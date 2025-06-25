@@ -10,32 +10,32 @@ const projects = [
     description:
       "Enterprise management system covering accounting, warehouse, and business process workflows.",
     image: "/images/tomaho.png",
-    liveUrl: "", // Nếu có demo nội bộ thì bạn điền, không thì để trống
-    githubUrl: "",
+    liveUrl: "https://github.com/your-user/portfolio", // Nếu có demo nội bộ thì bạn điền, không thì để trống
+    githubUrl: "https://github.com/your-user/portfolio",
   },
   {
     title: "KingFood Mart",
     description:
       "Supermarket inventory management UI — filter, search, and update product data efficiently.",
     image: "/images/kingfood.png",
-    liveUrl: "",
-    githubUrl: "",
+    liveUrl: "https://github.com/your-user/portfolio",
+    githubUrl: "https://github.com/your-user/portfolio",
   },
   {
     title: "FUJIA - Banking System",
     description:
       "Modern banking system frontend with NextJS, TypeScript, Redux, unit testing and dynamic forms.",
     image: "/images/dashboard.png",
-    liveUrl: "",
-    githubUrl: "",
+    liveUrl: "https://github.com/your-user/portfolio",
+    githubUrl: "https://github.com/your-user/portfolio",
   },
   {
     title: "NEOHOP - Hotel System",
     description:
       "Hotel management software refactored from VB to Angular; includes design, testing, and manual QA.",
     image: "/images/ecommerce.jpeg",
-    liveUrl: "",
-    githubUrl: "",
+    liveUrl: "https://github.com/your-user/portfolio",
+    githubUrl: "https://github.com/your-user/portfolio",
   },
   {
     title: "Portfolio Website",

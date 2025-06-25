@@ -13,8 +13,10 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body> <ScrollBackground />
-      {children}</body>
+      <body> 
+      <ScrollBackground />
+      {children}
+      </body>
     </html>
   );
 }
