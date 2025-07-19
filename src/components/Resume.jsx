@@ -37,7 +37,7 @@ const skills = [
 
 export default function Resume() {
   return (
-    <section id="resume" className="min-h-screen snap-start py-20 px-6 bg-black text-white">
+    <section id="resume" className="min-h-screen snap-start py-20 px-6 bg-black text-white pt-24">
       <div className="max-w-6xl mx-auto">
         {/* Title */}
         <motion.h2
@@ -132,17 +132,7 @@ export default function Resume() {
           </div>
         </div>
 
-        {/* CV Button */}
-        <div className="text-center mt-16">
-          <a
-            href="/cv-tungdo.pdf"
-            download
-            className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 transition text-white px-6 py-3 rounded-full font-semibold shadow-md"
-          >
-            <FaDownload className="text-lg" />
-            Download CV (PDF)
-          </a>
-        </div>
+        {/* Remove CV Button - CV section has its own download functionality */}
       </div>
     </section>
   );

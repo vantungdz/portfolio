@@ -5,7 +5,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="h-screen snap-start w-full bg-[#121212] flex items-center justify-center px-6"
+      className="min-h-screen snap-start w-full bg-[#121212] flex items-center justify-center px-6 pt-24"
     >
       <motion.div
         initial={{ opacity: 0, y: 30 }}

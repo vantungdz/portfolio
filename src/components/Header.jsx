@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
-const sections = ["Home", "About", "Projects", "Resume", "Contact"];
+const sections = ["Home", "About", "Skills", "Experience", "Projects", "Testimonials", "Blog", "CV", "Resume", "Contact"];
 
 export default function Header() {
   const [active, setActive] = useState("Home");
@@ -41,28 +41,44 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerHeight = 96; // 6rem = 96px (h-24)
+      const elementPosition = element.offsetTop - headerHeight;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+    }
+    setMenuOpen(false);
+  };
+
   return (
     <AnimatePresence>
       <motion.header
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 px-6 ${
-          scrolled ? "bg-black/60 backdrop-blur-md shadow-lg" : "bg-transparent"
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 h-24 ${
+          scrolled ? "bg-black/80 backdrop-blur-md shadow-lg border-b border-white/10" : "bg-black/40 backdrop-blur-sm"
         }`}
       >
         <div className="flex justify-between items-center py-4 max-w-6xl mx-auto">
-          <a href="#home" className="text-xl font-bold text-white">
+          <button 
+            onClick={() => scrollToSection('home')}
+            className="text-xl font-bold text-white hover:text-indigo-400 transition-colors"
+          >
             TungDo<span className="text-indigo-500">.</span>
-          </a>
+          </button>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex gap-6 text-sm font-semibold uppercase tracking-wide">
+          <div className="hidden lg:flex gap-6 text-sm font-semibold uppercase tracking-wide">
             {sections.map((sec) => (
-              <a
+              <button
                 key={sec}
-                href={`#${sec.toLowerCase()}`}
-                className={`relative px-1 transition duration-200 ${
+                onClick={() => scrollToSection(sec.toLowerCase())}
+                className={`relative px-1 transition duration-200 hover:text-indigo-400 ${
                   active === sec ? "text-indigo-400" : "text-gray-300"
                 }`}
               >
@@ -73,12 +89,12 @@ export default function Header() {
                     className="absolute left-0 bottom-0 w-full h-[2px] bg-indigo-400"
                   />
                 )}
-              </a>
+              </button>
             ))}
           </div>
 
           {/* Mobile toggle */}
-          <button className="md:hidden text-white" onClick={() => setMenuOpen(!menuOpen)}>
+          <button className="lg:hidden text-white" onClick={() => setMenuOpen(!menuOpen)}>
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -89,20 +105,19 @@ export default function Header() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden px-6 pb-4"
+            className="lg:hidden px-6 pb-4"
           >
             <div className="flex flex-col space-y-2 text-sm font-semibold uppercase tracking-wide">
               {sections.map((sec) => (
-                <a
+                <button
                   key={sec}
-                  href={`#${sec.toLowerCase()}`}
-                  onClick={() => setMenuOpen(false)}
-                  className={`transition ${
+                  onClick={() => scrollToSection(sec.toLowerCase())}
+                  className={`transition hover:text-indigo-400 ${
                     active === sec ? "text-indigo-400" : "text-gray-300"
                   }`}
                 >
                   {sec}
-                </a>
+                </button>
               ))}
             </div>
           </motion.div>

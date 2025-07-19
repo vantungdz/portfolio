@@ -1,7 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
+import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 
-export default function ProjectCard({ title, image, description, onClick }) {
+export default function ProjectCard({ title, image, description, category, technologies, year, onClick }) {
   return (
     <motion.div
       whileHover={{ scale: 1.02, rotate: 0.3 }}
@@ -15,16 +16,91 @@ export default function ProjectCard({ title, image, description, onClick }) {
       {/* Main content inside glow */}
       <div className="relative z-10">
         {/* Image */}
-        <img
-          src={image}
-          alt={title}
-          className="object-cover w-full h-64 rounded-2xl group-hover:scale-105 transition-transform duration-700"
-        />
+        <div className="relative">
+          <img
+            src={image}
+            alt={title}
+            className="object-cover w-full h-64 rounded-2xl group-hover:scale-105 transition-transform duration-700"
+          />
+          
+          {/* Category Badge */}
+          <div className="absolute top-4 left-4">
+            <span className="px-3 py-1 bg-indigo-500/90 backdrop-blur-md text-white text-xs font-medium rounded-full">
+              {category}
+            </span>
+          </div>
 
-        {/* Overlay content on hover */}
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-6 flex flex-col justify-end rounded-2xl">
-          <h3 className="text-xl font-semibold text-white drop-shadow">{title}</h3>
-          <p className="text-sm mt-2 text-gray-300">{description}</p>
+          {/* Year Badge */}
+          <div className="absolute top-4 right-4">
+            <span className="px-3 py-1 bg-black/70 backdrop-blur-md text-white text-xs font-medium rounded-full">
+              {year}
+            </span>
+          </div>
+
+          {/* View Details Button */}
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+            <div className="text-center">
+              <div className="text-2xl mb-2">👁️</div>
+              <span className="text-white font-medium">View Details</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-6">
+          <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-indigo-400 transition-colors">
+            {title}
+          </h3>
+          
+          <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+            {description}
+          </p>
+
+          {/* Technologies */}
+          <div className="flex flex-wrap gap-2 mb-4">
+            {technologies?.slice(0, 3).map((tech, index) => (
+              <span
+                key={index}
+                className="px-2 py-1 bg-indigo-500/20 text-indigo-400 text-xs rounded-full border border-indigo-500/30"
+              >
+                {tech}
+              </span>
+            ))}
+            {technologies?.length > 3 && (
+              <span className="px-2 py-1 bg-gray-500/20 text-gray-400 text-xs rounded-full">
+                +{technologies.length - 3} more
+              </span>
+            )}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex gap-2">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex-1 bg-indigo-500/20 text-indigo-400 py-2 px-3 rounded-lg text-sm font-medium hover:bg-indigo-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+              onClick={(e) => {
+                e.stopPropagation();
+                // Handle live demo
+              }}
+            >
+              <FaExternalLinkAlt className="text-xs" />
+              Demo
+            </motion.button>
+            
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex-1 bg-gray-500/20 text-gray-400 py-2 px-3 rounded-lg text-sm font-medium hover:bg-gray-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+              onClick={(e) => {
+                e.stopPropagation();
+                // Handle GitHub
+              }}
+            >
+              <FaGithub className="text-xs" />
+              Code
+            </motion.button>
+          </div>
         </div>
       </div>
     </motion.div>
