@@ -2,12 +2,11 @@
 import { useRef } from "react";
 import { FaDownload, FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin } from "react-icons/fa";
 import { SiTypescript, SiReact, SiNextdotjs, SiRedux, SiTailwindcss, SiJavascript, SiHtml5, SiCss3, SiGit, SiDocker, SiAws, SiMongodb, SiPostgresql, SiFigma, SiPython, SiAngular } from "react-icons/si";
-import html2pdf from "html2pdf.js";
 
 export default function CV() {
   const cvRef = useRef(null);
 
-  const downloadCV = () => {
+  const downloadCV = async () => {
     // Create a temporary div for the CV content with better structure
     const cvContent = document.createElement('div');
     cvContent.style.fontFamily = 'Arial, sans-serif';
@@ -154,33 +153,37 @@ export default function CV() {
     `;
 
     // Try html2pdf first, fallback to print if it fails
-    const tryHtml2Pdf = () => {
-      const opt = {
-        margin: [0.5, 0.5, 0.5, 0.5],
-        filename: 'TungDo_CV.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-          scale: 2,
-          useCORS: true,
-          allowTaint: true,
-          backgroundColor: '#ffffff'
-        },
-        jsPDF: { 
-          unit: 'in', 
-          format: 'a4', 
-          orientation: 'portrait',
-          compress: true
-        }
-      };
+    const tryHtml2Pdf = async () => {
+      try {
+        // Dynamically import html2pdf only when needed
+        const html2pdf = (await import('html2pdf.js')).default;
+        
+        const opt = {
+          margin: [0.5, 0.5, 0.5, 0.5],
+          filename: 'TungDo_CV.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { 
+            scale: 2,
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: '#ffffff'
+          },
+          jsPDF: { 
+            unit: 'in', 
+            format: 'a4', 
+            orientation: 'portrait',
+            compress: true
+          }
+        };
 
-      return html2pdf()
-        .set(opt)
-        .from(cvContent)
-        .save()
-        .catch(err => {
-          console.error('html2pdf failed:', err);
-          throw err;
-        });
+        return await html2pdf()
+          .set(opt)
+          .from(cvContent)
+          .save();
+      } catch (err) {
+        console.error('html2pdf failed:', err);
+        throw err;
+      }
     };
 
     const tryPrintMethod = () => {
@@ -215,10 +218,7 @@ export default function CV() {
 
     // Try html2pdf first, fallback to print
     try {
-      tryHtml2Pdf().catch(() => {
-        console.log('Falling back to print method');
-        tryPrintMethod();
-      });
+      await tryHtml2Pdf();
     } catch (error) {
       console.error('PDF generation failed:', error);
       console.log('Falling back to print method');

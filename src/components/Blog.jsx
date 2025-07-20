@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
 import { FaCalendarAlt, FaClock, FaArrowRight, FaExternalLinkAlt } from "react-icons/fa";
 
 const articles = [
@@ -84,13 +85,16 @@ const ArticleCard = ({ article, isFeatured = false }) => {
       <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:border-indigo-500/50 transition-all duration-300">
         {/* Image */}
         <div className="relative overflow-hidden">
-          <img
-            src={article.image}
-            alt={article.title}
-            className={`w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
-              isFeatured ? 'h-64' : 'h-48'
-            }`}
-          />
+          <div className={`relative ${isFeatured ? 'h-64' : 'h-48'}`}>
+            <Image
+              src={article.image}
+              alt={`${article.title} - ${article.category} article`}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              quality={80}
+            />
+          </div>
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           
           {/* Category Badge */}

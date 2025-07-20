@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 
 export default function ProjectCard({ title, image, description, category, technologies, year, onClick }) {
@@ -16,11 +17,14 @@ export default function ProjectCard({ title, image, description, category, techn
       {/* Main content inside glow */}
       <div className="relative z-10">
         {/* Image */}
-        <div className="relative">
-          <img
+        <div className="relative h-64">
+          <Image
             src={image}
-            alt={title}
-            className="object-cover w-full h-64 rounded-2xl group-hover:scale-105 transition-transform duration-700"
+            alt={`${title} - ${category} project`}
+            fill
+            className="object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            quality={85}
           />
           
           {/* Category Badge */}

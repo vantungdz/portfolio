@@ -1,5 +1,7 @@
 import "./globals.css";
 import type { ReactNode } from "react";
+import ScrollBackground from "@/components/ScrollBackground";
+import PerformanceMonitor from "@/components/PerformanceMonitor";
 
 export const metadata = {
   title: "Tung Do - Senior Frontend Developer | React, TypeScript, Next.js",
@@ -128,6 +130,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body> 
+        <PerformanceMonitor />
+        <ScrollBackground />
         {children}
       </body>
     </html>
