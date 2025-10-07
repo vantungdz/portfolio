@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaFacebook, FaInstagram, FaEnvelope, FaHeart } from "react-icons/fa";
+import { socialLinksConfig, contactInfoConfig } from "../config/socialLinks";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -8,31 +9,31 @@ export default function Footer() {
   const socialLinks = [
     {
       icon: <FaGithub />,
-      href: "https://github.com/your-github",
+      href: socialLinksConfig.github,
       label: "GitHub",
       color: "hover:text-gray-300"
     },
     {
       icon: <FaLinkedin />,
-      href: "https://linkedin.com/in/your-linkedin",
+      href: socialLinksConfig.linkedin,
       label: "LinkedIn",
       color: "hover:text-blue-400"
     },
     {
       icon: <FaFacebook />,
-      href: "https://facebook.com/your-facebook",
+      href: socialLinksConfig.facebook,
       label: "Facebook",
       color: "hover:text-blue-500"
     },
     {
       icon: <FaInstagram />,
-      href: "https://instagram.com/your-instagram",
+      href: socialLinksConfig.instagram,
       label: "Instagram",
       color: "hover:text-pink-400"
     },
     {
       icon: <FaEnvelope />,
-      href: "mailto:tungdo.dev@example.com",
+      href: `mailto:${contactInfoConfig.email}`,
       label: "Email",
       color: "hover:text-indigo-400"
     }
@@ -133,9 +134,9 @@ export default function Footer() {
           >
             <h3 className="text-lg font-semibold mb-4">Get in Touch</h3>
             <div className="space-y-3 text-gray-400">
-              <p>📍 Ho Chi Minh City, Vietnam</p>
-              <p>📧 tungdo.dev@example.com</p>
-              <p>📱 +84 123 456 789</p>
+              <p>📍 {contactInfoConfig.location}</p>
+              <p>📧 {contactInfoConfig.email}</p>
+              <p>📱 {contactInfoConfig.phone}</p>
             </div>
           </motion.div>
         </div>

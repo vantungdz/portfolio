@@ -25,7 +25,7 @@ export default function CV() {
           <div>📧 tungdo.dev@example.com</div>
           <div>📱 +84 123 456 789</div>
           <div>📍 Ho Chi Minh City, Vietnam</div>
-          <div>🔗 linkedin.com/in/your-linkedin</div>
+          <div>🔗 linkedin.com/in/t%C3%B9ng-%C4%91%E1%BB%97-v%C4%83n-475b8637a/</div>
         </div>
       </div>
 

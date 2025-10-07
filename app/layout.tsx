@@ -103,8 +103,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               "url": "https://your-portfolio-domain.com", // Replace with your actual domain
               "image": "https://your-portfolio-domain.com/images/avatar.jpg", // Replace with your actual domain
               "sameAs": [
-                "https://github.com/your-github",
-                "https://linkedin.com/in/your-linkedin",
+                "https://github.com/vantungdz",
+                "https://www.linkedin.com/in/t%C3%B9ng-%C4%91%E1%BB%97-v%C4%83n-475b8637a/",
                 "https://twitter.com/your-twitter"
               ],
               "worksFor": {

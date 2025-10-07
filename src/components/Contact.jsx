@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import emailjs from '@emailjs/browser';
 import Signature from "./Signature";
+import { socialLinksConfig, contactInfoConfig } from "../config/socialLinks";
 import {
   FaGithub,
   FaLinkedin,
@@ -144,19 +145,19 @@ export default function Contact() {
     {
       icon: <FaEnvelope />,
       label: "Email",
-      value: "dovantung1000@gmail.com",
-      href: "mailto:dovantung1000@gmail.com"
+      value: contactInfoConfig.email,
+      href: `mailto:${contactInfoConfig.email}`
     },
     {
       icon: <FaPhone />,
       label: "Phone",
-      value: "+84 123 456 789",
-      href: "tel:+84123456789"
+      value: contactInfoConfig.phone,
+      href: `tel:${contactInfoConfig.phone.replace(/\s/g, '')}`
     },
     {
       icon: <FaMapMarkerAlt />,
       label: "Location",
-      value: "Ho Chi Minh City, Vietnam",
+      value: contactInfoConfig.location,
       href: "#"
     }
   ];
@@ -165,25 +166,25 @@ export default function Contact() {
     {
       icon: <FaGithub />,
       label: "GitHub",
-      href: "https://github.com/your-github",
+      href: socialLinksConfig.github,
       color: "hover:text-gray-300"
     },
     {
       icon: <FaLinkedin />,
       label: "LinkedIn",
-      href: "https://linkedin.com/in/your-linkedin",
+      href: socialLinksConfig.linkedin,
       color: "hover:text-blue-400"
     },
     {
       icon: <FaFacebook />,
       label: "Facebook",
-      href: "https://facebook.com/your-facebook",
+      href: socialLinksConfig.facebook,
       color: "hover:text-blue-500"
     },
     {
       icon: <FaInstagram />,
       label: "Instagram",
-      href: "https://instagram.com/your-instagram",
+      href: socialLinksConfig.instagram,
       color: "hover:text-pink-400"
     }
   ];
@@ -458,22 +459,6 @@ export default function Contact() {
                 </motion.div>
               )}
 
-              {/* Setup Notice */}
-              {EMAILJS_SERVICE_ID === "YOUR_SERVICE_ID" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-yellow-500/20 border border-yellow-500/30 rounded-lg text-yellow-400 text-sm"
-                >
-                  <p className="font-medium mb-2">⚠️ EmailJS Setup Required</p>
-                  <p className="mb-2">To enable email functionality, please:</p>
-                  <ol className="list-decimal list-inside space-y-1 text-xs">
-                    <li>Follow the setup guide in EMAILJS_SETUP.md</li>
-                    <li>Create a .env.local file with your EmailJS credentials</li>
-                    <li>Restart the development server</li>
-                  </ol>
-                </motion.div>
-              )}
             </form>
           </motion.div>
         </div>

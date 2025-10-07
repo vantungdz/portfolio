@@ -17,7 +17,13 @@ export default function Header() {
         const visible = entries.find((entry) => entry.isIntersecting);
         if (visible) {
           const id = visible.target.getAttribute("id");
-          if (id) setActive(id.charAt(0).toUpperCase() + id.slice(1));
+          if (id) {
+            // Handle special cases for CV and other sections
+            const sectionName = id === "cv" ? "CV" : 
+              id === "resume" ? "Resume" :
+              id.charAt(0).toUpperCase() + id.slice(1);
+            setActive(sectionName);
+          }
         }
       },
       {

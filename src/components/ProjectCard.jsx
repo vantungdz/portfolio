@@ -9,10 +9,10 @@ export default function ProjectCard({ title, image, description, category, techn
       whileHover={{ scale: 1.02, rotate: 0.3 }}
       transition={{ type: "spring", stiffness: 200 }}
       onClick={onClick}
-      className="relative group cursor-pointer rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md border border-transparent hover:border-transparent hover:bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-blue-500/20 shadow-md hover:shadow-xl transition-all duration-500"
+      className="relative group cursor-pointer rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md border border-transparent hover:border-transparent hover:bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-blue-500/10 shadow-md hover:shadow-xl transition-all duration-500"
     >
       {/* Gradient border glow layer */}
-      <div className="absolute inset-0 p-[2px] bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
+      <div className="absolute inset-0 p-[2px] bg-gradient-to-r from-purple-500/50 via-pink-500/50 to-blue-500/50 rounded-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-500 z-0" />
 
       {/* Main content inside glow */}
       <div className="relative z-10">
@@ -52,7 +52,7 @@ export default function ProjectCard({ title, image, description, category, techn
 
         {/* Content */}
         <div className="p-6">
-          <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-indigo-400 transition-colors">
+          <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-white transition-colors">
             {title}
           </h3>
           
@@ -65,13 +65,13 @@ export default function ProjectCard({ title, image, description, category, techn
             {technologies?.slice(0, 3).map((tech, index) => (
               <span
                 key={index}
-                className="px-2 py-1 bg-indigo-500/20 text-indigo-400 text-xs rounded-full border border-indigo-500/30"
+                className="px-2 py-1 bg-indigo-500/20 text-indigo-400 group-hover:text-white text-xs rounded-full border border-indigo-500/30 group-hover:bg-white/20 group-hover:border-white/30 transition-all duration-300"
               >
                 {tech}
               </span>
             ))}
             {technologies?.length > 3 && (
-              <span className="px-2 py-1 bg-gray-500/20 text-gray-400 text-xs rounded-full">
+              <span className="px-2 py-1 bg-gray-500/20 text-gray-400 group-hover:text-white group-hover:bg-white/20 text-xs rounded-full transition-all duration-300">
                 +{technologies.length - 3} more
               </span>
             )}
@@ -82,7 +82,7 @@ export default function ProjectCard({ title, image, description, category, techn
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex-1 bg-indigo-500/20 text-indigo-400 py-2 px-3 rounded-lg text-sm font-medium hover:bg-indigo-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+              className="flex-1 bg-indigo-500/20 text-indigo-400 group-hover:text-white group-hover:bg-white/20 py-2 px-3 rounded-lg text-sm font-medium hover:bg-indigo-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
               onClick={(e) => {
                 e.stopPropagation();
                 // Handle live demo
@@ -95,7 +95,7 @@ export default function ProjectCard({ title, image, description, category, techn
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex-1 bg-gray-500/20 text-gray-400 py-2 px-3 rounded-lg text-sm font-medium hover:bg-gray-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+              className="flex-1 bg-gray-500/20 text-gray-400 group-hover:text-white group-hover:bg-white/20 py-2 px-3 rounded-lg text-sm font-medium hover:bg-gray-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
               onClick={(e) => {
                 e.stopPropagation();
                 // Handle GitHub
