@@ -135,6 +135,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
+      aria-labelledby="testimonials-heading"
       className="min-h-screen snap-start w-full bg-[#0a0a0a] text-white py-20 px-4 pt-24"
     >
       <div className="max-w-6xl mx-auto">
@@ -146,7 +147,7 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold mb-4">
             Client <span className="text-indigo-500">Testimonials</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -167,33 +168,41 @@ export default function Testimonials() {
 
           {/* Navigation Buttons */}
           <motion.button
+            type="button"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={prevTestimonial}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-indigo-500/20 backdrop-blur-md border border-indigo-500/30 text-indigo-400 p-3 rounded-full hover:bg-indigo-500 hover:text-white transition-all duration-300"
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-indigo-500/20 backdrop-blur-md border border-indigo-500/30 text-indigo-400 p-3 rounded-full hover:bg-indigo-500 hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/30"
+            aria-label="Previous testimonial"
           >
             <FaChevronLeft />
           </motion.button>
 
           <motion.button
+            type="button"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={nextTestimonial}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-indigo-500/20 backdrop-blur-md border border-indigo-500/30 text-indigo-400 p-3 rounded-full hover:bg-indigo-500 hover:text-white transition-all duration-300"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-indigo-500/20 backdrop-blur-md border border-indigo-500/30 text-indigo-400 p-3 rounded-full hover:bg-indigo-500 hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/30"
+            aria-label="Next testimonial"
           >
             <FaChevronRight />
           </motion.button>
         </div>
 
         {/* Dots Indicator */}
-        <div className="flex justify-center gap-3 mb-12">
+        <div className="flex justify-center gap-3 mb-12" role="tablist" aria-label="Testimonial navigation">
           {testimonials.map((_, index) => (
             <motion.button
               key={index}
+              type="button"
+              role="tab"
+              aria-selected={index === currentIndex}
+              aria-label={`Go to testimonial ${index + 1}`}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.8 }}
               onClick={() => goToTestimonial(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              className={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-[#0a0a0a] ${
                 index === currentIndex
                   ? 'bg-indigo-500 scale-125'
                   : 'bg-gray-600 hover:bg-gray-500'

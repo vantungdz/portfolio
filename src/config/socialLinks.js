@@ -1,7 +1,7 @@
 // Social media links configuration
 export const socialLinksConfig = {
   github: "https://github.com/vantungdz",
-  linkedin: "https://www.linkedin.com/in/t%C3%B9ng-%C4%91%E1%BB%97-v%C4%83n-475b8637a/",
+  linkedin: "https://www.linkedin.com/in/vantung1806/",
   facebook: "https://www.facebook.com/VantungdzIT/",
   instagram: "https://instagram.com/your-instagram"
 };

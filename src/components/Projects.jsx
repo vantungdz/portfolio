@@ -7,74 +7,52 @@ import { FaFilter, FaExternalLinkAlt, FaGithub, FaEye } from "react-icons/fa";
 
 const projects = [
   {
-    title: "Tomaho Soft",
-    description: "Enterprise management system covering accounting, warehouse, and business process workflows.",
+    title: "KPI Management System",
+    description: "Full-stack KPI management platform designed to support Balanced Scorecard (BSC) methodology and multi-level approval workflows.",
+    image: "/images/dashboard.png",
+    liveUrl: "https://github.com/your-user/portfolio",
+    githubUrl: "https://github.com/your-user/portfolio",
+    category: "Enterprise",
+    technologies: ["Vue 3", "Ant Design Vue", "Vuex", "Chart.js", "Socket.IO", "TypeScript", "ExcelJS"],
+    features: ["Multi-level KPI Tracking", "Formula-based Scoring", "Real-time Notifications", "RBAC", "Dashboard Analytics", "Responsive UI"],
+    year: "2024"
+  },
+  {
+    title: "PaySplit",
+    description: "Mobile application for splitting bills and managing group payments with real-time tracking and MoMo payment integration.",
+    image: "/images/portfolio.jpg",
+    liveUrl: "https://github.com/your-user/portfolio",
+    githubUrl: "https://github.com/your-user/portfolio",
+    category: "Finance",
+    technologies: ["React Native", "Expo", "TypeScript", "Node.js", "Express", "MongoDB", "Socket.IO", "JWT"],
+    features: ["Real-time Payment Tracking", "JWT Authentication", "MoMo Integration", "Real-time Notifications", "Admin Dashboard"],
+    year: "2023"
+  },
+  {
+    title: "Enterprise Management System",
+    description: "Enterprise software platform (Tomaho Soft) used to manage multiple business processes including accounting and warehouse operations.",
     image: "/images/tomaho.png",
     liveUrl: "https://github.com/your-user/portfolio",
     githubUrl: "https://github.com/your-user/portfolio",
     category: "Enterprise",
-    technologies: ["React", "TypeScript", "Redux", "Node.js", "PostgreSQL"],
-    features: ["User Management", "Inventory Control", "Financial Reports", "Workflow Automation"],
-    year: "2024"
+    technologies: ["ReactJS", "Redux-Saga", "Styled Components", "Formik", "Yup"],
+    features: ["Enterprise Management UI", "Accounting Workflows", "Warehouse Management", "Reusable Components"],
+    year: "2022"
   },
   {
-    title: "KingFood Mart",
-    description: "Supermarket inventory management UI — filter, search, and update product data efficiently.",
-    image: "/images/kingfood.png",
-    liveUrl: "https://github.com/your-user/portfolio",
-    githubUrl: "https://github.com/your-user/portfolio",
-    category: "E-commerce",
-    technologies: ["React", "JavaScript", "CSS3", "Local Storage"],
-    features: ["Product Management", "Search & Filter", "Inventory Tracking", "Responsive Design"],
-    year: "2023"
-  },
-  {
-    title: "FUJIA - Banking System",
-    description: "Modern banking system frontend with NextJS, TypeScript, Redux, unit testing and dynamic forms.",
+    title: "Banking System (FUJIA)",
+    description: "Large-scale banking platform supporting financial operations and internal workflows with React, TypeScript, and Next.js.",
     image: "/images/dashboard.png",
     liveUrl: "https://github.com/your-user/portfolio",
     githubUrl: "https://github.com/your-user/portfolio",
     category: "Finance",
-    technologies: ["Next.js", "TypeScript", "Redux", "Jest", "Tailwind CSS"],
-    features: ["Account Management", "Transaction History", "Security Features", "Real-time Updates"],
+    technologies: ["ReactJS", "TypeScript", "Next.js", "Redux", "Redux-Saga"],
+    features: ["Frontend Interfaces", "New UI Features", "Requirement Analysis", "Financial Operations"],
     year: "2023"
   },
-  {
-    title: "NEOHOP - Hotel System",
-    description: "Hotel management software refactored from VB to Angular; includes design, testing, and manual QA.",
-    image: "/images/ecommerce.jpeg",
-    liveUrl: "https://github.com/your-user/portfolio",
-    githubUrl: "https://github.com/your-user/portfolio",
-    category: "Hospitality",
-    technologies: ["Angular", "TypeScript", "Bootstrap", "REST API"],
-    features: ["Room Booking", "Guest Management", "Billing System", "Admin Dashboard"],
-    year: "2022"
-  },
-  {
-    title: "Portfolio Website",
-    description: "Personal portfolio to showcase professional experience and skills using Next.js, Framer Motion.",
-    image: "/images/portfolio.jpg",
-    liveUrl: "https://your-portfolio.com",
-    githubUrl: "https://github.com/your-user/portfolio",
-    category: "Personal",
-    technologies: ["Next.js", "Framer Motion", "Tailwind CSS", "GSAP"],
-    features: ["Responsive Design", "Smooth Animations", "Contact Form", "Project Showcase"],
-    year: "2024"
-  },
-  {
-    title: "Task Management App",
-    description: "A modern task management application with real-time collaboration and progress tracking.",
-    image: "/images/dashboard.png",
-    liveUrl: "https://github.com/your-user/portfolio",
-    githubUrl: "https://github.com/your-user/portfolio",
-    category: "Productivity",
-    technologies: ["React", "Firebase", "Material-UI", "Real-time DB"],
-    features: ["Task Creation", "Team Collaboration", "Progress Tracking", "Notifications"],
-    year: "2023"
-  }
 ];
 
-const categories = ["All", "Enterprise", "E-commerce", "Finance", "Hospitality", "Personal", "Productivity"];
+const categories = ["All", "Enterprise", "Finance"];
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -92,11 +70,13 @@ export default function Projects() {
   return (
     <section
       id="projects"
+      aria-labelledby="projects-heading"
       className="min-h-screen snap-start w-full bg-black text-white py-20 px-4 pt-24"
     >
       {/* Header */}
       <div className="max-w-6xl mx-auto text-center mb-16">
         <motion.h2
+          id="projects-heading"
           className="text-4xl md:text-5xl font-bold mb-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -133,11 +113,10 @@ export default function Projects() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  activeCategory === category
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category
                     ? "bg-indigo-500 text-white shadow-lg shadow-indigo-500/25"
                     : "bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white border border-gray-600"
-                }`}
+                  }`}
               >
                 {category}
               </motion.button>
@@ -190,6 +169,8 @@ export default function Projects() {
               category={project.category}
               technologies={project.technologies}
               year={project.year}
+              liveUrl={project.liveUrl}
+              githubUrl={project.githubUrl}
               onClick={() => setSelectedProject(project)}
             />
           </motion.div>

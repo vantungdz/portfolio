@@ -192,6 +192,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
+      aria-labelledby="contact-heading"
       className="min-h-screen snap-start py-20 px-6 bg-[#0e0e0e] text-white flex items-center pt-24"
     >
       <div className="max-w-6xl w-full mx-auto">
@@ -203,7 +204,7 @@ export default function Contact() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 id="contact-heading" className="text-4xl md:text-5xl font-bold mb-4">
             Let's <span className="text-indigo-500">Connect</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">

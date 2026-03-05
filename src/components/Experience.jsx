@@ -1,271 +1,202 @@
 "use client";
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt, FaExternalLinkAlt } from "react-icons/fa";
+
+import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 
 const experiences = [
   {
     id: 1,
-    company: "TechCorp Solutions",
-    position: "Senior Frontend Developer",
-    duration: "2023 - Present",
+    company: "ISB Vietnam",
+    position: "Frontend Engineer",
+    duration: "Jul 2022 – Present",
     location: "Ho Chi Minh City, Vietnam",
     type: "Full-time",
-    description: "Leading frontend development for enterprise applications, mentoring junior developers, and implementing best practices.",
+    description:
+      "Frontend Engineer working on enterprise software projects, participating in implementation and coding phases while continuously researching and applying new technologies.",
     achievements: [
-      "Led a team of 5 developers to rebuild the main product dashboard",
-      "Improved application performance by 40% through code optimization",
-      "Implemented CI/CD pipeline reducing deployment time by 60%",
-      "Mentored 3 junior developers and conducted code reviews"
+      "Participated in implementation and coding phases of software development",
+      "Performed unit testing and debugging to ensure application quality",
+      "Researched and applied new technologies when required by projects",
+      "Updated and improved applications based on customer requirements",
     ],
-    technologies: ["React", "TypeScript", "Next.js", "Redux", "Tailwind CSS", "Jest"],
-    logo: "🏢"
+    technologies: [
+      "ReactJS",
+      "TypeScript",
+      "Next.js",
+      "Redux",
+      "Redux-Saga",
+    ],
+    logo: "🏢",
   },
   {
     id: 2,
-    company: "Digital Innovations Ltd",
-    position: "Frontend Developer",
-    duration: "2021 - 2023",
+    company: "BUSO",
+    position: "Frontend Engineer",
+    duration: "Oct 2020 – Dec 2021",
     location: "Ho Chi Minh City, Vietnam",
     type: "Full-time",
-    description: "Developed responsive web applications and collaborated with design and backend teams to deliver high-quality products.",
+    description:
+      "Developed interfaces for enterprise management applications, implementing and improving features based on customer feedback and requirements.",
     achievements: [
-      "Built 10+ responsive web applications for various clients",
-      "Reduced bundle size by 30% through code splitting",
-      "Implemented accessibility features improving WCAG compliance",
-      "Collaborated with UX team to improve user experience"
+      "Developed interfaces for enterprise management applications",
+      "Updated and improved application features based on customer requirements",
+      "Collaborated with team members to improve UI functionality",
     ],
-    technologies: ["React", "JavaScript", "CSS3", "HTML5", "Git", "Figma"],
-    logo: "💻"
+    technologies: ["ReactJS", "JavaScript", "HTML", "CSS"],
+    logo: "💻",
   },
-  {
-    id: 3,
-    company: "StartUp Ventures",
-    position: "Junior Developer",
-    duration: "2020 - 2021",
-    location: "Ho Chi Minh City, Vietnam",
-    type: "Full-time",
-    description: "Started my journey as a developer, learning modern web technologies and contributing to various projects.",
-    achievements: [
-      "Developed 5+ small to medium web applications",
-      "Learned modern JavaScript frameworks and tools",
-      "Participated in code reviews and team meetings",
-      "Contributed to open-source projects"
-    ],
-    technologies: ["JavaScript", "HTML5", "CSS3", "Bootstrap", "jQuery"],
-    logo: "🚀"
-  }
 ];
 
-const ExperienceCard = ({ experience, isActive, onClick }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -50 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-      whileHover={{ scale: 1.02 }}
-      onClick={onClick}
-      className={`relative cursor-pointer transition-all duration-300 ${
-        isActive ? 'bg-indigo-500/20 border-indigo-500' : 'bg-white/5 border-white/10'
-      } border rounded-2xl p-6 hover:bg-white/10`}
-    >
-      {/* Active indicator */}
-      {isActive && (
-        <div className="absolute -right-2 -top-2 w-4 h-4 bg-indigo-500 rounded-full animate-pulse" />
-      )}
+const stats = [
+  { number: "4+", label: "Years Experience" },
+  { number: "10+", label: "Projects Completed" },
+  { number: "15+", label: "Technologies" },
+  { number: "2", label: "Companies" },
+];
 
-      <div className="flex items-start gap-4">
-        <div className="text-3xl">{experience.logo}</div>
-        <div className="flex-1">
-          <h3 className="text-xl font-bold text-white mb-1">
-            {experience.position}
-          </h3>
-          <p className="text-indigo-400 font-medium mb-2">
+function TimelineCard({ experience, isLast }) {
+  return (
+    <div className="relative flex gap-4 sm:gap-6">
+      {/* Timeline dot */}
+      <div className="relative z-10 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-white/20 bg-black text-xl shadow-[0_0_0_4px_rgba(0,0,0,1)]">
+        <span aria-hidden>{experience.logo}</span>
+      </div>
+
+      {/* Card */}
+      <div
+        className={`min-w-0 flex-1 rounded-xl border border-white/10 bg-white/[0.02] p-5 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.04] hover:shadow-lg hover:shadow-black/20 sm:p-6 ${isLast ? "pb-0" : "pb-8 sm:pb-10"
+          }`}
+      >
+        {/* Job title – most prominent */}
+        <h3 className="text-lg font-semibold tracking-tight text-white sm:text-xl">
+          {experience.position}
+        </h3>
+
+        {/* Company + duration */}
+        <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+          <span className="text-sm font-medium text-white/70">
             {experience.company}
-          </p>
-          
-          <div className="flex flex-wrap gap-4 text-sm text-gray-400 mb-3">
-            <div className="flex items-center gap-1">
-              <FaCalendarAlt className="text-xs" />
-              {experience.duration}
-            </div>
-            <div className="flex items-center gap-1">
-              <FaMapMarkerAlt className="text-xs" />
-              {experience.location}
-            </div>
-            <span className="px-2 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-xs">
-              {experience.type}
-            </span>
+          </span>
+          <span className="text-xs text-gray-500">·</span>
+          <span className="flex items-center gap-1.5 text-xs text-gray-500">
+            <FaCalendarAlt className="h-3.5 w-3.5" />
+            {experience.duration}
+          </span>
+        </div>
+
+        {/* Location + type */}
+        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-500">
+          <span className="flex items-center gap-1.5">
+            <FaMapMarkerAlt className="h-3.5 w-3.5" />
+            {experience.location}
+          </span>
+          <span className="rounded bg-white/10 px-2 py-0.5 text-gray-400">
+            {experience.type}
+          </span>
+        </div>
+
+        {/* Description */}
+        <p className="mt-4 text-sm leading-relaxed text-gray-400">
+          {experience.description}
+        </p>
+
+        {/* Key achievements */}
+        {experience.achievements?.length > 0 && (
+          <div className="mt-5">
+            <h4 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gray-500">
+              <FaBriefcase className="h-3.5 w-3.5" />
+              Key achievements
+            </h4>
+            <ul className="mt-3 space-y-2">
+              {experience.achievements.map((item, i) => (
+                <li
+                  key={i}
+                  className="flex items-start gap-3 text-sm text-gray-400"
+                >
+                  <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-white/40" />
+                  <span className="leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
+        )}
 
-          <p className="text-gray-300 text-sm leading-relaxed">
-            {experience.description}
-          </p>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-const ExperienceDetail = ({ experience }) => {
-  if (!experience) return null;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8"
-    >
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h2 className="text-3xl font-bold text-white mb-2">
-            {experience.position}
-          </h2>
-          <p className="text-2xl text-indigo-400 font-medium">
-            {experience.company}
-          </p>
-        </div>
-        <div className="text-6xl">{experience.logo}</div>
-      </div>
-
-      <div className="grid md:grid-cols-2 gap-8">
-        {/* Key Achievements */}
-        <div>
-          <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-            <FaBriefcase className="text-indigo-400" />
-            Key Achievements
-          </h3>
-          <ul className="space-y-3">
-            {experience.achievements.map((achievement, index) => (
-              <motion.li
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex items-start gap-3 text-gray-300"
+        {/* Technologies */}
+        {experience.technologies?.length > 0 && (
+          <div className="mt-5 flex flex-wrap gap-2">
+            {experience.technologies.map((tech) => (
+              <span
+                key={tech}
+                className="rounded-md bg-white/10 px-2.5 py-1 text-xs text-gray-400"
               >
-                <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2 flex-shrink-0" />
-                {achievement}
-              </motion.li>
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function Experience() {
+  return (
+    <section
+      id="experience"
+      aria-labelledby="experience-heading"
+      className="min-h-screen snap-start bg-black py-20 px-6 pt-24"
+    >
+      <div className="mx-auto max-w-4xl">
+        {/* Section header */}
+        <header className="mb-12 text-center md:mb-16">
+          <h2
+            id="experience-heading"
+            className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl"
+          >
+            Work <span className="text-white/80">Experience</span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-gray-500 md:text-lg">
+            My professional journey in software development, showcasing growth,
+            achievements, and continuous learning.
+          </p>
+        </header>
+
+        {/* Timeline */}
+        <div className="relative">
+          {/* Vertical line */}
+          <div
+            className="absolute left-5 top-0 bottom-0 w-px bg-white/10 sm:left-6"
+            aria-hidden
+          />
+
+          <ul className="space-y-0">
+            {experiences.map((exp, index) => (
+              <li key={exp.id}>
+                <TimelineCard
+                  experience={exp}
+                  isLast={index === experiences.length - 1}
+                />
+              </li>
             ))}
           </ul>
         </div>
 
-        {/* Technologies Used */}
-        <div>
-          <h3 className="text-xl font-bold text-white mb-4">
-            Technologies Used
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {experience.technologies.map((tech, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm border border-indigo-500/30"
-              >
-                {tech}
-              </motion.span>
-            ))}
-          </div>
-
-          {/* Duration & Location */}
-          <div className="mt-6 space-y-2 text-gray-400">
-            <div className="flex items-center gap-2">
-              <FaCalendarAlt className="text-indigo-400" />
-              <span>{experience.duration}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaMapMarkerAlt className="text-indigo-400" />
-              <span>{experience.location}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-export default function Experience() {
-  const [selectedExperience, setSelectedExperience] = useState(experiences[0]);
-
-  return (
-    <section
-      id="experience"
-      className="min-h-screen snap-start w-full bg-[#0f0f0f] text-white py-20 px-6 pt-24"
-    >
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Work <span className="text-indigo-500">Experience</span>
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            My professional journey in software development, 
-            showcasing growth, achievements, and continuous learning.
-          </p>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-8">
-          {/* Experience Cards */}
-          <div className="space-y-4">
-            {experiences.map((experience, index) => (
-              <ExperienceCard
-                key={experience.id}
-                experience={experience}
-                isActive={selectedExperience?.id === experience.id}
-                onClick={() => setSelectedExperience(experience)}
-              />
-            ))}
-          </div>
-
-          {/* Experience Detail */}
-          <div className="lg:sticky lg:top-8">
-            <ExperienceDetail experience={selectedExperience} />
-          </div>
-        </div>
-
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6"
-        >
-          {[
-            { number: "4+", label: "Years Experience" },
-            { number: "20+", label: "Projects Completed" },
-            { number: "15+", label: "Technologies" },
-            { number: "100%", label: "Client Satisfaction" },
-          ].map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="text-center bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6"
+        {/* Stats */}
+        <div className="mt-16 grid grid-cols-2 gap-4 sm:mt-20 md:grid-cols-4 md:gap-6">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-5 text-center transition-colors hover:bg-white/[0.04] sm:px-6 sm:py-6"
             >
-              <div className="text-3xl md:text-4xl font-bold text-indigo-400 mb-2">
+              <div className="text-2xl font-bold text-white sm:text-3xl">
                 {stat.number}
               </div>
-              <div className="text-gray-400 text-sm">
+              <div className="mt-1 text-xs text-gray-500 sm:text-sm">
                 {stat.label}
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
-} 
+}
