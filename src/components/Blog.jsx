@@ -13,80 +13,69 @@ import { scrollToSection } from "@/lib/layout";
 const articles = [
   {
     id: 1,
-    title: "Building Scalable React Applications with TypeScript",
+    title: "Building a KPI Management System with Vue 3",
     excerpt:
-      "Learn how to structure large React applications using TypeScript, including best practices for state management, component composition, and performance optimization.",
+      "How I designed and implemented a multi-level KPI workflow system using Vue 3 and Ant Design Vue, including BSC methodology, formula-based scoring, and real-time notifications.",
     image: "/images/dashboard.png",
-    category: "React",
-    readTime: "8 min read",
-    date: "2024-01-15",
-    tags: ["React", "TypeScript", "Architecture"],
+    category: "Vue",
+    readTime: "10 min read",
+    date: "2024-03-01",
+    tags: ["Vue 3", "Ant Design Vue", "KPI", "Socket.IO"],
     featured: true,
   },
   {
     id: 2,
-    title: "The Future of Web Development: AI-Powered Tools",
+    title: "Designing Scalable Dashboard Architectures",
     excerpt:
-      "Exploring how artificial intelligence is transforming the way we build and maintain web applications, from code generation to automated testing.",
-    image: "/images/portfolio.jpg",
-    category: "AI/ML",
-    readTime: "6 min read",
-    date: "2024-01-10",
-    tags: ["AI", "Web Development", "Automation"],
+      "Best practices for building scalable dashboards using modern frontend frameworks, including component decomposition, data fetching strategies, and performance optimization.",
+    image: "/images/tomaho.png",
+    category: "Architecture",
+    readTime: "8 min read",
+    date: "2024-02-15",
+    tags: ["Architecture", "Dashboard", "React", "Performance"],
   },
   {
     id: 3,
-    title: "Optimizing Performance in Next.js Applications",
+    title: "Implementing RBAC in Frontend Applications",
     excerpt:
-      "A comprehensive guide to improving loading speeds, reducing bundle sizes, and implementing advanced caching strategies in Next.js projects.",
-    image: "/images/ecommerce.jpeg",
-    category: "Performance",
-    readTime: "10 min read",
-    date: "2024-01-05",
-    tags: ["Next.js", "Performance", "Optimization"],
+      "How to implement role-based access control in Vue and React applications, including route guards, conditional rendering, and JWT token management.",
+    image: "/images/portfolio.jpg",
+    category: "Security",
+    readTime: "7 min read",
+    date: "2024-01-20",
+    tags: ["RBAC", "Security", "Vue", "React"],
   },
   {
     id: 4,
-    title: "Design Systems: From Theory to Implementation",
+    title: "Real-time Notifications with Socket.IO",
     excerpt:
-      "How to create and maintain a robust design system that scales with your product and team, including component libraries and documentation.",
-    image: "/images/kingfood.png",
-    category: "Design",
-    readTime: "12 min read",
-    date: "2023-12-28",
-    tags: ["Design Systems", "UI/UX", "Components"],
+      "Building real-time notification systems for web applications using Socket.IO, including event-driven architecture, room management, and frontend integration.",
+    image: "/images/dashboard.png",
+    category: "Backend",
+    readTime: "9 min read",
+    date: "2023-12-10",
+    tags: ["Socket.IO", "Real-time", "Node.js", "WebSockets"],
   },
   {
     id: 5,
-    title: "State Management Patterns in Modern React",
+    title: "Optimizing React and Next.js Performance",
     excerpt:
-      "Comparing different state management solutions and patterns, from useState to Redux Toolkit and Zustand, with real-world examples.",
-    image: "/images/tomaho.png",
-    category: "React",
-    readTime: "9 min read",
-    date: "2023-12-20",
-    tags: ["React", "State Management", "Redux"],
-  },
-  {
-    id: 6,
-    title: "Microservices Architecture for Frontend Teams",
-    excerpt:
-      "How frontend teams can benefit from microservices architecture, including module federation, independent deployments, and team autonomy.",
-    image: "/images/dashboard.png",
-    category: "Architecture",
+      "Techniques to improve performance in modern React applications, including code splitting, lazy loading, memoization, and Next.js-specific optimizations.",
+    image: "/images/portfolio.jpg",
+    category: "Performance",
     readTime: "11 min read",
-    date: "2023-12-15",
-    tags: ["Microservices", "Architecture", "Team Structure"],
+    date: "2023-11-20",
+    tags: ["React", "Next.js", "Performance", "Optimization"],
   },
 ];
 
 const categories = [
   "All",
-  "React",
-  "AI/ML",
-  "Performance",
-  "Design",
+  "Vue",
   "Architecture",
+  "Security",
+  "Backend",
+  "Performance",
 ];
 
 function formatDate(dateStr) {
@@ -113,9 +102,8 @@ function ArticleCard({ article, isFeatured = false }) {
           scrollToContact();
         }
       }}
-      className={`group flex cursor-pointer flex-col overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] transition-all duration-300 hover:border-white/20 hover:bg-white/[0.04] hover:shadow-xl hover:shadow-black/20 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black ${
-        isFeatured ? "lg:col-span-2" : ""
-      }`}
+      className={`group flex cursor-pointer flex-col overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] transition-all duration-300 hover:border-white/20 hover:bg-white/[0.04] hover:shadow-xl hover:shadow-black/20 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black ${isFeatured ? "lg:col-span-2" : ""
+        }`}
     >
       {/* Thumbnail */}
       <div className="relative aspect-video overflow-hidden bg-gray-900/50">
@@ -238,11 +226,10 @@ export default function Blog() {
               type="button"
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black ${
-                activeCategory === cat
+              className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black ${activeCategory === cat
                   ? "bg-white text-black"
                   : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-gray-200"
-              }`}
+                }`}
             >
               {cat}
             </button>

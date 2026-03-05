@@ -24,7 +24,7 @@ export default function About() {
         <div className="relative w-48 h-48 md:w-60 md:h-60">
           <Image
             src="/images/avatar.jpg"
-            alt="Tung Do - Senior Frontend Developer"
+            alt="Do Van Tung - Frontend Engineer"
             fill
             className="object-cover rounded-full border-4 border-indigo-500 shadow-lg"
             sizes="(max-width: 768px) 192px, 240px"
@@ -38,15 +38,19 @@ export default function About() {
           <h2 id="about-heading" className="text-4xl font-bold mb-4">About Me</h2>
 
           <p className="text-gray-400 text-lg mb-4 leading-relaxed">
-            I'm <span className="text-indigo-400 font-medium">Do Van Tung</span>, a passionate Junior Software Engineer with nearly 4 years of experience building user-centric web applications.
+            I am a <span className="text-indigo-400 font-medium">Frontend Engineer</span> with nearly 4 years of experience developing modern web applications and enterprise management systems.
           </p>
 
           <p className="text-gray-400 text-lg mb-4 leading-relaxed">
-            My core expertise includes <span className="text-indigo-400">ReactJS</span>, <span className="text-indigo-400">TypeScript</span>, <span className="text-indigo-400">Redux</span>, and responsive UI/UX. I've worked on large-scale systems in banking, e-commerce, and enterprise management.
+            My main expertise lies in building scalable user interfaces using <span className="text-indigo-400">React</span>, <span className="text-indigo-400">Next.js</span>, <span className="text-indigo-400">Vue.js</span>, and <span className="text-indigo-400">TypeScript</span>. I have experience working on complex systems such as banking platforms, warehouse management systems, KPI management dashboards, and enterprise accounting software.
+          </p>
+
+          <p className="text-gray-400 text-lg mb-4 leading-relaxed">
+            I focus on writing clean, maintainable code and designing intuitive user experiences. I am also experienced in working with state management tools like <span className="text-indigo-400">Redux</span> and <span className="text-indigo-400">Vuex</span>, integrating REST APIs, and building real-time features using technologies like <span className="text-indigo-400">Socket.IO</span>.
           </p>
 
           <p className="text-gray-400 text-lg leading-relaxed">
-            I believe in clean code, meaningful animation, and always being ready to learn something new. Let's build something amazing together!
+            Beyond frontend development, I enjoy learning new technologies, improving application performance, and building full-stack side projects that combine modern frontend frameworks with scalable backend architectures.
           </p>
         </div>
       </motion.div>

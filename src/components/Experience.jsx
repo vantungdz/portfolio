@@ -5,72 +5,52 @@ import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 const experiences = [
   {
     id: 1,
-    company: "TechCorp Solutions",
-    position: "Senior Frontend Developer",
-    duration: "2023 – Present",
+    company: "ISB Vietnam",
+    position: "Frontend Engineer",
+    duration: "Jul 2022 – Present",
     location: "Ho Chi Minh City, Vietnam",
     type: "Full-time",
     description:
-      "Leading frontend development for enterprise applications, mentoring junior developers, and implementing best practices.",
+      "Frontend Engineer working on enterprise software projects, participating in implementation and coding phases while continuously researching and applying new technologies.",
     achievements: [
-      "Led a team of 5 developers to rebuild the main product dashboard",
-      "Improved application performance by 40% through code optimization",
-      "Implemented CI/CD pipeline reducing deployment time by 60%",
-      "Mentored 3 junior developers and conducted code reviews",
+      "Participated in implementation and coding phases of software development",
+      "Performed unit testing and debugging to ensure application quality",
+      "Researched and applied new technologies when required by projects",
+      "Updated and improved applications based on customer requirements",
     ],
     technologies: [
-      "React",
+      "ReactJS",
       "TypeScript",
       "Next.js",
       "Redux",
-      "Tailwind CSS",
-      "Jest",
+      "Redux-Saga",
     ],
     logo: "🏢",
   },
   {
     id: 2,
-    company: "Digital Innovations Ltd",
-    position: "Frontend Developer",
-    duration: "2021 – 2023",
+    company: "BUSO",
+    position: "Frontend Engineer",
+    duration: "Oct 2020 – Dec 2021",
     location: "Ho Chi Minh City, Vietnam",
     type: "Full-time",
     description:
-      "Developed responsive web applications and collaborated with design and backend teams to deliver high-quality products.",
+      "Developed interfaces for enterprise management applications, implementing and improving features based on customer feedback and requirements.",
     achievements: [
-      "Built 10+ responsive web applications for various clients",
-      "Reduced bundle size by 30% through code splitting",
-      "Implemented accessibility features improving WCAG compliance",
-      "Collaborated with UX team to improve user experience",
+      "Developed interfaces for enterprise management applications",
+      "Updated and improved application features based on customer requirements",
+      "Collaborated with team members to improve UI functionality",
     ],
-    technologies: ["React", "JavaScript", "CSS3", "HTML5", "Git", "Figma"],
+    technologies: ["ReactJS", "JavaScript", "HTML", "CSS"],
     logo: "💻",
-  },
-  {
-    id: 3,
-    company: "StartUp Ventures",
-    position: "Junior Developer",
-    duration: "2020 – 2021",
-    location: "Ho Chi Minh City, Vietnam",
-    type: "Full-time",
-    description:
-      "Started my journey as a developer, learning modern web technologies and contributing to various projects.",
-    achievements: [
-      "Developed 5+ small to medium web applications",
-      "Learned modern JavaScript frameworks and tools",
-      "Participated in code reviews and team meetings",
-      "Contributed to open-source projects",
-    ],
-    technologies: ["JavaScript", "HTML5", "CSS3", "Bootstrap", "jQuery"],
-    logo: "🚀",
   },
 ];
 
 const stats = [
   { number: "4+", label: "Years Experience" },
-  { number: "20+", label: "Projects Completed" },
+  { number: "10+", label: "Projects Completed" },
   { number: "15+", label: "Technologies" },
-  { number: "100%", label: "Client Satisfaction" },
+  { number: "2", label: "Companies" },
 ];
 
 function TimelineCard({ experience, isLast }) {
@@ -83,9 +63,8 @@ function TimelineCard({ experience, isLast }) {
 
       {/* Card */}
       <div
-        className={`min-w-0 flex-1 rounded-xl border border-white/10 bg-white/[0.02] p-5 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.04] hover:shadow-lg hover:shadow-black/20 sm:p-6 ${
-          isLast ? "pb-0" : "pb-8 sm:pb-10"
-        }`}
+        className={`min-w-0 flex-1 rounded-xl border border-white/10 bg-white/[0.02] p-5 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.04] hover:shadow-lg hover:shadow-black/20 sm:p-6 ${isLast ? "pb-0" : "pb-8 sm:pb-10"
+          }`}
       >
         {/* Job title – most prominent */}
         <h3 className="text-lg font-semibold tracking-tight text-white sm:text-xl">

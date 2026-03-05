@@ -75,7 +75,7 @@ export default function Hero() {
           >
             <span className="block">Hi, I&apos;m </span>
             <span className="mt-1 block bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-              Tung Do
+              Do Van Tung
             </span>
           </motion.h1>
 
@@ -85,7 +85,7 @@ export default function Hero() {
             transition={transition}
             className="mt-4 text-xl text-gray-400 sm:text-2xl md:mt-6"
           >
-            Senior Frontend Developer
+            Frontend Engineer
           </motion.p>
 
           {/* Description */}
@@ -94,8 +94,8 @@ export default function Hero() {
             transition={transition}
             className="mt-6 max-w-xl text-base leading-relaxed text-gray-500 md:mt-8 md:text-lg"
           >
-            Building modern web experiences with React, TypeScript, and Next.js.
-            Focused on clean code, performance, and user-centric design.
+            Frontend Engineer with nearly 4 years of experience building scalable web applications using React, Next.js, Vue, and TypeScript.
+            Specialized in building enterprise dashboards, management systems, and modern frontend architectures focused on performance and scalability.
           </motion.p>
 
           {/* CTAs */}

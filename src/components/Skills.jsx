@@ -1,53 +1,78 @@
 "use client";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { 
-  FaReact, 
-  FaJs, 
-  FaHtml5, 
-  FaCss3Alt, 
-  FaNodeJs, 
+import {
+  FaReact,
+  FaJs,
+  FaHtml5,
+  FaCss3Alt,
+  FaNodeJs,
   FaGitAlt,
-  FaDocker,
-  FaAws,
   FaDatabase,
-  FaFigma,
-  FaPython,
-  FaAngular
+  FaAngular,
+  FaRobot
 } from "react-icons/fa";
-import { SiTypescript, SiNextdotjs, SiRedux, SiTailwindcss, SiMongodb, SiPostgresql } from "react-icons/si";
+import { SiTypescript, SiNextdotjs, SiRedux, SiTailwindcss, SiMongodb, SiPostgresql, SiMysql, SiVuedotjs, SiSocketdotio, SiExpress, SiJira, SiPrettier, SiEslint } from "react-icons/si";
 
 const skills = [
   {
     category: "Frontend",
     items: [
       { name: "React", icon: <FaReact />, level: 95, color: "#61DAFB" },
+      { name: "Next.js", icon: <SiNextdotjs />, level: 88, color: "#e2e8f0" },
+      { name: "Vue.js", icon: <SiVuedotjs />, level: 80, color: "#42B883" },
+      { name: "Angular", icon: <FaAngular />, level: 70, color: "#DD0031" },
       { name: "TypeScript", icon: <SiTypescript />, level: 90, color: "#3178C6" },
-      { name: "Next.js", icon: <SiNextdotjs />, level: 88, color: "#000000" },
       { name: "JavaScript", icon: <FaJs />, level: 92, color: "#F7DF1E" },
       { name: "HTML5", icon: <FaHtml5 />, level: 95, color: "#E34F26" },
       { name: "CSS3", icon: <FaCss3Alt />, level: 90, color: "#1572B6" },
-      { name: "Tailwind CSS", icon: <SiTailwindcss />, level: 85, color: "#06B6D4" },
-      { name: "Redux", icon: <SiRedux />, level: 80, color: "#764ABC" },
+      { name: "TailwindCSS", icon: <SiTailwindcss />, level: 85, color: "#06B6D4" },
     ]
   },
   {
-    category: "Backend & Tools",
+    category: "State Management",
+    items: [
+      { name: "Redux", icon: <SiRedux />, level: 88, color: "#764ABC" },
+      { name: "Redux-Saga", icon: <SiRedux />, level: 82, color: "#999999" },
+      { name: "Vuex", icon: <SiVuedotjs />, level: 78, color: "#42B883" },
+    ]
+  },
+  {
+    category: "Backend & APIs",
     items: [
       { name: "Node.js", icon: <FaNodeJs />, level: 75, color: "#339933" },
-      { name: "Git", icon: <FaGitAlt />, level: 85, color: "#F05032" },
-      { name: "Docker", icon: <FaDocker />, level: 70, color: "#2496ED" },
-      { name: "AWS", icon: <FaAws />, level: 65, color: "#FF9900" },
+      { name: "Express", icon: <SiExpress />, level: 70, color: "#e2e8f0" },
+      { name: "REST APIs", icon: <FaDatabase />, level: 85, color: "#6366f1" },
+      { name: "JWT Auth", icon: <FaDatabase />, level: 80, color: "#eab308" },
+      { name: "RBAC", icon: <FaDatabase />, level: 78, color: "#f97316" },
+      { name: "Socket.IO", icon: <SiSocketdotio />, level: 75, color: "#e2e8f0" },
+    ]
+  },
+  {
+    category: "Databases",
+    items: [
       { name: "MongoDB", icon: <SiMongodb />, level: 75, color: "#47A248" },
+      { name: "MySQL", icon: <SiMysql />, level: 72, color: "#4479A1" },
       { name: "PostgreSQL", icon: <SiPostgresql />, level: 70, color: "#336791" },
     ]
   },
   {
-    category: "Design & Others",
+    category: "Developer Tools",
     items: [
-      { name: "Figma", icon: <FaFigma />, level: 80, color: "#F24E1E" },
-      { name: "Python", icon: <FaPython />, level: 70, color: "#3776AB" },
-      { name: "Angular", icon: <FaAngular />, level: 75, color: "#DD0031" },
+      { name: "Git", icon: <FaGitAlt />, level: 90, color: "#F05032" },
+      { name: "ESLint", icon: <SiEslint />, level: 85, color: "#4B32C3" },
+      { name: "Prettier", icon: <SiPrettier />, level: 85, color: "#F7B93E" },
+      { name: "Jira", icon: <SiJira />, level: 80, color: "#0052CC" },
+      { name: "Redmine", icon: <FaDatabase />, level: 75, color: "#9b2335" },
+      { name: "VS Code", icon: <FaDatabase />, level: 95, color: "#007ACC" },
+    ]
+  },
+  {
+    category: "AI Tools",
+    items: [
+      { name: "Cursor", icon: <FaRobot />, level: 85, color: "#6366f1" },
+      { name: "GitHub Copilot", icon: <FaRobot />, level: 82, color: "#e2e8f0" },
+      { name: "Gemini", icon: <FaRobot />, level: 80, color: "#4285F4" },
     ]
   }
 ];
@@ -127,7 +152,7 @@ export default function Skills() {
             Skills & <span className="text-indigo-500">Technologies</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            My technical expertise spans across modern web technologies, 
+            My technical expertise spans across modern web technologies,
             with a focus on creating scalable and maintainable applications.
           </p>
         </motion.div>
@@ -145,11 +170,10 @@ export default function Skills() {
               key={category.category}
               type="button"
               onClick={() => setActiveCategory(category.category)}
-              className={`rounded-full px-6 py-3 font-medium transition-[background-color,color,transform] duration-300 hover:scale-[1.02] ${
-                activeCategory === category.category
+              className={`rounded-full px-6 py-3 font-medium transition-[background-color,color,transform] duration-300 hover:scale-[1.02] ${activeCategory === category.category
                   ? "bg-indigo-500 text-white shadow-lg shadow-indigo-500/25"
                   : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
-              }`}
+                }`}
             >
               {category.category}
             </button>
@@ -184,8 +208,8 @@ export default function Skills() {
               Always Learning & Growing
             </h3>
             <p className="text-gray-400 leading-relaxed">
-              I'm constantly exploring new technologies and best practices to stay current 
-              with industry trends. Currently diving deep into AI/ML integration, 
+              I'm constantly exploring new technologies and best practices to stay current
+              with industry trends. Currently diving deep into AI/ML integration,
               microservices architecture, and advanced React patterns.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-6">
