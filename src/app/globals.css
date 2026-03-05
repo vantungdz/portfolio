@@ -5,7 +5,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 6rem; /* 96px - matches header height (h-24) */
+  scroll-padding-top: 4rem; /* 64px - matches header height (h-16) */
 }
 
 body {
@@ -57,6 +57,26 @@ main {
   background: #4f46e5;
 }
 
+/* Skip link: visible only on focus for keyboard/screen reader users */
+.skip-link {
+  position: absolute;
+  left: 0;
+  top: -100%;
+  z-index: 110;
+  padding: 0.75rem 1.25rem;
+  background: #fff;
+  color: #000;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 1rem;
+  left: 1.5rem;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
 /* Custom select styling */
 select {
   background-color: #1f2937 !important;
@@ -86,10 +106,8 @@ input:focus, select:focus, textarea:focus {
   border-color: #6366f1 !important;
 }
 
-/* Smooth animations */
-* {
-  transition: all 0.3s ease;
-}
+/* Scoped transitions – use Tailwind transition-* on buttons, cards, links as needed.
+   Avoid global * { transition } to prevent scroll/layout jank. */
 
 /* Glass morphism effect */
 .glass {
@@ -132,4 +150,11 @@ input:focus, select:focus, textarea:focus {
 
 .pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float,
+  .pulse-glow {
+    animation: none;
+  }
 }

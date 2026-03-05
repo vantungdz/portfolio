@@ -1,25 +1,38 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import { useEffect, useState, useRef } from "react";
 
 export default function ScrollProgress() {
   const [progress, setProgress] = useState(0);
+  const rafId = useRef(null);
+  const ticking = useRef(false);
 
   useEffect(() => {
-    const updateScroll = () => {
+    const updateProgress = () => {
       const scrollTop = window.scrollY;
       const height = document.body.scrollHeight - window.innerHeight;
-      const scrollPercent = (scrollTop / height) * 100;
+      const scrollPercent = height > 0 ? (scrollTop / height) * 100 : 0;
       setProgress(scrollPercent);
+      ticking.current = false;
     };
 
-    window.addEventListener("scroll", updateScroll);
-    return () => window.removeEventListener("scroll", updateScroll);
+    const onScroll = () => {
+      if (ticking.current) return;
+      ticking.current = true;
+      rafId.current = requestAnimationFrame(updateProgress);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll, { passive: true });
+      if (rafId.current != null) cancelAnimationFrame(rafId.current);
+    };
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-1 z-[100] bg-transparent">
+    <div className="fixed top-0 left-0 z-[100] h-1 w-full bg-transparent">
       <div
-        className="h-full bg-indigo-500 transition-all duration-150 ease-out"
+        className="h-full bg-indigo-500 transition-[width] duration-150 ease-out"
         style={{ width: `${progress}%` }}
       />
     </div>

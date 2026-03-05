@@ -92,11 +92,13 @@ export default function Projects() {
   return (
     <section
       id="projects"
+      aria-labelledby="projects-heading"
       className="min-h-screen snap-start w-full bg-black text-white py-20 px-4 pt-24"
     >
       {/* Header */}
       <div className="max-w-6xl mx-auto text-center mb-16">
         <motion.h2
+          id="projects-heading"
           className="text-4xl md:text-5xl font-bold mb-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -190,6 +192,8 @@ export default function Projects() {
               category={project.category}
               technologies={project.technologies}
               year={project.year}
+              liveUrl={project.liveUrl}
+              githubUrl={project.githubUrl}
               onClick={() => setSelectedProject(project)}
             />
           </motion.div>

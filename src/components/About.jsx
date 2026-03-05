@@ -1,17 +1,22 @@
 "use client";
+
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export default function About() {
+  const reducedMotion = useReducedMotion();
+
   return (
     <section
       id="about"
+      aria-labelledby="about-heading"
       className="min-h-screen snap-start w-full bg-[#121212] flex items-center justify-center px-6 pt-24"
     >
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+        initial={reducedMotion ? false : { opacity: 0, y: 24 }}
+        whileInView={reducedMotion ? false : { opacity: 1, y: 0 }}
+        transition={{ duration: reducedMotion ? 0 : 0.5 }}
         viewport={{ once: true }}
         className="max-w-6xl w-full flex flex-col md:flex-row items-center gap-10"
       >
@@ -30,7 +35,7 @@ export default function About() {
 
         {/* Info */}
         <div className="text-center md:text-left">
-          <h2 className="text-4xl font-bold mb-4">About Me</h2>
+          <h2 id="about-heading" className="text-4xl font-bold mb-4">About Me</h2>
 
           <p className="text-gray-400 text-lg mb-4 leading-relaxed">
             I'm <span className="text-indigo-400 font-medium">Do Van Tung</span>, a passionate Junior Software Engineer with nearly 4 years of experience building user-centric web applications.

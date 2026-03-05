@@ -1,53 +1,65 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import AnimatedBackground from "./AnimatedBackground";
 import { FaGithub, FaLinkedin, FaArrowDown, FaDownload } from "react-icons/fa";
 import { socialLinksConfig } from "@/config/socialLinks";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { scrollToSection } from "@/lib/layout";
+
+const AnimatedBackground = dynamic(
+  () => import("./AnimatedBackground"),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"
+        aria-hidden
+      />
+    ),
+  }
+);
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
 };
 
-const container = {
-  animate: {
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
-    },
-  },
+const fadeInUpReduced = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
 };
 
-function scrollToSection(id) {
-  const el = document.getElementById(id);
-  if (el) {
-    const headerHeight = 96;
-    window.scrollTo({
-      top: el.offsetTop - headerHeight,
-      behavior: "smooth",
-    });
-  }
-}
-
 export default function Hero() {
+  const reducedMotion = useReducedMotion();
+  const variants = reducedMotion ? fadeInUpReduced : fadeInUp;
+  const transition = reducedMotion ? { duration: 0 } : { duration: 0.5 };
+  const containerTransition = reducedMotion
+    ? { staggerChildren: 0, delayChildren: 0 }
+    : { staggerChildren: 0.08, delayChildren: 0.1 };
+
   return (
     <section
       id="home"
       className="relative min-h-screen snap-start overflow-hidden pt-24 flex items-center"
+      aria-labelledby="hero-heading"
     >
       <AnimatedBackground />
 
       <div className="relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
         <motion.div
           className="max-w-3xl"
-          variants={container}
           initial="initial"
           animate="animate"
+          variants={{
+            initial: {},
+            animate: { transition: containerTransition },
+          }}
         >
           {/* Eyebrow / status */}
           <motion.div
-            variants={fadeInUp}
+            variants={variants}
+            transition={transition}
             className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 mb-8 text-sm text-gray-400"
           >
             <span className="h-2 w-2 rounded-full bg-emerald-500" />
@@ -56,7 +68,9 @@ export default function Hero() {
 
           {/* Headline */}
           <motion.h1
-            variants={fadeInUp}
+            id="hero-heading"
+            variants={variants}
+            transition={transition}
             className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
           >
             <span className="block">Hi, I&apos;m </span>
@@ -67,7 +81,8 @@ export default function Hero() {
 
           {/* Role / subline */}
           <motion.p
-            variants={fadeInUp}
+            variants={variants}
+            transition={transition}
             className="mt-4 text-xl text-gray-400 sm:text-2xl md:mt-6"
           >
             Senior Frontend Developer
@@ -75,7 +90,8 @@ export default function Hero() {
 
           {/* Description */}
           <motion.p
-            variants={fadeInUp}
+            variants={variants}
+            transition={transition}
             className="mt-6 max-w-xl text-base leading-relaxed text-gray-500 md:mt-8 md:text-lg"
           >
             Building modern web experiences with React, TypeScript, and Next.js.
@@ -84,7 +100,8 @@ export default function Hero() {
 
           {/* CTAs */}
           <motion.div
-            variants={fadeInUp}
+            variants={variants}
+            transition={transition}
             className="mt-10 flex flex-wrap items-center gap-4 md:mt-12"
           >
             <button
@@ -104,7 +121,8 @@ export default function Hero() {
 
           {/* Social links */}
           <motion.div
-            variants={fadeInUp}
+            variants={variants}
+            transition={transition}
             className="mt-12 flex items-center gap-6"
           >
             <a
@@ -133,21 +151,26 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.8, duration: 0.5 }}
+        transition={{ delay: reducedMotion ? 0 : 0.8, duration: reducedMotion ? 0 : 0.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <button
+          type="button"
           onClick={() => scrollToSection("about")}
-          className="flex flex-col items-center gap-2 text-gray-500 transition-colors hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-[#0f0f0f] rounded-full"
+          className="flex flex-col items-center gap-2 rounded-full text-gray-500 transition-colors hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-[#0f0f0f]"
           aria-label="Scroll to about"
         >
           <span className="text-xs font-medium">Scroll</span>
-          <motion.span
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
+          {reducedMotion ? (
             <FaArrowDown className="h-4 w-4" />
-          </motion.span>
+          ) : (
+            <motion.span
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <FaArrowDown className="h-4 w-4" />
+            </motion.span>
+          )}
         </button>
       </motion.div>
     </section>

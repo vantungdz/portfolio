@@ -1,134 +1,234 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-
-const sections = ["Home", "About", "Skills", "Experience", "Projects", "Testimonials", "Blog", "CV", "Resume", "Contact"];
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import {
+  SECTION_IDS,
+  scrollToSection,
+  sectionIdToLabel,
+} from "@/lib/layout";
 
 export default function Header() {
   const [active, setActive] = useState("Home");
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef(null);
+  const firstNavItemRef = useRef(null);
+  const reducedMotion = useReducedMotion();
 
-  // Use IntersectionObserver to track visible section
+  const scrolledRef = useRef(false);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries.find((entry) => entry.isIntersecting);
-        if (visible) {
-          const id = visible.target.getAttribute("id");
-          if (id) {
-            // Handle special cases for CV and other sections
-            const sectionName = id === "cv" ? "CV" : 
-              id === "resume" ? "Resume" :
-              id.charAt(0).toUpperCase() + id.slice(1);
-            setActive(sectionName);
-          }
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const id = entry.target.getAttribute("id");
+          if (id) setActive(sectionIdToLabel(id));
+          break;
         }
       },
-      {
-        rootMargin: "-30% 0px -65% 0px", // fine-tune when highlight changes
-        threshold: 0,
-      }
+      { rootMargin: "-25% 0px -60% 0px", threshold: 0 }
     );
 
-    sections.forEach((sec) => {
-      const el = document.getElementById(sec.toLowerCase());
+    SECTION_IDS.forEach((id) => {
+      const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
-
     return () => observer.disconnect();
   }, []);
 
-  // Blur background on scroll
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => {
+      const now = window.scrollY > 16;
+      if (now !== scrolledRef.current) {
+        scrolledRef.current = now;
+        setScrolled(now);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const headerHeight = 96; // 6rem = 96px (h-24)
-      const elementPosition = element.offsetTop - headerHeight;
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
+  useEffect(() => {
+    if (menuOpen) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  // Focus first menu item when menu opens, return focus to hamburger when it closes
+  useEffect(() => {
+    if (menuOpen) {
+      const timer = requestAnimationFrame(() => {
+        firstNavItemRef.current?.focus();
       });
+      return () => cancelAnimationFrame(timer);
+    } else {
+      menuButtonRef.current?.focus();
     }
+  }, [menuOpen]);
+
+  // Close menu on Escape
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
+
+  const handleNavClick = (sectionId) => {
+    scrollToSection(sectionId);
     setMenuOpen(false);
   };
 
+  const openMenu = () => setMenuOpen(true);
+  const closeMenu = () => setMenuOpen(false);
+
+  const motionTransition = reducedMotion
+    ? { duration: 0 }
+    : { type: "spring", stiffness: 380, damping: 30 };
+
   return (
-    <AnimatePresence>
-      <motion.header
-        initial={{ y: -60, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 h-24 ${
-          scrolled ? "bg-black/80 backdrop-blur-md shadow-lg border-b border-white/10" : "bg-black/40 backdrop-blur-sm"
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300 ${
+          scrolled
+            ? "border-b border-white/10 bg-black/80 backdrop-blur-xl"
+            : "bg-transparent"
         }`}
+        role="banner"
       >
-        <div className="flex justify-between items-center py-4 max-w-6xl mx-auto">
-          <button 
-            onClick={() => scrollToSection('home')}
-            className="text-xl font-bold text-white hover:text-indigo-400 transition-colors"
+        <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-6">
+          <button
+            type="button"
+            onClick={() => handleNavClick("home")}
+            className="text-lg font-semibold text-white transition-colors hover:text-white/90 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black"
           >
-            TungDo<span className="text-indigo-500">.</span>
+            TungDo<span className="text-white/60">.</span>
           </button>
 
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex gap-6 text-sm font-semibold uppercase tracking-wide">
-            {sections.map((sec) => (
-              <button
-                key={sec}
-                onClick={() => scrollToSection(sec.toLowerCase())}
-                className={`relative px-1 transition duration-200 hover:text-indigo-400 ${
-                  active === sec ? "text-indigo-400" : "text-gray-300"
-                }`}
-              >
-                {sec}
-                {active === sec && (
-                  <motion.span
-                    layoutId="underline"
-                    className="absolute left-0 bottom-0 w-full h-[2px] bg-indigo-400"
-                  />
-                )}
-              </button>
-            ))}
-          </div>
+          <nav className="hidden lg:block" aria-label="Main navigation">
+            <ul className="flex items-center gap-1">
+              {SECTION_IDS.map((sectionId) => {
+                const label = sectionIdToLabel(sectionId);
+                const isActive = active === label;
+                return (
+                  <li key={sectionId}>
+                    <button
+                      type="button"
+                      onClick={() => handleNavClick(sectionId)}
+                      className={`relative rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black ${
+                        isActive
+                          ? "text-white"
+                          : "text-gray-400 hover:bg-white/5 hover:text-gray-200"
+                      }`}
+                    >
+                      {isActive && (
+                        <motion.span
+                          layoutId={reducedMotion ? undefined : "header-active"}
+                          className="absolute inset-0 rounded-md bg-white/10"
+                          transition={motionTransition}
+                        />
+                      )}
+                      <span className="relative">{label}</span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
 
-          {/* Mobile toggle */}
-          <button className="lg:hidden text-white" onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          <button
+            ref={menuButtonRef}
+            type="button"
+            onClick={openMenu}
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30 lg:hidden"
+            aria-label="Open menu"
+            aria-expanded={menuOpen}
+            aria-haspopup="true"
+            aria-controls="mobile-menu"
+          >
+            <Menu className="h-5 w-5" />
           </button>
         </div>
+      </header>
 
-        {/* Mobile Nav */}
+      <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="lg:hidden px-6 pb-4"
-          >
-            <div className="flex flex-col space-y-2 text-sm font-semibold uppercase tracking-wide">
-              {sections.map((sec) => (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: reducedMotion ? 0 : 0.2 }}
+              className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm lg:hidden"
+              onClick={closeMenu}
+              aria-hidden="true"
+            />
+            <motion.div
+              id="mobile-menu"
+              initial={{ opacity: 0, x: "100%" }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: "100%" }}
+              transition={
+                reducedMotion
+                  ? { duration: 0 }
+                  : { type: "spring", damping: 25, stiffness: 200 }
+              }
+              className="fixed right-0 top-0 z-50 flex h-full w-full max-w-sm flex-col border-l border-white/10 bg-black/95 backdrop-blur-xl lg:hidden"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Navigation menu"
+            >
+              <div className="flex h-16 items-center justify-between border-b border-white/10 px-6">
+                <span className="text-lg font-semibold text-white">
+                  Menu
+                </span>
                 <button
-                  key={sec}
-                  onClick={() => scrollToSection(sec.toLowerCase())}
-                  className={`transition hover:text-indigo-400 ${
-                    active === sec ? "text-indigo-400" : "text-gray-300"
-                  }`}
+                  type="button"
+                  onClick={closeMenu}
+                  className="flex h-10 w-10 items-center justify-center rounded-lg text-gray-400 transition-colors hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/30"
+                  aria-label="Close menu"
                 >
-                  {sec}
+                  <X className="h-5 w-5" />
                 </button>
-              ))}
-            </div>
-          </motion.div>
+              </div>
+              <nav
+                className="flex-1 overflow-y-auto px-4 py-4"
+                aria-label="Main navigation"
+              >
+                <ul className="space-y-0.5">
+                  {SECTION_IDS.map((sectionId, index) => {
+                    const label = sectionIdToLabel(sectionId);
+                    const isActive = active === label;
+                    const isFirst = index === 0;
+                    return (
+                      <li key={sectionId}>
+                        <button
+                          ref={isFirst ? firstNavItemRef : null}
+                          type="button"
+                          onClick={() => handleNavClick(sectionId)}
+                          className={`flex w-full items-center rounded-lg px-4 py-3 text-left text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 ${
+                            isActive
+                              ? "bg-white/10 text-white"
+                              : "text-gray-400 hover:bg-white/5 hover:text-gray-200"
+                          }`}
+                        >
+                          {label}
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </nav>
+            </motion.div>
+          </>
         )}
-      </motion.header>
-    </AnimatePresence>
+      </AnimatePresence>
+    </>
   );
 }

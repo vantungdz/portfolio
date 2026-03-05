@@ -53,62 +53,48 @@ const skills = [
 ];
 
 const SkillCard = ({ skill, index }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
       viewport={{ once: true }}
-      whileHover={{ 
-        scale: 1.05,
-        rotateY: 10,
-        rotateX: 5,
-      }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-      className="relative group cursor-pointer"
+      className="group"
     >
-      <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-indigo-500/50 transition-all duration-300">
-        {/* Glow effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
+      <div className="relative h-full rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-[border-color,transform] duration-300 hover:scale-[1.02] hover:border-indigo-500/50">
+        {/* Glow effect – CSS only */}
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-indigo-500/20 to-purple-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
         <div className="relative z-10">
-          {/* Icon */}
-          <div className="flex items-center justify-between mb-4">
-            <div 
+          <div className="mb-4 flex items-center justify-between">
+            <div
               className="text-4xl transition-transform duration-300 group-hover:scale-110"
               style={{ color: skill.color }}
             >
               {skill.icon}
             </div>
-            <span className="text-sm text-gray-400 font-medium">
+            <span className="text-sm font-medium text-gray-400">
               {skill.level}%
             </span>
           </div>
 
-          {/* Skill name */}
-          <h3 className="text-lg font-semibold text-white mb-3">
+          <h3 className="mb-3 text-lg font-semibold text-white">
             {skill.name}
           </h3>
 
-          {/* Progress bar */}
-          <div className="w-full bg-gray-700 rounded-full h-2 mb-2">
+          <div className="mb-2 h-2 w-full rounded-full bg-gray-700">
             <motion.div
               initial={{ width: 0 }}
               whileInView={{ width: `${skill.level}%` }}
-              transition={{ duration: 1, delay: index * 0.1 }}
+              transition={{ duration: 0.8, delay: index * 0.05 }}
               viewport={{ once: true }}
-              className="h-2 rounded-full transition-all duration-300"
-              style={{ 
+              className="h-2 rounded-full transition-[box-shadow] duration-300 group-hover:shadow-md"
+              style={{
                 background: `linear-gradient(90deg, ${skill.color}, ${skill.color}80)`,
-                boxShadow: isHovered ? `0 0 20px ${skill.color}40` : 'none'
               }}
             />
           </div>
 
-          {/* Experience level */}
           <div className="flex justify-between text-xs text-gray-400">
             <span>Beginner</span>
             <span>Expert</span>
@@ -125,6 +111,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
+      aria-labelledby="skills-heading"
       className="min-h-screen snap-start w-full bg-[#0a0a0a] text-white py-20 px-4 pt-24"
     >
       <div className="max-w-6xl mx-auto">
@@ -136,7 +123,7 @@ export default function Skills() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 id="skills-heading" className="text-4xl md:text-5xl font-bold mb-4">
             Skills & <span className="text-indigo-500">Technologies</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -154,19 +141,18 @@ export default function Skills() {
           className="flex flex-wrap justify-center gap-4 mb-12"
         >
           {skills.map((category) => (
-            <motion.button
+            <button
               key={category.category}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              type="button"
               onClick={() => setActiveCategory(category.category)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+              className={`rounded-full px-6 py-3 font-medium transition-[background-color,color,transform] duration-300 hover:scale-[1.02] ${
                 activeCategory === category.category
                   ? "bg-indigo-500 text-white shadow-lg shadow-indigo-500/25"
                   : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
               }`}
             >
               {category.category}
-            </motion.button>
+            </button>
           ))}
         </motion.div>
 
