@@ -1,41 +1,11 @@
 "use client";
 import { motion } from "framer-motion";
 import CountUp from "react-countup";
-import { FaDownload } from "react-icons/fa";
-
-const experiences = [
-  {
-    role: "Frontend Engineer",
-    company: "ISB Vietnam",
-    time: "07/2022 – Present",
-    description:
-      "Participated in implementation, unit testing, and tech research. Updated UI according to customer requirements.",
-  },
-  {
-    role: "Frontend Engineer",
-    company: "BUSO",
-    time: "10/2020 – 12/2021",
-    description:
-      "Developed and enhanced business management applications' interfaces based on customer needs.",
-  },
-];
-
-const education = [
-  {
-    school: "VNUHCM - University Of Science",
-    degree: "Bachelor of Computer Science",
-    time: "Graduated 08/2020",
-  },
-];
-
-const skills = [
-  "JavaScript", "TypeScript", "ReactJS", "NextJS", "Redux", "VueJS",
-  "Angular", "HTML/CSS", "Tailwind", "Formik + Yup", "Jest",
-  "MongoDB", "MySQL", "PostgreSQL",
-  "Git", "SVN", "Jira", "EsLint", "Prettier",
-];
+import { getResumeExperiences, education, resumeSkillTags, resumeCounters } from "@/data/experience";
 
 export default function Resume() {
+  const experiences = getResumeExperiences();
+
   return (
     <section id="resume" className="min-h-screen snap-start py-20 px-6 bg-black text-white pt-24">
       <div className="max-w-6xl mx-auto">
@@ -53,26 +23,26 @@ export default function Resume() {
         {/* COUNTERS */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mb-16">
           <div>
-            <p className="text-4xl font-bold text-indigo-500">
-              <CountUp end={4} duration={2} />+
+            <p className="text-4xl font-bold text-primary">
+              <CountUp end={resumeCounters.yearsExperience} duration={2} />+
             </p>
             <p className="text-gray-400 mt-1">Years Experience</p>
           </div>
           <div>
-            <p className="text-4xl font-bold text-indigo-500">
-              <CountUp end={4} duration={2} />+
+            <p className="text-4xl font-bold text-primary">
+              <CountUp end={resumeCounters.majorProjects} duration={2} />+
             </p>
             <p className="text-gray-400 mt-1">Major Projects</p>
           </div>
           <div>
-            <p className="text-4xl font-bold text-indigo-500">
-              <CountUp end={3} duration={2} />
+            <p className="text-4xl font-bold text-primary">
+              <CountUp end={resumeCounters.companies} duration={2} />
             </p>
             <p className="text-gray-400 mt-1">Companies</p>
           </div>
           <div>
-            <p className="text-4xl font-bold text-indigo-500">
-              <CountUp end={100} duration={2} />%
+            <p className="text-4xl font-bold text-primary">
+              <CountUp end={resumeCounters.commitment} duration={2} />%
             </p>
             <p className="text-gray-400 mt-1">Commitment</p>
           </div>
@@ -93,9 +63,9 @@ export default function Resume() {
                   viewport={{ once: true }}
                   className="relative"
                 >
-                  <div className="absolute -left-3 top-1 w-3 h-3 bg-indigo-500 rounded-full" />
+                  <div className="absolute -left-3 top-1 w-3 h-3 bg-primary rounded-full" />
                   <h4 className="text-lg font-semibold">{exp.role}</h4>
-                  <p className="text-indigo-400 text-sm font-medium mb-1">{exp.company}</p>
+                  <p className="text-primary text-sm font-medium mb-1">{exp.company}</p>
                   <p className="text-gray-400 text-sm">{exp.time}</p>
                   <p className="text-gray-300 mt-2">{exp.description}</p>
                 </motion.div>
@@ -119,10 +89,10 @@ export default function Resume() {
             <div>
               <h3 className="text-2xl font-semibold mb-4">Skills</h3>
               <div className="flex flex-wrap gap-3">
-                {skills.map((skill, idx) => (
+                {resumeSkillTags.map((skill, idx) => (
                   <span
                     key={idx}
-                    className="bg-white/10 text-sm text-white px-3 py-1 rounded-full hover:bg-indigo-600 transition"
+                    className="bg-white/10 text-sm text-white px-3 py-1 rounded-full hover:bg-primary transition"
                   >
                     {skill}
                   </span>
@@ -131,8 +101,6 @@ export default function Resume() {
             </div>
           </div>
         </div>
-
-        {/* Remove CV Button - CV section has its own download functionality */}
       </div>
     </section>
   );

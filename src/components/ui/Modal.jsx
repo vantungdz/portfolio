@@ -116,7 +116,7 @@ export default function Modal({ isOpen, onClose, project }) {
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded bg-indigo-600 px-4 py-2 text-white transition-colors hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-[#111]"
+                  className="rounded bg-primary px-4 py-2 text-white transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-[#111]"
                 >
                   View Live
                 </a>

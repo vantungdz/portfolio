@@ -7,7 +7,10 @@ module.exports = {
     extend: {
       colors: {
         background: "#0f0f0f",
-        primary: "#6366f1",
+        primary: {
+          DEFAULT: "#6366f1",
+          foreground: "#ffffff",
+        },
       },
       fontFamily: {
         sans: ["-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "sans-serif"],

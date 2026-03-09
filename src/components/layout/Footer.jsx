@@ -12,7 +12,8 @@ import {
   FaMapMarkerAlt,
   FaPhone,
 } from "react-icons/fa";
-import { socialLinksConfig, contactInfoConfig } from "@/config/socialLinks";
+import { socialLinksConfig, contactInfoConfig } from "@/data/contact";
+import { RESUME_PDF_URL } from "@/lib/resume";
 
 const navigationLinks = [
   { name: "About", href: "#about" },
@@ -25,7 +26,7 @@ const navigationLinks = [
 
 const resourceLinks = [
   { name: "Resume", href: "#resume" },
-  { name: "CV", href: "#cv" },
+  { name: "CV", href: RESUME_PDF_URL, openInNewTab: true },
   { name: "Portfolio", href: "#home" },
   { name: "Blog Posts", href: "#blog" },
 ];
@@ -53,14 +54,25 @@ function ColumnHeading({ children }) {
 function LinkList({ links, className = "" }) {
   return (
     <ul className={`mt-4 space-y-3 ${className}`}>
-      {links.map(({ name, href }) => (
+      {links.map(({ name, href, openInNewTab }) => (
         <li key={name}>
-          <Link
-            href={href}
-            className="text-sm text-gray-400 transition-colors duration-200 hover:text-white"
-          >
-            {name}
-          </Link>
+          {openInNewTab ? (
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-gray-400 transition-colors duration-200 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b0b0c]"
+            >
+              {name}
+            </a>
+          ) : (
+            <Link
+              href={href}
+              className="text-sm text-gray-400 transition-colors duration-200 hover:text-white"
+            >
+              {name}
+            </Link>
+          )}
         </li>
       ))}
     </ul>
@@ -82,7 +94,7 @@ export default function Footer() {
       />
       {/* Very subtle background gradient for depth */}
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-indigo-500/[0.02] via-transparent to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/[0.02] via-transparent to-transparent"
         aria-hidden
       />
 

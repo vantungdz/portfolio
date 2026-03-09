@@ -1,22 +1,19 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import ScrollProgress from "@/components/ScrollProgress";
-import Footer from "@/components/Footer";
+import Header from "@/components/layout/Header";
+import Hero from "@/components/sections/Hero";
+import ScrollProgress from "@/components/layout/ScrollProgress";
+import Footer from "@/components/layout/Footer";
 
-const About = dynamic(() => import("@/components/About"), { ssr: true });
-const Skills = dynamic(() => import("@/components/Skills"), { ssr: true });
-const Experience = dynamic(() => import("@/components/Experience"), { ssr: true });
-const Projects = dynamic(() => import("@/components/Projects"), { ssr: true });
-const Testimonials = dynamic(() => import("@/components/Testimonials"), {
-  ssr: true,
-});
-const Blog = dynamic(() => import("@/components/Blog"), { ssr: true });
-const CV = dynamic(() => import("@/components/CV"), { ssr: true });
-const Resume = dynamic(() => import("@/components/Resume"), { ssr: true });
-const Contact = dynamic(() => import("@/components/Contact"), { ssr: true });
+const About = dynamic(() => import("@/components/sections/About"), { ssr: true });
+const Skills = dynamic(() => import("@/components/sections/Skills"), { ssr: true });
+const Experience = dynamic(() => import("@/components/sections/Experience"), { ssr: true });
+const Projects = dynamic(() => import("@/components/sections/Projects"), { ssr: true });
+const Testimonials = dynamic(() => import("@/components/sections/Testimonials"), { ssr: true });
+const Blog = dynamic(() => import("@/components/sections/Blog"), { ssr: true });
+const Resume = dynamic(() => import("@/components/sections/Resume"), { ssr: true });
+const Contact = dynamic(() => import("@/components/sections/Contact"), { ssr: true });
 
 export default function Page() {
   return (
@@ -38,7 +35,6 @@ export default function Page() {
         <Projects />
         <Testimonials />
         <Blog />
-        <CV />
         <Resume />
         <Contact />
       </main>

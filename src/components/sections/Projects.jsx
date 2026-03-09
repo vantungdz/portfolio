@@ -1,58 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import Modal from "./Modal";
-import ProjectCard from "./ProjectCard";
-import { FaFilter, FaExternalLinkAlt, FaGithub, FaEye } from "react-icons/fa";
-
-const projects = [
-  {
-    title: "KPI Management System",
-    description: "Full-stack KPI management platform designed to support Balanced Scorecard (BSC) methodology and multi-level approval workflows.",
-    image: "/images/dashboard.png",
-    liveUrl: "https://github.com/your-user/portfolio",
-    githubUrl: "https://github.com/your-user/portfolio",
-    category: "Enterprise",
-    technologies: ["Vue 3", "Ant Design Vue", "Vuex", "Chart.js", "Socket.IO", "TypeScript", "ExcelJS"],
-    features: ["Multi-level KPI Tracking", "Formula-based Scoring", "Real-time Notifications", "RBAC", "Dashboard Analytics", "Responsive UI"],
-    year: "2024"
-  },
-  {
-    title: "PaySplit",
-    description: "Mobile application for splitting bills and managing group payments with real-time tracking and MoMo payment integration.",
-    image: "/images/portfolio.jpg",
-    liveUrl: "https://github.com/your-user/portfolio",
-    githubUrl: "https://github.com/your-user/portfolio",
-    category: "Finance",
-    technologies: ["React Native", "Expo", "TypeScript", "Node.js", "Express", "MongoDB", "Socket.IO", "JWT"],
-    features: ["Real-time Payment Tracking", "JWT Authentication", "MoMo Integration", "Real-time Notifications", "Admin Dashboard"],
-    year: "2023"
-  },
-  {
-    title: "Enterprise Management System",
-    description: "Enterprise software platform (Tomaho Soft) used to manage multiple business processes including accounting and warehouse operations.",
-    image: "/images/tomaho.png",
-    liveUrl: "https://github.com/your-user/portfolio",
-    githubUrl: "https://github.com/your-user/portfolio",
-    category: "Enterprise",
-    technologies: ["ReactJS", "Redux-Saga", "Styled Components", "Formik", "Yup"],
-    features: ["Enterprise Management UI", "Accounting Workflows", "Warehouse Management", "Reusable Components"],
-    year: "2022"
-  },
-  {
-    title: "Banking System (FUJIA)",
-    description: "Large-scale banking platform supporting financial operations and internal workflows with React, TypeScript, and Next.js.",
-    image: "/images/dashboard.png",
-    liveUrl: "https://github.com/your-user/portfolio",
-    githubUrl: "https://github.com/your-user/portfolio",
-    category: "Finance",
-    technologies: ["ReactJS", "TypeScript", "Next.js", "Redux", "Redux-Saga"],
-    features: ["Frontend Interfaces", "New UI Features", "Requirement Analysis", "Financial Operations"],
-    year: "2023"
-  },
-];
-
-const categories = ["All", "Enterprise", "Finance"];
+import Modal from "@/components/ui/Modal";
+import ProjectCard from "@/components/ui/ProjectCard";
+import { FaFilter, FaGithub } from "react-icons/fa";
+import { projects, projectCategories } from "@/data/projects";
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -60,10 +12,10 @@ export default function Projects() {
   const [sortBy, setSortBy] = useState("newest");
 
   const filteredProjects = projects
-    .filter(project => activeCategory === "All" || project.category === activeCategory)
+    .filter(project => activeCategory === "All" || project.domain === activeCategory)
     .sort((a, b) => {
-      if (sortBy === "newest") return b.year - a.year;
-      if (sortBy === "oldest") return a.year - b.year;
+      if (sortBy === "newest") return Number(b.year) - Number(a.year);
+      if (sortBy === "oldest") return Number(a.year) - Number(b.year);
       return a.title.localeCompare(b.title);
     });
 
@@ -83,7 +35,7 @@ export default function Projects() {
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          Featured <span className="text-indigo-500">Projects</span>
+          Featured <span className="text-primary">Projects</span>
         </motion.h2>
         <motion.p
           className="text-gray-400 text-lg max-w-2xl mx-auto"
@@ -107,14 +59,14 @@ export default function Projects() {
         <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
           {/* Category Filter */}
           <div className="flex flex-wrap gap-2">
-            {categories.map((category) => (
+            {projectCategories.map((category) => (
               <motion.button
                 key={category}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setActiveCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category
-                    ? "bg-indigo-500 text-white shadow-lg shadow-indigo-500/25"
+                    ? "bg-primary text-white shadow-lg shadow-primary/25"
                     : "bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white border border-gray-600"
                   }`}
               >
@@ -129,7 +81,7 @@ export default function Projects() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="bg-gray-800 text-white border border-gray-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="bg-gray-800 text-white border border-gray-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
             >
               <option value="newest" className="bg-gray-800 text-white">Newest First</option>
               <option value="oldest" className="bg-gray-800 text-white">Oldest First</option>
@@ -156,7 +108,7 @@ export default function Projects() {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {filteredProjects.map((project, index) => (
           <motion.div
-            key={index}
+            key={project.title}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -166,6 +118,7 @@ export default function Projects() {
               title={project.title}
               image={project.image}
               description={project.description}
+              domain={project.domain}
               category={project.category}
               technologies={project.technologies}
               year={project.year}
@@ -201,14 +154,13 @@ export default function Projects() {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-indigo-500/25 transition-all duration-300 flex items-center gap-2 mx-auto"
+          className="bg-gradient-to-r from-primary to-purple-600 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-primary/25 transition-all duration-300 flex items-center gap-2 mx-auto"
         >
           <FaGithub className="text-sm" />
           View All Projects on GitHub
         </motion.button>
       </motion.div>
 
-      {/* Modal hiển thị chi tiết */}
       <Modal
         isOpen={!!selectedProject}
         onClose={() => setSelectedProject(null)}

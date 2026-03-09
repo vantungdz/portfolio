@@ -14,7 +14,6 @@ export const SECTION_IDS = [
   "projects",
   "testimonials",
   "blog",
-  "cv",
   "resume",
   "contact",
 ];
@@ -34,10 +33,9 @@ export function scrollToSection(id) {
 }
 
 /**
- * Maps section id to nav label (e.g. "cv" -> "CV").
+ * Maps section id to nav label (e.g. "resume" -> "Resume").
  */
 export function sectionIdToLabel(id) {
-  if (id === "cv") return "CV";
   if (id === "resume") return "Resume";
   return id.charAt(0).toUpperCase() + id.slice(1);
 }

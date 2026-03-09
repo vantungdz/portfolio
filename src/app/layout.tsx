@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { ReactNode } from "react";
-import ScrollBackground from "@/components/ScrollBackground";
-import PerformanceMonitor from "@/components/PerformanceMonitor";
+import ScrollBackground from "@/components/background/ScrollBackground";
+import PerformanceMonitor from "@/components/system/PerformanceMonitor";
 import { getPersonSchema } from "@/data/personal";
 
 export const metadata = {

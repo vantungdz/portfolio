@@ -1,9 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import emailjs from '@emailjs/browser';
-import Signature from "./Signature";
-import { socialLinksConfig, contactInfoConfig } from "../config/socialLinks";
+import Signature from "@/components/sections/Signature";
+import { socialLinksConfig, contactInfoConfig } from "@/data/contact";
 import {
   FaGithub,
   FaLinkedin,
@@ -27,7 +27,6 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
-  // EmailJS configuration
   const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
   const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
   const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
@@ -35,7 +34,6 @@ export default function Contact() {
   const validateForm = () => {
     const newErrors = {};
 
-    // Name validation
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
     } else if (formData.name.trim().length < 2) {
@@ -44,14 +42,12 @@ export default function Contact() {
       newErrors.name = "Name must be less than 50 characters";
     }
 
-    // Email validation
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Please enter a valid email address";
     }
 
-    // Subject validation
     if (!formData.subject.trim()) {
       newErrors.subject = "Subject is required";
     } else if (formData.subject.trim().length < 5) {
@@ -60,7 +56,6 @@ export default function Contact() {
       newErrors.subject = "Subject must be less than 100 characters";
     }
 
-    // Message validation
     if (!formData.message.trim()) {
       newErrors.message = "Message is required";
     } else if (formData.message.trim().length < 10) {
@@ -78,7 +73,6 @@ export default function Contact() {
     
     if (!validateForm()) return;
 
-    // Check if EmailJS is properly configured
     if (EMAILJS_SERVICE_ID === "YOUR_SERVICE_ID" || 
         EMAILJS_TEMPLATE_ID === "YOUR_TEMPLATE_ID" || 
         EMAILJS_PUBLIC_KEY === "YOUR_PUBLIC_KEY") {
@@ -91,19 +85,17 @@ export default function Contact() {
     setSubmitStatus(null);
     
     try {
-      // Prepare template parameters
       const templateParams = {
         from_name: formData.name.trim(),
         from_email: formData.email.trim(),
         subject: formData.subject.trim(),
         message: formData.message.trim(),
-        to_email: "dovantung1000@gmail.com",
+        to_email: contactInfoConfig.email,
         reply_to: formData.email.trim(),
         timestamp: new Date().toISOString(),
         user_agent: navigator.userAgent
       };
 
-      // Send email using EmailJS
       const result = await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
@@ -114,8 +106,6 @@ export default function Contact() {
       if (result.status === 200) {
         setSubmitStatus("success");
         setFormData({ name: "", email: "", subject: "", message: "" });
-        
-        // Reset status after 5 seconds
         setTimeout(() => setSubmitStatus(null), 5000);
       } else {
         throw new Error("Failed to send email");
@@ -123,8 +113,6 @@ export default function Contact() {
     } catch (error) {
       console.error("Email sending failed:", error);
       setSubmitStatus("error");
-      
-      // Reset status after 5 seconds
       setTimeout(() => setSubmitStatus(null), 5000);
     } finally {
       setIsSubmitting(false);
@@ -134,59 +122,22 @@ export default function Contact() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: "" }));
     }
   };
 
   const contactInfo = [
-    {
-      icon: <FaEnvelope />,
-      label: "Email",
-      value: contactInfoConfig.email,
-      href: `mailto:${contactInfoConfig.email}`
-    },
-    {
-      icon: <FaPhone />,
-      label: "Phone",
-      value: contactInfoConfig.phone,
-      href: `tel:${contactInfoConfig.phone.replace(/\s/g, '')}`
-    },
-    {
-      icon: <FaMapMarkerAlt />,
-      label: "Location",
-      value: contactInfoConfig.location,
-      href: "#"
-    }
+    { icon: <FaEnvelope />, label: "Email", value: contactInfoConfig.email, href: `mailto:${contactInfoConfig.email}` },
+    { icon: <FaPhone />, label: "Phone", value: contactInfoConfig.phone, href: `tel:${contactInfoConfig.phone.replace(/\s/g, '')}` },
+    { icon: <FaMapMarkerAlt />, label: "Location", value: contactInfoConfig.location, href: "#" }
   ];
 
   const socialLinks = [
-    {
-      icon: <FaGithub />,
-      label: "GitHub",
-      href: socialLinksConfig.github,
-      color: "hover:text-gray-300"
-    },
-    {
-      icon: <FaLinkedin />,
-      label: "LinkedIn",
-      href: socialLinksConfig.linkedin,
-      color: "hover:text-blue-400"
-    },
-    {
-      icon: <FaFacebook />,
-      label: "Facebook",
-      href: socialLinksConfig.facebook,
-      color: "hover:text-blue-500"
-    },
-    {
-      icon: <FaInstagram />,
-      label: "Instagram",
-      href: socialLinksConfig.instagram,
-      color: "hover:text-pink-400"
-    }
+    { icon: <FaGithub />, label: "GitHub", href: socialLinksConfig.github, color: "hover:text-gray-300" },
+    { icon: <FaLinkedin />, label: "LinkedIn", href: socialLinksConfig.linkedin, color: "hover:text-blue-400" },
+    { icon: <FaFacebook />, label: "Facebook", href: socialLinksConfig.facebook, color: "hover:text-blue-500" },
+    { icon: <FaInstagram />, label: "Instagram", href: socialLinksConfig.instagram, color: "hover:text-pink-400" }
   ];
 
   return (
@@ -196,7 +147,6 @@ export default function Contact() {
       className="min-h-screen snap-start py-20 px-6 bg-[#0e0e0e] text-white flex items-center pt-24"
     >
       <div className="max-w-6xl w-full mx-auto">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -205,7 +155,7 @@ export default function Contact() {
           className="text-center mb-16"
         >
           <h2 id="contact-heading" className="text-4xl md:text-5xl font-bold mb-4">
-            Let's <span className="text-indigo-500">Connect</span>
+            Let's <span className="text-primary">Connect</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Whether you have an idea, a project, or just want to say hi — I'm always open to
@@ -214,7 +164,6 @@ export default function Contact() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Left: Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -230,7 +179,6 @@ export default function Contact() {
               </p>
             </div>
 
-            {/* Contact Info Cards */}
             <div className="space-y-4">
               {contactInfo.map((info, index) => (
                 <motion.a
@@ -243,7 +191,7 @@ export default function Contact() {
                   whileHover={{ scale: 1.02 }}
                   className="flex items-center gap-4 p-4 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300"
                 >
-                  <div className="text-2xl text-indigo-400">{info.icon}</div>
+                  <div className="text-2xl text-primary">{info.icon}</div>
                   <div>
                     <p className="text-gray-400 text-sm">{info.label}</p>
                     <p className="text-white font-medium">{info.value}</p>
@@ -252,7 +200,6 @@ export default function Contact() {
               ))}
             </div>
 
-            {/* Social Links */}
             <div>
               <h4 className="text-lg font-semibold mb-4">Follow Me</h4>
               <div className="flex gap-4">
@@ -277,13 +224,11 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Signature */}
             <div className="pt-8">
               <Signature />
             </div>
           </motion.div>
 
-          {/* Right: Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -299,115 +244,51 @@ export default function Contact() {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Name Field */}
+              {["name", "email", "subject"].map((field) => (
+                <div key={field}>
+                  <label htmlFor={field} className="block text-sm font-medium text-gray-300 mb-2">
+                    {field.charAt(0).toUpperCase() + field.slice(1)} *
+                  </label>
+                  <input
+                    type={field === "email" ? "email" : "text"}
+                    id={field}
+                    name={field}
+                    value={formData[field]}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 bg-white/5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 ${
+                      errors[field] ? 'border-red-500 focus:border-red-500' : 'border-white/20 focus:border-primary'
+                    }`}
+                    placeholder={field === "name" ? "Your name" : field === "email" ? "your.email@example.com" : "What's this about?"}
+                    disabled={isSubmitting}
+                  />
+                  {errors[field] && (
+                    <p className="text-red-400 text-sm mt-1 flex items-center gap-1">
+                      <FaTimes className="text-xs" />{errors[field]}
+                    </p>
+                  )}
+                </div>
+              ))}
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                  Name *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 bg-white/5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-300 ${
-                    errors.name 
-                      ? 'border-red-500 focus:border-red-500' 
-                      : 'border-white/20 focus:border-indigo-500'
-                  }`}
-                  placeholder="Your name"
-                  disabled={isSubmitting}
-                />
-                {errors.name && (
-                  <p className="text-red-400 text-sm mt-1 flex items-center gap-1">
-                    <FaTimes className="text-xs" />
-                    {errors.name}
-                  </p>
-                )}
-              </div>
-
-              {/* Email Field */}
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 bg-white/5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-300 ${
-                    errors.email 
-                      ? 'border-red-500 focus:border-red-500' 
-                      : 'border-white/20 focus:border-indigo-500'
-                  }`}
-                  placeholder="your.email@example.com"
-                  disabled={isSubmitting}
-                />
-                {errors.email && (
-                  <p className="text-red-400 text-sm mt-1 flex items-center gap-1">
-                    <FaTimes className="text-xs" />
-                    {errors.email}
-                  </p>
-                )}
-              </div>
-
-              {/* Subject Field */}
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
-                  Subject *
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 bg-white/5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-300 ${
-                    errors.subject 
-                      ? 'border-red-500 focus:border-red-500' 
-                      : 'border-white/20 focus:border-indigo-500'
-                  }`}
-                  placeholder="What's this about?"
-                  disabled={isSubmitting}
-                />
-                {errors.subject && (
-                  <p className="text-red-400 text-sm mt-1 flex items-center gap-1">
-                    <FaTimes className="text-xs" />
-                    {errors.subject}
-                  </p>
-                )}
-              </div>
-
-              {/* Message Field */}
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                  Message *
-                </label>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">Message *</label>
                 <textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   rows={6}
-                  className={`w-full px-4 py-3 bg-white/5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-300 resize-none ${
-                    errors.message 
-                      ? 'border-red-500 focus:border-red-500' 
-                      : 'border-white/20 focus:border-indigo-500'
+                  className={`w-full px-4 py-3 bg-white/5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 resize-none ${
+                    errors.message ? 'border-red-500 focus:border-red-500' : 'border-white/20 focus:border-primary'
                   }`}
                   placeholder="Tell me about your project, idea, or just say hello..."
                   disabled={isSubmitting}
                 />
                 {errors.message && (
                   <p className="text-red-400 text-sm mt-1 flex items-center gap-1">
-                    <FaTimes className="text-xs" />
-                    {errors.message}
+                    <FaTimes className="text-xs" />{errors.message}
                   </p>
                 )}
               </div>
 
-              {/* Submit Button */}
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
@@ -416,7 +297,7 @@ export default function Contact() {
                 className={`w-full py-4 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
                   isSubmitting
                     ? 'bg-gray-600 text-gray-300 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white hover:shadow-lg hover:shadow-indigo-500/25'
+                    : 'bg-gradient-to-r from-primary to-purple-600 text-white hover:shadow-lg hover:shadow-primary/25'
                 }`}
               >
                 {isSubmitting ? (
@@ -432,7 +313,6 @@ export default function Contact() {
                 )}
               </motion.button>
 
-              {/* Status Messages */}
               {submitStatus === "success" && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -459,7 +339,6 @@ export default function Contact() {
                   </span>
                 </motion.div>
               )}
-
             </form>
           </motion.div>
         </div>

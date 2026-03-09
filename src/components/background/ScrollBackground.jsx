@@ -10,7 +10,6 @@ const sectionColors = {
   projects: "#0f1117",
   testimonials: "#0a0a0a",
   blog: "#0a0a0a",
-  cv: "#0f0f0f",
   resume: "#0f0f0f",
   contact: "#0d1b2a",
 };

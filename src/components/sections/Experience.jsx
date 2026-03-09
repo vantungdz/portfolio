@@ -1,57 +1,7 @@
 "use client";
 
 import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
-
-const experiences = [
-  {
-    id: 1,
-    company: "ISB Vietnam",
-    position: "Frontend Engineer",
-    duration: "Jul 2022 – Present",
-    location: "Ho Chi Minh City, Vietnam",
-    type: "Full-time",
-    description:
-      "Frontend Engineer working on enterprise software projects, participating in implementation and coding phases while continuously researching and applying new technologies.",
-    achievements: [
-      "Participated in implementation and coding phases of software development",
-      "Performed unit testing and debugging to ensure application quality",
-      "Researched and applied new technologies when required by projects",
-      "Updated and improved applications based on customer requirements",
-    ],
-    technologies: [
-      "ReactJS",
-      "TypeScript",
-      "Next.js",
-      "Redux",
-      "Redux-Saga",
-    ],
-    logo: "🏢",
-  },
-  {
-    id: 2,
-    company: "BUSO",
-    position: "Frontend Engineer",
-    duration: "Oct 2020 – Dec 2021",
-    location: "Ho Chi Minh City, Vietnam",
-    type: "Full-time",
-    description:
-      "Developed interfaces for enterprise management applications, implementing and improving features based on customer feedback and requirements.",
-    achievements: [
-      "Developed interfaces for enterprise management applications",
-      "Updated and improved application features based on customer requirements",
-      "Collaborated with team members to improve UI functionality",
-    ],
-    technologies: ["ReactJS", "JavaScript", "HTML", "CSS"],
-    logo: "💻",
-  },
-];
-
-const stats = [
-  { number: "4+", label: "Years Experience" },
-  { number: "10+", label: "Projects Completed" },
-  { number: "15+", label: "Technologies" },
-  { number: "2", label: "Companies" },
-];
+import { experiences, experienceStats } from "@/data/experience";
 
 function TimelineCard({ experience, isLast }) {
   return (
@@ -182,7 +132,7 @@ export default function Experience() {
 
         {/* Stats */}
         <div className="mt-16 grid grid-cols-2 gap-4 sm:mt-20 md:grid-cols-4 md:gap-6">
-          {stats.map((stat) => (
+          {experienceStats.map((stat) => (
             <div
               key={stat.label}
               className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-5 text-center transition-colors hover:bg-white/[0.04] sm:px-6 sm:py-6"

@@ -8,6 +8,7 @@ export default function ProjectCard({
   title,
   image,
   description,
+  domain,
   category,
   technologies,
   year,
@@ -19,6 +20,9 @@ export default function ProjectCard({
     if (e.target.closest("a")) return;
     onClick?.();
   };
+
+  const isClient = category === "client";
+  const hasLinks = liveUrl || githubUrl;
 
   return (
     <article
@@ -39,8 +43,13 @@ export default function ProjectCard({
 
         {/* Badges */}
         <div className="absolute left-4 top-4 flex flex-wrap gap-2">
+          {isClient && (
+            <span className="rounded-md bg-amber-400/90 px-2.5 py-1 text-xs font-medium text-black backdrop-blur-sm">
+              Client Project
+            </span>
+          )}
           <span className="rounded-md bg-white/90 px-2.5 py-1 text-xs font-medium text-black backdrop-blur-sm">
-            {category}
+            {domain}
           </span>
           <span className="rounded-md bg-black/60 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm">
             {year}
@@ -102,7 +111,7 @@ export default function ProjectCard({
               Code
             </Link>
           )}
-          {!liveUrl && !githubUrl && (
+          {!hasLinks && (
             <button
               type="button"
               onClick={(e) => {

@@ -2,13 +2,14 @@
 
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaArrowDown, FaDownload } from "react-icons/fa";
-import { socialLinksConfig } from "@/config/socialLinks";
+import { FaGithub, FaLinkedin, FaArrowDown, FaDownload, FaExternalLinkAlt } from "react-icons/fa";
+import { socialLinksConfig } from "@/data/contact";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { scrollToSection } from "@/lib/layout";
+import { RESUME_PDF_URL, RESUME_PDF_FILENAME } from "@/lib/resume";
 
 const AnimatedBackground = dynamic(
-  () => import("./AnimatedBackground"),
+  () => import("@/components/background/AnimatedBackground"),
   {
     ssr: false,
     loading: () => (
@@ -104,13 +105,23 @@ export default function Hero() {
             transition={transition}
             className="mt-10 flex flex-wrap items-center gap-4 md:mt-12"
           >
-            <button
-              onClick={() => scrollToSection("cv")}
+            <a
+              href={RESUME_PDF_URL}
+              download={RESUME_PDF_FILENAME}
               className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-[#0f0f0f]"
             >
               <FaDownload className="h-4 w-4" />
-              View CV
-            </button>
+              Download Resume
+            </a>
+            <a
+              href={RESUME_PDF_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-white/10 hover:border-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-[#0f0f0f]"
+            >
+              <FaExternalLinkAlt className="h-4 w-4" />
+              View Resume
+            </a>
             <button
               onClick={() => scrollToSection("projects")}
               className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-white/10 hover:border-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-[#0f0f0f]"

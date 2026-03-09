@@ -10,6 +10,7 @@ import {
   scrollToSection,
   sectionIdToLabel,
 } from "@/lib/layout";
+import { RESUME_PDF_URL, RESUME_PDF_FILENAME } from "@/lib/resume";
 
 export default function Header() {
   const [active, setActive] = useState("Home");
@@ -148,6 +149,27 @@ export default function Header() {
                   </li>
                 );
               })}
+              <li>
+                <a
+                  href={RESUME_PDF_URL}
+                  download={RESUME_PDF_FILENAME}
+                  className="relative rounded-md px-3 py-2 text-sm font-medium text-gray-400 transition-colors hover:bg-white/5 hover:text-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                  title="Download CV as PDF"
+                >
+                  <span className="relative">Download CV</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={RESUME_PDF_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative rounded-md px-3 py-2 text-sm font-medium text-gray-400 transition-colors hover:bg-white/5 hover:text-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                  title="View Resume (opens in new tab)"
+                >
+                  <span className="relative">View Resume</span>
+                </a>
+              </li>
             </ul>
           </nav>
 
@@ -232,6 +254,27 @@ export default function Header() {
                       </li>
                     );
                   })}
+                  <li>
+                    <a
+                      href={RESUME_PDF_URL}
+                      download={RESUME_PDF_FILENAME}
+                      className="flex w-full items-center rounded-lg px-4 py-3 text-left text-sm font-medium text-gray-400 transition-colors hover:bg-white/5 hover:text-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+                      title="Download CV as PDF"
+                    >
+                      Download CV
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={RESUME_PDF_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex w-full items-center rounded-lg px-4 py-3 text-left text-sm font-medium text-gray-400 transition-colors hover:bg-white/5 hover:text-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+                      title="View Resume (opens in new tab)"
+                    >
+                      View Resume
+                    </a>
+                  </li>
                 </ul>
               </nav>
             </motion.div>
