@@ -23,7 +23,7 @@ export default function About() {
         {/* Avatar */}
         <div className="relative w-48 h-48 md:w-60 md:h-60">
           <Image
-            src="/images/avatar.jpg"
+            src="/images/ava.jpg"
             alt="Do Van Tung - Frontend Engineer"
             fill
             className="object-cover rounded-full border-4 border-indigo-500 shadow-lg"

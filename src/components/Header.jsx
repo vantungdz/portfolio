@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -106,9 +107,17 @@ export default function Header() {
           <button
             type="button"
             onClick={() => handleNavClick("home")}
-            className="text-lg font-semibold text-white transition-colors hover:text-white/90 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black"
+            className="flex items-center transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            aria-label="Tung Do - Home"
           >
-            TungDo<span className="text-white/60">.</span>
+            <Image
+              src="/images/logo.png"
+              alt="Tung Do"
+              width={120}
+              height={40}
+              className="h-8 w-auto object-contain"
+              priority
+            />
           </button>
 
           <nav className="hidden lg:block" aria-label="Main navigation">
@@ -121,7 +130,7 @@ export default function Header() {
                     <button
                       type="button"
                       onClick={() => handleNavClick(sectionId)}
-                      className={`relative rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black ${
+                      className={`relative rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
                         isActive
                           ? "text-white"
                           : "text-gray-400 hover:bg-white/5 hover:text-gray-200"
@@ -146,7 +155,7 @@ export default function Header() {
             ref={menuButtonRef}
             type="button"
             onClick={openMenu}
-            className="flex h-10 w-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30 lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 lg:hidden"
             aria-label="Open menu"
             aria-expanded={menuOpen}
             aria-haspopup="true"
@@ -191,7 +200,7 @@ export default function Header() {
                 <button
                   type="button"
                   onClick={closeMenu}
-                  className="flex h-10 w-10 items-center justify-center rounded-lg text-gray-400 transition-colors hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/30"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg text-gray-400 transition-colors hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
                   aria-label="Close menu"
                 >
                   <X className="h-5 w-5" />
@@ -212,7 +221,7 @@ export default function Header() {
                           ref={isFirst ? firstNavItemRef : null}
                           type="button"
                           onClick={() => handleNavClick(sectionId)}
-                          className={`flex w-full items-center rounded-lg px-4 py-3 text-left text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 ${
+                          className={`flex w-full items-center rounded-lg px-4 py-3 text-left text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 ${
                             isActive
                               ? "bg-white/10 text-white"
                               : "text-gray-400 hover:bg-white/5 hover:text-gray-200"

@@ -2,6 +2,7 @@ import "./globals.css";
 import type { ReactNode } from "react";
 import ScrollBackground from "@/components/ScrollBackground";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
+import { getPersonSchema } from "@/data/personal";
 
 export const metadata = {
   title: "Tung Do - Senior Frontend Developer | React, TypeScript, Next.js",
@@ -37,7 +38,7 @@ export const metadata = {
     siteName: "Tung Do Portfolio",
     images: [
       {
-        url: '/images/avatar.jpg',
+        url: '/images/ava.jpg',
         width: 1200,
         height: 630,
         alt: 'Tung Do - Senior Frontend Developer',
@@ -50,7 +51,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: "Tung Do - Senior Frontend Developer",
     description: "Passionate Senior Frontend Developer with 4+ years of experience building scalable web applications.",
-    images: ['/images/avatar.jpg'],
+    images: ['/images/ava.jpg'],
     creator: '@your_twitter_handle', // Replace with your Twitter handle
   },
   robots: {
@@ -69,6 +70,9 @@ export const metadata = {
     yandex: 'your-yandex-verification-code', // Optional
     yahoo: 'your-yahoo-verification-code', // Optional
   },
+  icons: {
+    icon: '/images/icon.ico',
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -80,7 +84,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/images/icon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         
@@ -90,43 +94,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {/* Theme color */}
         <meta name="theme-color" content="#6366f1" />
         
-        {/* Structured Data */}
+        {/* Structured Data (Schema.org Person) */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Tung Do",
-              "jobTitle": "Senior Frontend Developer",
-              "description": "Passionate Senior Frontend Developer with 4+ years of experience building scalable web applications",
-              "url": "https://your-portfolio-domain.com", // Replace with your actual domain
-              "image": "https://your-portfolio-domain.com/images/avatar.jpg", // Replace with your actual domain
-              "sameAs": [
-                "https://github.com/vantungdz",
-                "https://www.linkedin.com/in/t%C3%B9ng-%C4%91%E1%BB%97-v%C4%83n-475b8637a/",
-                "https://twitter.com/your-twitter"
-              ],
-              "worksFor": {
-                "@type": "Organization",
-                "name": "Freelance"
-              },
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Ho Chi Minh City",
-                "addressCountry": "Vietnam"
-              },
-              "knowsAbout": [
-                "React",
-                "TypeScript",
-                "Next.js",
-                "JavaScript",
-                "Web Development",
-                "Frontend Development",
-                "UI/UX Design"
-              ]
-            })
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(getPersonSchema()) }}
         />
       </head>
       <body>
