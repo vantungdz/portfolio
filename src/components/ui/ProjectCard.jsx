@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import { trackEvent } from "@/lib/analytics";
 
 export default function ProjectCard({
   title,
@@ -18,6 +19,7 @@ export default function ProjectCard({
 }) {
   const handleCardClick = (e) => {
     if (e.target.closest("a")) return;
+    trackEvent("project_click", { projectName: title });
     onClick?.();
   };
 
@@ -116,6 +118,7 @@ export default function ProjectCard({
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
+                trackEvent("project_click", { projectName: title });
                 onClick?.();
               }}
               className="w-full rounded-lg border border-white/20 bg-white/5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10"

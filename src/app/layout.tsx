@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import ScrollBackground from "@/components/background/ScrollBackground";
 import PerformanceMonitor from "@/components/system/PerformanceMonitor";
 import { getPersonSchema } from "@/data/personal";
@@ -104,6 +105,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <PerformanceMonitor />
         <ScrollBackground />
         {children}
+        <Analytics />
       </body>
     </html>
   );

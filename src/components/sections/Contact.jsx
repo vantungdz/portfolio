@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import emailjs from '@emailjs/browser';
 import Signature from "@/components/sections/Signature";
+import { trackEvent } from "@/lib/analytics";
 import { socialLinksConfig, contactInfoConfig } from "@/data/contact";
 import {
   FaGithub,
@@ -24,12 +25,12 @@ export default function Contact() {
     message: ""
   });
   const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
-  const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
-  const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
-  const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
+  const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+  const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+  const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
   const validateForm = () => {
     const newErrors = {};
@@ -70,52 +71,42 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
 
-    if (EMAILJS_SERVICE_ID === "YOUR_SERVICE_ID" || 
-        EMAILJS_TEMPLATE_ID === "YOUR_TEMPLATE_ID" || 
-        EMAILJS_PUBLIC_KEY === "YOUR_PUBLIC_KEY") {
-      setSubmitStatus("error");
-      setTimeout(() => setSubmitStatus(null), 5000);
-      return;
-    }
-
-    setIsSubmitting(true);
-    setSubmitStatus(null);
-    
     try {
+      setLoading(true);
+      setSubmitStatus(null);
+
       const templateParams = {
         from_name: formData.name.trim(),
         from_email: formData.email.trim(),
         subject: formData.subject.trim(),
         message: formData.message.trim(),
-        to_email: contactInfoConfig.email,
         reply_to: formData.email.trim(),
-        timestamp: new Date().toISOString(),
-        user_agent: navigator.userAgent
       };
 
-      const result = await emailjs.send(
+      await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         templateParams,
         EMAILJS_PUBLIC_KEY
       );
 
-      if (result.status === 200) {
-        setSubmitStatus("success");
-        setFormData({ name: "", email: "", subject: "", message: "" });
-        setTimeout(() => setSubmitStatus(null), 5000);
-      } else {
-        throw new Error("Failed to send email");
-      }
-    } catch (error) {
-      console.error("Email sending failed:", error);
+      setSubmitStatus("success");
+      trackEvent("contact_submit", { email: formData.email });
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+      setTimeout(() => setSubmitStatus(null), 5000);
+    } catch {
       setSubmitStatus("error");
       setTimeout(() => setSubmitStatus(null), 5000);
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
     }
   };
 
@@ -259,7 +250,7 @@ export default function Contact() {
                       errors[field] ? 'border-red-500 focus:border-red-500' : 'border-white/20 focus:border-primary'
                     }`}
                     placeholder={field === "name" ? "Your name" : field === "email" ? "your.email@example.com" : "What's this about?"}
-                    disabled={isSubmitting}
+                    disabled={loading}
                   />
                   {errors[field] && (
                     <p className="text-red-400 text-sm mt-1 flex items-center gap-1">
@@ -280,7 +271,7 @@ export default function Contact() {
                     errors.message ? 'border-red-500 focus:border-red-500' : 'border-white/20 focus:border-primary'
                   }`}
                   placeholder="Tell me about your project, idea, or just say hello..."
-                  disabled={isSubmitting}
+                  disabled={loading}
                 />
                 {errors.message && (
                   <p className="text-red-400 text-sm mt-1 flex items-center gap-1">
@@ -291,19 +282,19 @@ export default function Contact() {
 
               <motion.button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={loading}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className={`w-full py-4 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
-                  isSubmitting
+                  loading
                     ? 'bg-gray-600 text-gray-300 cursor-not-allowed'
                     : 'bg-gradient-to-r from-primary to-purple-600 text-white hover:shadow-lg hover:shadow-primary/25'
                 }`}
               >
-                {isSubmitting ? (
+                {loading ? (
                   <>
                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Sending Message...
+                    Sending...
                   </>
                 ) : (
                   <>
@@ -331,12 +322,7 @@ export default function Contact() {
                   className="flex items-center gap-2 p-4 bg-red-500/20 border border-red-500/30 rounded-lg text-red-400"
                 >
                   <FaTimes className="text-red-400" />
-                  <span>
-                    {EMAILJS_SERVICE_ID === "YOUR_SERVICE_ID" 
-                      ? "EmailJS not configured. Please check EMAILJS_SETUP.md for setup instructions."
-                      : "Failed to send message. Please try again or contact me directly."
-                    }
-                  </span>
+                  <span>Failed to send message. Please try again or contact me directly.</span>
                 </motion.div>
               )}
             </form>

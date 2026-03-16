@@ -39,7 +39,7 @@ export default function Blog() {
               transition={{ duration: 0.4, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <BlogCard article={article} blogUrl={BLOG_BASE_URL} />
+              <BlogCard article={article} slug={article.slug} />
             </motion.div>
           ))}
         </div>

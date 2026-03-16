@@ -7,6 +7,7 @@ import { socialLinksConfig } from "@/data/contact";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { scrollToSection } from "@/lib/layout";
 import { RESUME_PDF_URL, RESUME_PDF_FILENAME } from "@/lib/resume";
+import { trackEvent } from "@/lib/analytics";
 
 const AnimatedBackground = dynamic(
   () => import("@/components/background/AnimatedBackground"),
@@ -108,6 +109,7 @@ export default function Hero() {
             <a
               href={RESUME_PDF_URL}
               download={RESUME_PDF_FILENAME}
+              onClick={() => trackEvent("download_cv")}
               className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-[#0f0f0f]"
             >
               <FaDownload className="h-4 w-4" />
@@ -117,6 +119,7 @@ export default function Hero() {
               href={RESUME_PDF_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent("view_resume")}
               className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-white/10 hover:border-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-[#0f0f0f]"
             >
               <FaExternalLinkAlt className="h-4 w-4" />

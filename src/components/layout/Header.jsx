@@ -11,6 +11,7 @@ import {
   sectionIdToLabel,
 } from "@/lib/layout";
 import { RESUME_PDF_URL, RESUME_PDF_FILENAME } from "@/lib/resume";
+import { trackEvent } from "@/lib/analytics";
 
 export default function Header() {
   const [active, setActive] = useState("Home");
@@ -153,6 +154,7 @@ export default function Header() {
                 <a
                   href={RESUME_PDF_URL}
                   download={RESUME_PDF_FILENAME}
+                  onClick={() => trackEvent("download_cv")}
                   className="relative rounded-md px-3 py-2 text-sm font-medium text-gray-400 transition-colors hover:bg-white/5 hover:text-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                   title="Download CV as PDF"
                 >
@@ -164,6 +166,7 @@ export default function Header() {
                   href={RESUME_PDF_URL}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackEvent("view_resume")}
                   className="relative rounded-md px-3 py-2 text-sm font-medium text-gray-400 transition-colors hover:bg-white/5 hover:text-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                   title="View Resume (opens in new tab)"
                 >
@@ -258,6 +261,7 @@ export default function Header() {
                     <a
                       href={RESUME_PDF_URL}
                       download={RESUME_PDF_FILENAME}
+                      onClick={() => trackEvent("download_cv")}
                       className="flex w-full items-center rounded-lg px-4 py-3 text-left text-sm font-medium text-gray-400 transition-colors hover:bg-white/5 hover:text-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
                       title="Download CV as PDF"
                     >
@@ -269,6 +273,7 @@ export default function Header() {
                       href={RESUME_PDF_URL}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => trackEvent("view_resume")}
                       className="flex w-full items-center rounded-lg px-4 py-3 text-left text-sm font-medium text-gray-400 transition-colors hover:bg-white/5 hover:text-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
                       title="View Resume (opens in new tab)"
                     >
