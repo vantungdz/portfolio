@@ -25,30 +25,36 @@ export default function About() {
         whileInView={reducedMotion ? false : { opacity: 1, y: 0 }}
         transition={{ duration: reducedMotion ? 0 : 0.5 }}
         viewport={{ once: true }}
-        className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-[auto_1fr] gap-12 md:gap-16 lg:gap-20 items-center"
+        className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-[minmax(0,280px)_1fr] gap-10 sm:gap-14 md:gap-16 lg:gap-20 items-center md:items-start"
       >
-        {/* Left: Avatar — 200–240px desktop, responsive on mobile */}
-        <div className="flex justify-center md:justify-start">
+        {/* Avatar: prominent, balanced, dark-theme aligned */}
+        <div className="flex justify-center md:justify-start md:sticky md:top-28">
           <div
-            className="relative w-[180px] h-[180px] sm:w-[200px] sm:h-[200px] md:w-[220px] md:h-[220px] lg:w-[240px] lg:h-[240px] shrink-0 rounded-full border-4 border-white/90 bg-neutral-800"
-            style={{
-              boxShadow:
-                "0 25px 50px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05), 0 0 40px rgba(255,255,255,0.08), 0 0 80px rgba(255,255,255,0.04)",
-            }}
+            className="
+              relative w-[200px] h-[200px] sm:w-[220px] sm:h-[220px] md:w-[240px] md:h-[240px] lg:w-[260px] lg:h-[260px]
+              shrink-0 rounded-full
+              border-[3px] border-white/20 md:border-[4px] md:border-primary/30
+              bg-neutral-800/90
+              shadow-[0_25px_50px_-12px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.06)]
+              ring-4 ring-primary/5
+              transition-[transform,box-shadow,border-color] duration-300 ease-out
+              hover:scale-[1.02] hover:border-primary/50 hover:shadow-[0_32px_64px_-12px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.08),0_0_60px_rgba(99,102,241,0.15)]
+              motion-reduce:hover:scale-100
+            "
           >
             <Image
               src="/images/ava.png"
               alt="Do Van Tung - Frontend Engineer"
               fill
-              className="object-cover rounded-full"
-              sizes="(max-width: 640px) 180px, (max-width: 768px) 200px, (max-width: 1024px) 220px, 240px"
+              className="object-cover rounded-full select-none"
+              sizes="(max-width: 640px) 200px, (max-width: 768px) 220px, (max-width: 1024px) 240px, 260px"
               priority
               quality={90}
             />
           </div>
         </div>
 
-        {/* Right: Intro + description + focus + highlights */}
+        {/* Content: intro, description, highlights */}
         <div className="space-y-6 text-center md:text-left min-w-0">
           <h2
             id="about-heading"
