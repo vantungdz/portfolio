@@ -44,7 +44,7 @@ export default function Projects() {
           transition={{ delay: 0.2 }}
           viewport={{ once: true }}
         >
-          A curated collection of my best work, showcasing diverse skills and problem-solving abilities.
+          From enterprise KPI dashboards to banking UIs and group payments — problem, solution, and impact.
         </motion.p>
       </div>
 

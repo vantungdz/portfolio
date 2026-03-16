@@ -39,7 +39,7 @@ export const metadata = {
     siteName: "Tung Do Portfolio",
     images: [
       {
-        url: '/images/ava.jpg',
+        url: '/images/ava.png',
         width: 1200,
         height: 630,
         alt: 'Tung Do - Senior Frontend Developer',
@@ -52,7 +52,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: "Tung Do - Senior Frontend Developer",
     description: "Passionate Senior Frontend Developer with 4+ years of experience building scalable web applications.",
-    images: ['/images/ava.jpg'],
+    images: ['/images/ava.png'],
     creator: '@your_twitter_handle', // Replace with your Twitter handle
   },
   robots: {

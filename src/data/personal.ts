@@ -4,9 +4,9 @@ export const personalInfo = {
   name: "Tung Do",
   jobTitle: "Senior Frontend Developer",
   description:
-    "Passionate Senior Frontend Developer with 4+ years of experience building scalable web applications",
+    "Senior Frontend Developer building scalable, high-performance web applications with React, Next.js, and TypeScript. Focused on clean code and real-world impact.",
   url: BASE_URL,
-  image: `${BASE_URL}/images/ava.jpg`,
+  image: `${BASE_URL}/images/ava.png`,
   sameAs: [
     "https://github.com/vantungdz",
     "https://www.linkedin.com/in/t%C3%B9ng-%C4%91%E1%BB%97-v%C4%83n-475b8637a/",

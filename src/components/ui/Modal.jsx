@@ -109,6 +109,14 @@ export default function Modal({ isOpen, onClose, project }) {
             {project.description}
           </p>
 
+          {project.features && project.features.length > 0 && (
+            <ul className="mb-4 list-disc list-inside space-y-1 text-sm text-gray-400">
+              {project.features.map((feature, i) => (
+                <li key={i}>{feature}</li>
+              ))}
+            </ul>
+          )}
+
           {(project.liveUrl || project.githubUrl) && (
             <div className="mt-4 flex gap-4">
               {project.liveUrl && (

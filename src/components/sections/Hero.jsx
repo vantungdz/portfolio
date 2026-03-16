@@ -87,7 +87,7 @@ export default function Hero() {
             transition={transition}
             className="mt-4 text-xl text-gray-400 sm:text-2xl md:mt-6"
           >
-            Frontend Engineer
+            Building scalable, high-performance web applications
           </motion.p>
 
           {/* Description */}
@@ -96,8 +96,7 @@ export default function Hero() {
             transition={transition}
             className="mt-6 max-w-xl text-base leading-relaxed text-gray-500 md:mt-8 md:text-lg"
           >
-            Frontend Engineer with nearly 4 years of experience building scalable web applications using React, Next.js, Vue, and TypeScript.
-            Specialized in building enterprise dashboards, management systems, and modern frontend architectures focused on performance and scalability.
+            Senior Frontend Engineer with 4+ years turning complex business needs into fast, maintainable interfaces. React, Next.js, Vue, TypeScript — focused on clean code and real-world impact.
           </motion.p>
 
           {/* CTAs */}
