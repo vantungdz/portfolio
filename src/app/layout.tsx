@@ -28,14 +28,14 @@ export const metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://your-portfolio-domain.com'), // Replace with your actual domain
+  metadataBase: new URL('https://portfolio-virid-pi-75.vercel.app/'), // Replace with your actual domain
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: "Tung Do - Senior Frontend Developer",
     description: "Passionate Senior Frontend Developer with 4+ years of experience building scalable web applications. Expert in React, TypeScript, and modern web technologies.",
-    url: 'https://your-portfolio-domain.com', // Replace with your actual domain
+    url: 'https://portfolio-virid-pi-75.vercel.app/', // Replace with your actual domain
     siteName: "Tung Do Portfolio",
     images: [
       {

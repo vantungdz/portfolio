@@ -1,4 +1,4 @@
-const BASE_URL = "https://your-portfolio-domain.com"; 
+const BASE_URL = "https://portfolio-virid-pi-75.vercel.app/"; 
 
 export const personalInfo = {
   name: "Tung Do",

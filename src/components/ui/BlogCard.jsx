@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { FaCalendarAlt, FaClock, FaExternalLinkAlt } from "react-icons/fa";
-import { BLOG_BASE_URL } from "@/data/blog";
+import Link from "next/link";
+import { FaCalendarAlt, FaClock, FaExternalLinkAlt, FaFolderOpen } from "react-icons/fa";
+import { getPostUrl } from "@/data/blog";
+import { getProjectBySlug } from "@/data/projects";
 
 function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString("en-US", {
@@ -77,14 +79,35 @@ export default function BlogCard({ article, slug }) {
           </div>
         )}
 
+        {/* Related project: link back to portfolio project */}
+        {article.relatedProjectSlug && (() => {
+          const project = getProjectBySlug(article.relatedProjectSlug);
+          if (!project) return null;
+          return (
+            <div className="mt-4 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2">
+              <span className="flex items-center gap-2 text-xs font-medium text-gray-400">
+                <FaFolderOpen className="h-3 w-3 shrink-0" />
+                Related project
+              </span>
+              <Link
+                href={`/#project-${project.slug}`}
+                className="mt-1 block text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+              >
+                {project.title}
+              </Link>
+            </div>
+          );
+        })()}
+
         {/* CTA: link to external blog article */}
         {slug && (
           <div className="mt-5 border-t border-white/10 pt-4">
             <a
-              href={`${BLOG_BASE_URL}/posts/${slug}`}
+              href={getPostUrl(slug)}
               target="_blank"
               rel="noopener noreferrer"
               title="Read full article"
+              aria-label={`Read full article: ${article.title}`}
               className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10 hover:border-white/30 w-full sm:w-auto"
             >
               <FaExternalLinkAlt className="h-3.5 w-3.5" />

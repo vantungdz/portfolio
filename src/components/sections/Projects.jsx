@@ -109,6 +109,8 @@ export default function Projects() {
         {filteredProjects.map((project, index) => (
           <motion.div
             key={project.title}
+            id={project.slug ? `project-${project.slug}` : undefined}
+            className={project.slug ? "scroll-mt-16" : undefined}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -124,6 +126,7 @@ export default function Projects() {
               year={project.year}
               liveUrl={project.liveUrl}
               githubUrl={project.githubUrl}
+              relatedPostSlugs={project.relatedPostSlugs}
               onClick={() => setSelectedProject(project)}
             />
           </motion.div>

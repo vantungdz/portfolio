@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import { FaExternalLinkAlt, FaGithub, FaBookOpen } from "react-icons/fa";
 import { trackEvent } from "@/lib/analytics";
+import { getPostsBySlugs, getPostUrl, getPostInsight } from "@/data/blog";
 
 export default function ProjectCard({
   title,
@@ -15,6 +16,7 @@ export default function ProjectCard({
   year,
   liveUrl,
   githubUrl,
+  relatedPostSlugs,
   onClick,
 }) {
   const handleCardClick = (e) => {
@@ -25,6 +27,8 @@ export default function ProjectCard({
 
   const isClient = category === "client";
   const hasLinks = liveUrl || githubUrl;
+  const relatedPosts = relatedPostSlugs?.length ? getPostsBySlugs(relatedPostSlugs) : [];
+  const firstPost = relatedPosts[0];
 
   return (
     <article
@@ -84,6 +88,27 @@ export default function ProjectCard({
                 +{technologies.length - 4}
               </span>
             )}
+          </div>
+        )}
+
+        {/* Engineering Insights: one-line proof + CTA when related posts exist */}
+        {firstPost && (
+          <div className="mt-3 rounded-lg border border-white/10 bg-white/[0.02] p-2.5">
+            <p className="text-xs leading-snug text-gray-400 line-clamp-2">
+              {getPostInsight(firstPost)}
+            </p>
+            <a
+              href={getPostUrl(firstPost.slug)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 transition-colors"
+              aria-label={`Read full breakdown: ${firstPost.title}`}
+            >
+              <FaBookOpen className="h-3 w-3 shrink-0" aria-hidden />
+              Read full breakdown
+              <FaExternalLinkAlt className="h-2.5 w-2.5 shrink-0" aria-hidden />
+            </a>
           </div>
         )}
 

@@ -2,7 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaBookOpen, FaExternalLinkAlt } from "react-icons/fa";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { getPostsBySlugs, getPostUrl, getPostInsight, BLOG_BASE_URL } from "@/data/blog";
 
 const FOCUSABLE =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
@@ -116,6 +118,70 @@ export default function Modal({ isOpen, onClose, project }) {
               ))}
             </ul>
           )}
+
+          {(() => {
+            const relatedPosts = project.relatedPostSlugs?.length
+              ? getPostsBySlugs(project.relatedPostSlugs)
+              : [];
+            const maxInsights = 3;
+            const displayPosts = relatedPosts.slice(0, maxInsights);
+            const hasMore = relatedPosts.length > maxInsights;
+
+            return (
+              <div className="mb-4 rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold text-white" id="modal-insights-heading">
+                  <span className="text-primary" aria-hidden>📖</span>
+                  Engineering Insights
+                </h4>
+                {displayPosts.length > 0 ? (
+                  <>
+                    <p className="mb-3 text-xs text-gray-400">
+                      How I approached this project — case studies and technical breakdowns.
+                    </p>
+                    <ul className="space-y-3" aria-labelledby="modal-insights-heading">
+                      {displayPosts.map((post) => (
+                        <li key={post.slug}>
+                          <a
+                            href={getPostUrl(post.slug)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group block rounded-lg border border-white/10 bg-white/[0.02] p-3 transition-colors hover:border-primary/20 hover:bg-white/[0.04]"
+                            aria-label={`Read full breakdown: ${post.title}`}
+                          >
+                            <span className="block text-sm font-medium text-white group-hover:text-primary transition-colors">
+                              {post.title}
+                            </span>
+                            <p className="mt-1 text-xs leading-relaxed text-gray-400">
+                              {getPostInsight(post)}
+                            </p>
+                            <span className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary">
+                              Read full breakdown
+                              <FaExternalLinkAlt className="h-3 w-3 shrink-0" />
+                            </span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                    {hasMore && (
+                      <a
+                        href={BLOG_BASE_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-primary transition-colors"
+                        aria-label={`View all ${relatedPosts.length} articles on blog`}
+                      >
+                        View all {relatedPosts.length} articles →
+                      </a>
+                    )}
+                  </>
+                ) : (
+                  <p className="text-sm text-gray-500 italic">
+                    Technical breakdown coming soon.
+                  </p>
+                )}
+              </div>
+            );
+          })()}
 
           {(project.liveUrl || project.githubUrl) && (
             <div className="mt-4 flex gap-4">
