@@ -46,7 +46,7 @@ export default function About() {
               src="/images/ava.png"
               alt="Do Van Tung - Frontend Engineer"
               fill
-              className="object-cover rounded-full select-none"
+              className="object-cover object-top rounded-full select-none"
               sizes="(max-width: 640px) 200px, (max-width: 768px) 220px, (max-width: 1024px) 240px, 260px"
               priority
               quality={90}
