@@ -8,6 +8,7 @@ import { getPostsBySlugs, getPostUrl, getPostInsight } from "@/data/blog";
 
 export default function ProjectCard({
   title,
+  slug,
   image,
   description,
   domain,
@@ -16,6 +17,8 @@ export default function ProjectCard({
   year,
   liveUrl,
   githubUrl,
+  codeNote,
+  hasCaseStudy,
   relatedPostSlugs,
   onClick,
 }) {
@@ -115,7 +118,7 @@ export default function ProjectCard({
         )}
 
         {/* Actions */}
-        <div className="mt-5 flex gap-3 border-t border-white/10 pt-4">
+        <div className="mt-5 flex flex-wrap gap-3 border-t border-white/10 pt-4">
           {liveUrl && (
             <Link
               href={liveUrl}
@@ -140,7 +143,12 @@ export default function ProjectCard({
               Code
             </Link>
           )}
-          {!hasLinks && (
+          {!hasLinks && codeNote && (
+            <span className="flex-1 self-center text-center text-xs italic text-gray-500">
+              {codeNote}
+            </span>
+          )}
+          {!hasLinks && !codeNote && (
             <button
               type="button"
               onClick={(e) => {
@@ -148,10 +156,23 @@ export default function ProjectCard({
                 trackEvent("project_click", { projectName: title });
                 onClick?.();
               }}
-              className="w-full rounded-lg border border-white/20 bg-white/5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10"
+              className="flex-1 rounded-lg border border-white/20 bg-white/5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10"
             >
               View details
             </button>
+          )}
+          {hasCaseStudy && slug && (
+            <Link
+              href={`/projects/${slug}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                trackEvent("case_study_click", { projectName: title });
+              }}
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-primary/40 bg-primary/10 px-4 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary/20"
+            >
+              <FaBookOpen className="h-3.5 w-3.5" />
+              Case Study
+            </Link>
           )}
         </div>
       </div>

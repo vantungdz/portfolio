@@ -5,10 +5,10 @@ import Image from "next/image";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const highlights = [
-  "4+ years shipping production web applications",
-  "React, Next.js, Node.js, Vue, TypeScript",
-  "Enterprise dashboards, banking UIs, and operations tools",
-  "Clean code, performance, and maintainable architecture",
+  "Turn ambiguous business requirements into shipped, maintainable features",
+  "Comfortable owning a system end-to-end: requirements, architecture, implementation, and handoff",
+  "Use AI to move faster on repetitive work, but verify every suggestion before it ships",
+  "Pick up new stacks quickly — moved between React, Vue, and Next.js across projects without slowing delivery down",
 ];
 
 export default function About() {

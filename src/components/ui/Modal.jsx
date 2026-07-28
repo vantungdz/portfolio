@@ -183,30 +183,40 @@ export default function Modal({ isOpen, onClose, project }) {
             );
           })()}
 
-          {(project.liveUrl || project.githubUrl) && (
-            <div className="mt-4 flex gap-4">
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded bg-primary px-4 py-2 text-white transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-[#111]"
-                >
-                  View Live
-                </a>
-              )}
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded bg-gray-800 px-4 py-2 text-white transition-colors hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-[#111]"
-                >
-                  GitHub
-                </a>
-              )}
-            </div>
-          )}
+          <div className="mt-4 flex flex-wrap items-center gap-4">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded bg-primary px-4 py-2 text-white transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-[#111]"
+              >
+                View Live
+              </a>
+            )}
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded bg-gray-800 px-4 py-2 text-white transition-colors hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-[#111]"
+              >
+                GitHub
+              </a>
+            )}
+            {!project.liveUrl && !project.githubUrl && project.codeNote && (
+              <span className="text-sm italic text-gray-500">{project.codeNote}</span>
+            )}
+            {project.caseStudy && project.slug && (
+              <a
+                href={`/projects/${project.slug}`}
+                className="ml-auto inline-flex items-center gap-1.5 rounded border border-primary/40 bg-primary/10 px-4 py-2 text-primary transition-colors hover:bg-primary/20 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-[#111]"
+              >
+                <FaBookOpen className="h-3.5 w-3.5" />
+                Full Case Study
+              </a>
+            )}
+          </div>
         </motion.div>
       </motion.div>
     </AnimatePresence>

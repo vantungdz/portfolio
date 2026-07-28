@@ -118,6 +118,7 @@ export default function Projects() {
           >
             <ProjectCard
               title={project.title}
+              slug={project.slug}
               image={project.image}
               description={project.description}
               domain={project.domain}
@@ -126,6 +127,8 @@ export default function Projects() {
               year={project.year}
               liveUrl={project.liveUrl}
               githubUrl={project.githubUrl}
+              codeNote={project.codeNote}
+              hasCaseStudy={!!project.caseStudy}
               relatedPostSlugs={project.relatedPostSlugs}
               onClick={() => setSelectedProject(project)}
             />

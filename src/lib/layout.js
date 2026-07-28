@@ -10,8 +10,10 @@ export const SECTION_IDS = [
   "home",
   "about",
   "skills",
+  "ai-workflow",
   "experience",
   "projects",
+  "learning",
   "blog",
   "resume",
   "contact",
@@ -36,5 +38,7 @@ export function scrollToSection(id) {
  */
 export function sectionIdToLabel(id) {
   if (id === "resume") return "Resume";
+  if (id === "ai-workflow") return "AI Workflow";
+  if (id === "learning") return "Learning";
   return id.charAt(0).toUpperCase() + id.slice(1);
 }
