@@ -31,8 +31,8 @@ export const projects: Project[] = [
     image: "/images/portfolio.jpg",
     domain: "Finance",
     ownership: "personal",
-    liveUrl: "https://github.com/your-user/portfolio",
-    githubUrl: "https://github.com/your-user/portfolio",
+    liveUrl: "",
+    githubUrl: "",
     technologies: ["React Native", "Expo", "TypeScript", "Node.js", "Express", "MongoDB", "Socket.IO", "JWT"],
     features: [
       "Real-time payment and balance tracking across devices",

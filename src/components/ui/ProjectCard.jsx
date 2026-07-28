@@ -97,18 +97,20 @@ export default function ProjectCard({
             <p className="text-xs leading-snug text-gray-400 line-clamp-2">
               {getPostInsight(firstPost)}
             </p>
-            <a
-              href={getPostUrl(firstPost.slug)}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 transition-colors"
-              aria-label={`Read full breakdown: ${firstPost.title}`}
-            >
-              <FaBookOpen className="h-3 w-3 shrink-0" aria-hidden />
-              Read full breakdown
-              <FaExternalLinkAlt className="h-2.5 w-2.5 shrink-0" aria-hidden />
-            </a>
+            {getPostUrl(firstPost.slug) && (
+              <a
+                href={getPostUrl(firstPost.slug)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 transition-colors"
+                aria-label={`Read full breakdown: ${firstPost.title}`}
+              >
+                <FaBookOpen className="h-3 w-3 shrink-0" aria-hidden />
+                Read full breakdown
+                <FaExternalLinkAlt className="h-2.5 w-2.5 shrink-0" aria-hidden />
+              </a>
+            )}
           </div>
         )}
 

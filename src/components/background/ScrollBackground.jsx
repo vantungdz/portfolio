@@ -8,7 +8,6 @@ const sectionColors = {
   skills: "#0a0a0a",
   experience: "#0f0f0f",
   projects: "#0f1117",
-  testimonials: "#0a0a0a",
   blog: "#0a0a0a",
   resume: "#0f0f0f",
   contact: "#0d1b2a",

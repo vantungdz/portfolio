@@ -53,7 +53,6 @@ export const metadata = {
     title: "Tung Do - Senior Frontend Developer",
     description: "Passionate Senior Frontend Developer with 4+ years of experience building scalable web applications.",
     images: ['/images/ava.png'],
-    creator: '@your_twitter_handle', // Replace with your Twitter handle
   },
   robots: {
     index: true,
@@ -65,11 +64,6 @@ export const metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-  verification: {
-    google: 'your-google-verification-code', // Replace with your Google Search Console verification code
-    yandex: 'your-yandex-verification-code', // Optional
-    yahoo: 'your-yahoo-verification-code', // Optional
   },
   icons: {
     icon: '/images/icon.ico',

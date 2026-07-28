@@ -3,7 +3,6 @@ export const socialLinksConfig = {
   github: "https://github.com/vantungdz",
   linkedin: "https://www.linkedin.com/in/vantung1806/",
   facebook: "https://www.facebook.com/VantungdzIT/",
-  instagram: "https://instagram.com/your-instagram"
 };
 
 // Contact info configuration

@@ -10,7 +10,6 @@ const About = dynamic(() => import("@/components/sections/About"), { ssr: true }
 const Skills = dynamic(() => import("@/components/sections/Skills"), { ssr: true });
 const Experience = dynamic(() => import("@/components/sections/Experience"), { ssr: true });
 const Projects = dynamic(() => import("@/components/sections/Projects"), { ssr: true });
-const Testimonials = dynamic(() => import("@/components/sections/Testimonials"), { ssr: true });
 const Blog = dynamic(() => import("@/components/sections/Blog"), { ssr: true });
 const Resume = dynamic(() => import("@/components/sections/Resume"), { ssr: true });
 const Contact = dynamic(() => import("@/components/sections/Contact"), { ssr: true });
@@ -33,7 +32,6 @@ export default function Page() {
         <Skills />
         <Experience />
         <Projects />
-        <Testimonials />
         <Blog />
         <Resume />
         <Contact />

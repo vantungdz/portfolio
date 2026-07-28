@@ -5,8 +5,9 @@ export const BLOG_BASE_URL =
   (typeof process !== "undefined" && process.env.NEXT_PUBLIC_BLOG_URL) ||
   "";
 
-/** Full URL to a blog post (path is /post/{slug}). */
-export function getPostUrl(slug: string): string {
+/** Full URL to a blog post (path is /post/{slug}), or null if the blog isn't configured yet. */
+export function getPostUrl(slug: string): string | null {
+  if (!BLOG_BASE_URL) return null;
   return `${BLOG_BASE_URL}/post/${slug}`;
 }
 

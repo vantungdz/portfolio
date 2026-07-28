@@ -121,7 +121,7 @@ export default function Modal({ isOpen, onClose, project }) {
 
           {(() => {
             const relatedPosts = project.relatedPostSlugs?.length
-              ? getPostsBySlugs(project.relatedPostSlugs)
+              ? getPostsBySlugs(project.relatedPostSlugs).filter((post) => getPostUrl(post.slug))
               : [];
             const maxInsights = 3;
             const displayPosts = relatedPosts.slice(0, maxInsights);
@@ -162,7 +162,7 @@ export default function Modal({ isOpen, onClose, project }) {
                         </li>
                       ))}
                     </ul>
-                    {hasMore && (
+                    {hasMore && BLOG_BASE_URL && (
                       <a
                         href={BLOG_BASE_URL}
                         target="_blank"

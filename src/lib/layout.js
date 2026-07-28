@@ -12,7 +12,6 @@ export const SECTION_IDS = [
   "skills",
   "experience",
   "projects",
-  "testimonials",
   "blog",
   "resume",
   "contact",

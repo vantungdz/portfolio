@@ -6,7 +6,6 @@ import {
   FaGithub,
   FaLinkedin,
   FaFacebook,
-  FaInstagram,
   FaEnvelope,
   FaHeart,
   FaMapMarkerAlt,
@@ -35,7 +34,6 @@ const socialLinks = [
   { icon: FaGithub, href: socialLinksConfig.github, label: "GitHub" },
   { icon: FaLinkedin, href: socialLinksConfig.linkedin, label: "LinkedIn" },
   { icon: FaFacebook, href: socialLinksConfig.facebook, label: "Facebook" },
-  { icon: FaInstagram, href: socialLinksConfig.instagram, label: "Instagram" },
   {
     icon: FaEnvelope,
     href: `mailto:${contactInfoConfig.email}`,

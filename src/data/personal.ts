@@ -9,8 +9,7 @@ export const personalInfo = {
   image: `${BASE_URL}/images/ava.png`,
   sameAs: [
     "https://github.com/vantungdz",
-    "https://www.linkedin.com/in/t%C3%B9ng-%C4%91%E1%BB%97-v%C4%83n-475b8637a/",
-    "https://twitter.com/your-twitter",
+    "https://www.linkedin.com/in/vantung1806/",
   ],
   worksFor: {
     "@type": "Organization" as const,

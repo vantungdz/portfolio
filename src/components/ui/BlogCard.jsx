@@ -99,8 +99,8 @@ export default function BlogCard({ article, slug }) {
           );
         })()}
 
-        {/* CTA: link to external blog article */}
-        {slug && (
+        {/* CTA: link to external blog article (hidden until the blog is configured) */}
+        {slug && getPostUrl(slug) && (
           <div className="mt-5 border-t border-white/10 pt-4">
             <a
               href={getPostUrl(slug)}

@@ -9,7 +9,6 @@ import {
   FaGithub,
   FaLinkedin,
   FaFacebook,
-  FaInstagram,
   FaEnvelope,
   FaMapMarkerAlt,
   FaPhone,
@@ -128,7 +127,6 @@ export default function Contact() {
     { icon: <FaGithub />, label: "GitHub", href: socialLinksConfig.github, color: "hover:text-gray-300" },
     { icon: <FaLinkedin />, label: "LinkedIn", href: socialLinksConfig.linkedin, color: "hover:text-blue-400" },
     { icon: <FaFacebook />, label: "Facebook", href: socialLinksConfig.facebook, color: "hover:text-blue-500" },
-    { icon: <FaInstagram />, label: "Instagram", href: socialLinksConfig.instagram, color: "hover:text-pink-400" }
   ];
 
   return (
