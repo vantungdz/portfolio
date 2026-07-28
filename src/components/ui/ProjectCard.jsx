@@ -11,7 +11,7 @@ export default function ProjectCard({
   image,
   description,
   domain,
-  category,
+  ownership,
   technologies,
   year,
   liveUrl,
@@ -25,7 +25,7 @@ export default function ProjectCard({
     onClick?.();
   };
 
-  const isClient = category === "client";
+  const isClient = ownership === "client";
   const hasLinks = liveUrl || githubUrl;
   const relatedPosts = relatedPostSlugs?.length ? getPostsBySlugs(relatedPostSlugs) : [];
   const firstPost = relatedPosts[0];

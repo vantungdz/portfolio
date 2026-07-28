@@ -1,4 +1,4 @@
-import type { Project } from "@/types/project";
+﻿import type { Project } from "@/types/project";
 
 export const projects: Project[] = [
   {
@@ -8,7 +8,7 @@ export const projects: Project[] = [
       "Enterprises needed a single place to track KPIs using the Balanced Scorecard (BSC) methodology with multi-level approval and real-time visibility. I built a full-stack platform that centralizes goal setting, formula-based scoring, and approval workflows. Teams can now align on objectives and track progress from one dashboard. Built with Vue 3, Ant Design Vue, Vuex, Chart.js, Socket.IO, TypeScript, and ExcelJS.",
     image: "/images/dashboard.png",
     domain: "Enterprise",
-    category: "client",
+    ownership: "client",
     liveUrl: "",
     githubUrl: "",
     technologies: ["Vue 3", "Ant Design Vue", "Vuex", "Chart.js", "Socket.IO", "TypeScript", "ExcelJS"],
@@ -30,7 +30,7 @@ export const projects: Project[] = [
       "Splitting bills and tracking who paid what in groups was messy and error-prone. I designed and built a mobile app that lets groups create expenses, assign shares, and settle up with real-time sync and MoMo payment integration. Reduces friction in group payments and keeps everyone aligned. Built with React Native, Expo, TypeScript, Node.js, Express, MongoDB, Socket.IO, and JWT.",
     image: "/images/portfolio.jpg",
     domain: "Finance",
-    category: "personal",
+    ownership: "personal",
     liveUrl: "https://github.com/your-user/portfolio",
     githubUrl: "https://github.com/your-user/portfolio",
     technologies: ["React Native", "Expo", "TypeScript", "Node.js", "Express", "MongoDB", "Socket.IO", "JWT"],
@@ -51,7 +51,7 @@ export const projects: Project[] = [
       "Tomaho Soft needed a unified interface for accounting, warehouse, and operations instead of scattered tools. I contributed to a React-based enterprise platform that brings these workflows into one place with consistent UX and reusable components. Improved day-to-day operations for staff and reduced context-switching. Built with React, Redux-Saga, Styled Components, Formik, and Yup.",
     image: "/images/tomaho.png",
     domain: "Enterprise",
-    category: "client",
+    ownership: "client",
     liveUrl: "",
     githubUrl: "",
     technologies: ["ReactJS", "Redux-Saga", "Styled Components", "Formik", "Yup"],
@@ -71,7 +71,7 @@ export const projects: Project[] = [
       "A large-scale banking product required a modern, type-safe frontend for financial operations and internal workflows. I worked on the React/Next.js frontend: new UI features, requirement analysis, and integration with existing services. The result is a maintainable codebase that supports complex flows and stays performant. Built with React, TypeScript, Next.js, Redux, and Redux-Saga.",
     image: "/images/dashboard.png",
     domain: "Finance",
-    category: "client",
+    ownership: "client",
     liveUrl: "",
     githubUrl: "",
     technologies: ["ReactJS", "TypeScript", "Next.js", "Redux", "Redux-Saga"],
@@ -91,13 +91,13 @@ export const projects: Project[] = [
       "Vue 3, Vite, content-driven technical blog with theme toggle, search, and markdown-based posts. Case studies and tutorials on AI, Vue, and developer tools.",
     image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
     domain: "Personal",
-    category: "personal",
+    ownership: "personal",
     liveUrl: (typeof process !== "undefined" && process.env.NEXT_PUBLIC_BLOG_URL) || "",
     githubUrl: "",
     technologies: ["Vue 3", "Vite", "Markdown", "Vue Router", "Pinia"],
     features: [
       "Markdown + frontmatter (gray-matter, marked)",
-      "Related project ↔ portfolio deep links",
+      "Related project â†” portfolio deep links",
       "Theme toggle, search, archive, tags",
     ],
     year: "2025",
@@ -105,9 +105,10 @@ export const projects: Project[] = [
   },
 ];
 
-/** Get project by slug for blog → portfolio linking. */
+/** Get project by slug for blog â†’ portfolio linking. */
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
 }
-
 export const projectCategories = ["All", "Enterprise", "Finance", "Personal"];
+
+

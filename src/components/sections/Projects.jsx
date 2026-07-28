@@ -121,7 +121,7 @@ export default function Projects() {
               image={project.image}
               description={project.description}
               domain={project.domain}
-              category={project.category}
+              ownership={project.ownership}
               technologies={project.technologies}
               year={project.year}
               liveUrl={project.liveUrl}

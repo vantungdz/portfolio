@@ -4,10 +4,10 @@ export interface Project {
   image: string;
   /** Stable slug for deep-linking (e.g. from blog). Used in portfolio URL hash/query. */
   slug?: string;
-  /** Project domain/industry for filtering (e.g. Enterprise, Finance). */
+  /** Project domain/industry. Drives the category filter buttons (see projectCategories). */
   domain: string;
-  /** Whether this is a personal or client project. */
-  category: "personal" | "client";
+  /** Whether this is a personal or client project. Display-only (badge), not used for filtering. */
+  ownership: "personal" | "client";
   technologies: string[];
   features?: string[];
   year: string;
