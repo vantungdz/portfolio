@@ -5,7 +5,7 @@ export const projects: Project[] = [
     title: "KPI Management System",
     slug: "kpi-management-system",
     description:
-      "Enterprises needed a single place to track KPIs using the Balanced Scorecard (BSC) methodology with multi-level approval and real-time visibility. I built a full-stack platform that centralizes goal setting, formula-based scoring, and approval workflows. Teams can now align on objectives and track progress from one dashboard. Built with Vue 3, Ant Design Vue, Vuex, Chart.js, Socket.IO, TypeScript, and ExcelJS.",
+      "Enterprises needed a single place to track KPIs using the Balanced Scorecard (BSC) methodology with multi-level assignment, approval, and real-time visibility. I built a centralized platform covering KPI creation, assignment, cascading, and performance tracking, with formula-based scoring, live dashboards, and Excel-based reporting. Teams can now align on objectives and track progress from one dashboard. Built with Vue 3, Ant Design Vue, Vuex, Chart.js, Socket.IO, TypeScript, and ExcelJS.",
     image: "/images/dashboard.png",
     domain: "Enterprise",
     ownership: "client",
@@ -14,12 +14,12 @@ export const projects: Project[] = [
     codeNote: "Internal company project — no public demo",
     technologies: ["Vue 3", "Ant Design Vue", "Vuex", "Chart.js", "Socket.IO", "TypeScript", "ExcelJS"],
     features: [
-      "Multi-level KPI tracking with BSC methodology",
+      "KPI creation, assignment, cascading, and performance tracking workflows",
       "Formula-based scoring and configurable targets",
-      "Real-time notifications and live dashboard updates",
-      "Role-based access control (RBAC) for approvals",
-      "Analytics and export (Excel) for reporting",
-      "Responsive UI for desktop and tablet",
+      "Dashboards and data visualization for monitoring KPI progress",
+      "Real-time data synchronization and updates via Socket.IO",
+      "Multi-level KPI assignment and approval business rules",
+      "Excel-based data processing and reporting (ExcelJS)",
     ],
     year: "2024",
     relatedPostSlugs: [],
@@ -53,51 +53,104 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "PaySplit",
-    slug: "paysplit",
+    title: "AI Database Assistant / OpenClaw Integration",
+    slug: "ai-database-assistant",
     description:
-      "Splitting bills and tracking who paid what in groups was messy and error-prone. I designed and built a mobile app that lets groups create expenses, assign shares, and settle up with real-time sync and MoMo payment integration. Reduces friction in group payments and keeps everyone aligned. Built with React Native, Expo, TypeScript, Node.js, Express, MongoDB, Socket.IO, and JWT.",
-    image: "/images/portfolio.jpg",
-    domain: "Finance",
+      "Querying business data usually means writing code or waiting on someone who can. I built a Node.js integration layer that lets an AI agent interact with database data through natural-language conversations, using controlled backend tools instead of giving the LLM direct database access. Integrated with OpenClaw for conversational access to business data. Built with Node.js, TypeScript, MongoDB, OpenClaw, and function calling.",
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485",
+    domain: "AI",
     ownership: "personal",
     liveUrl: "",
     githubUrl: "",
-    codeNote: "Mobile app — repo not published",
-    technologies: ["React Native", "Expo", "TypeScript", "Node.js", "Express", "MongoDB", "Socket.IO", "JWT"],
+    codeNote: "Integration project — repo not published",
+    technologies: ["Node.js", "TypeScript", "MongoDB", "OpenClaw", "LLM", "Function Calling"],
     features: [
-      "Real-time payment and balance tracking across devices",
-      "JWT-secured auth and session handling",
-      "MoMo integration for local payments",
-      "Push and in-app notifications for updates",
-      "Admin dashboard for oversight and support",
+      "Tool/function calling so the LLM picks the right database operation from a natural-language question",
+      "Reusable tools for querying, filtering, searching, and counting records",
+      "Multi-step workflow: select tool + parameters → execute → generate a natural-language response",
+      "Database layer supporting multiple collections",
+      "LLM reasoning separated from direct database access via a controlled tool layer",
+      "Conversational access to business data through OpenClaw integration",
     ],
-    year: "2023",
+    year: "2025",
     relatedPostSlugs: [],
     caseStudy: {
       problem:
-        "Friend groups and roommates were tracking shared expenses in chat threads and mental math, which made it easy to lose track of who owed what and led to awkward, delayed settlements.",
+        "Non-technical stakeholders needed answers from live database data (counts, filters, lookups) without writing a query or waiting on an engineer to pull a report.",
       challenges: [
-        "Keeping balances in sync in real time when multiple members add expenses concurrently from different devices",
-        "Integrating MoMo payments so settling up happens inside the app instead of switching to a separate banking app",
-        "Designing a data model where an expense can be split unevenly (not just equal shares) without the UI becoming confusing",
+        "Letting an LLM decide *which* database operation to run from an ambiguous natural-language question, without giving it raw query access",
+        "Designing a tool layer generic enough to cover querying, filtering, searching, and counting across multiple collections",
+        "Keeping the multi-step loop (select tool → execute → respond) reliable when the LLM picks the wrong tool or malformed parameters",
       ],
       decisions: [
         {
-          decision: "MongoDB over a relational database",
-          why: "Group/expense/split data is naturally nested and schema shape varies per split type, which mapped more directly to documents than normalized tables for a fast-moving personal project.",
+          decision: "Controlled tool/function-calling layer instead of direct LLM-to-database access",
+          why: "Letting the LLM call a fixed set of backend tools instead of writing raw queries keeps every database interaction auditable and bounded to operations I explicitly implemented.",
         },
         {
-          decision: "Socket.IO for balance updates instead of polling",
-          why: "Group expense apps live or die on trust — if one member's phone shows a stale balance, they lose confidence in the app immediately.",
+          decision: "OpenClaw as the conversational front-end",
+          why: "Reusing an existing conversational integration meant focusing engineering effort on the tool layer and workflow instead of rebuilding a chat interface.",
         },
       ],
       results: [
-        "Group expenses and balances stay in sync across devices without manual refresh",
-        "Settling up happens without leaving the app, reducing the friction that usually kills these apps' adoption in a group",
+        "Working natural-language-to-database pipeline: question → tool selection → execution → grounded response",
+        "Reusable tool set (query, filter, search, count) that generalizes across multiple MongoDB collections",
       ],
       lessonsLearned: [
-        "For a solo/personal project, MongoDB's flexibility sped up early iteration, but I'd revisit that choice for a version with more complex reporting queries",
-        "Payment integrations deserve a sandboxed test plan written before the first line of integration code — MoMo's edge cases surfaced late otherwise",
+        "A narrow, explicit tool layer is easier to trust and debug than giving an LLM broader database access, even when it means more upfront tool design",
+        "Separating 'LLM reasoning' from 'data access' as distinct layers made it much easier to reason about failure modes independently",
+      ],
+    },
+  },
+  {
+    title: "Bakery E-commerce & Management System",
+    slug: "bakery-ecommerce-management-system",
+    description:
+      "A bakery needed one system to handle online ordering, custom cakes, delivery/pickup, payments, and staff operations instead of juggling disconnected tools. I built a full-stack e-commerce and management platform: a customer storefront plus a multi-role admin dashboard for admin, order staff, baker, and accountant roles, with an end-to-end order workflow and automated bank-transfer payment verification. Built with Next.js 16, React 19, TypeScript, Tailwind CSS 4, Node.js, Express 5, PostgreSQL, Supabase, JWT, VietQR, and SePay.",
+    image: "/images/ecommerce.jpeg",
+    domain: "E-commerce",
+    ownership: "personal",
+    liveUrl: "",
+    githubUrl: "",
+    codeNote: "Full-stack project — repo not published",
+    technologies: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "Node.js", "Express 5", "PostgreSQL", "Supabase", "JWT", "bcrypt", "VietQR", "SePay", "Nodemailer"],
+    features: [
+      "Customer storefront and multi-role admin dashboard (admin, order staff, baker, accountant)",
+      "RESTful services for products, orders, customers, vouchers, reviews, loyalty points, blog content, and store settings",
+      "Custom authentication and RBAC on a relational PostgreSQL (Supabase) database",
+      "End-to-end order workflow: pending → confirmed → baking → delivering → delivered",
+      "VietQR + SePay webhook integration to auto-verify bank-transfer payments against order references",
+      "Custom cake ordering, loyalty points, vouchers, image uploads, and transactional email notifications",
+      "Row Level Security (RLS) with authorization enforced in backend middleware",
+    ],
+    year: "2025",
+    relatedPostSlugs: [],
+    caseStudy: {
+      problem:
+        "The business was running ordering, custom cake requests, delivery coordination, and payment confirmation across separate manual channels, making it hard to track order status or verify payments without back-and-forth.",
+      challenges: [
+        "Modeling a five-stage order workflow (pending → confirmed → baking → delivering → delivered) that stays consistent across the storefront, admin dashboard, and notification emails",
+        "Automatically matching incoming bank-transfer webhooks (VietQR/SePay) to the correct order without manual reconciliation",
+        "Supporting four distinct staff roles (admin, order staff, baker, accountant) with different permissions on the same data, without duplicating dashboard code per role",
+      ],
+      decisions: [
+        {
+          decision: "Supabase (PostgreSQL) with Row Level Security plus backend middleware authorization",
+          why: "RLS gave a database-level safety net for a relational order/customer/payment model, while still enforcing the real business rules explicitly in backend middleware rather than relying on RLS alone.",
+        },
+        {
+          decision: "Webhook-based payment verification (VietQR + SePay) instead of manual confirmation",
+          why: "Matching transaction metadata to order references automatically removed the slowest, most error-prone step in the original manual process — someone checking a bank app and updating order status by hand.",
+        },
+      ],
+      results: [
+        "Bank-transfer payments are verified automatically against order references instead of manual reconciliation",
+        "Four staff roles operate from one shared dashboard with role-appropriate permissions instead of separate tools",
+        "Customers get a clear order status pipeline from placement through delivery",
+      ],
+      lessonsLearned: [
+        "Designing the order-status state machine before writing storefront/admin UI paid off — every downstream screen just reflects one shared source of truth",
+        "RLS is a strong safety net but not a substitute for explicit authorization checks in backend middleware — treating it as the only guard would have been a mistake",
       ],
     },
   },
@@ -270,4 +323,4 @@ export const projects: Project[] = [
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
 }
-export const projectCategories = ["All", "Enterprise", "Finance", "Personal"];
+export const projectCategories = ["All", "Enterprise", "Finance", "E-commerce", "AI", "Personal"];

@@ -6,8 +6,8 @@ import PerformanceMonitor from "@/components/system/PerformanceMonitor";
 import { getPersonSchema } from "@/data/personal";
 
 export const metadata = {
-  title: "Tung Do - Senior Frontend Developer | React, TypeScript, Next.js",
-  description: "Passionate Senior Frontend Developer with 4+ years of experience building scalable web applications. Expert in React, TypeScript, and modern web technologies. Available for freelance and full-time opportunities.",
+  title: "Tung Do - Frontend Developer | React, TypeScript, Next.js",
+  description: "Passionate Frontend Developer with 4+ years of experience building scalable web applications. Expert in React, TypeScript, and modern web technologies. Available for freelance and full-time opportunities.",
   keywords: [
     "Frontend Developer",
     "React Developer",
@@ -33,8 +33,8 @@ export const metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: "Tung Do - Senior Frontend Developer",
-    description: "Passionate Senior Frontend Developer with 4+ years of experience building scalable web applications. Expert in React, TypeScript, and modern web technologies.",
+    title: "Tung Do - Frontend Developer",
+    description: "Passionate Frontend Developer with 4+ years of experience building scalable web applications. Expert in React, TypeScript, and modern web technologies.",
     url: 'https://portfolio-virid-pi-75.vercel.app/', // Replace with your actual domain
     siteName: "Tung Do Portfolio",
     images: [
@@ -42,7 +42,7 @@ export const metadata = {
         url: '/images/ava.png',
         width: 1200,
         height: 630,
-        alt: 'Tung Do - Senior Frontend Developer',
+        alt: 'Tung Do - Frontend Developer',
       },
     ],
     locale: 'en_US',

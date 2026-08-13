@@ -31,21 +31,24 @@ export const skillsCategories: SkillCategory[] = [
       { name: "REST APIs", iconKey: "FaDatabase", level: 85, color: "#6366f1" },
       { name: "JWT Auth", iconKey: "FaDatabase", level: 80, color: "#eab308" },
       { name: "RBAC", iconKey: "FaDatabase", level: 78, color: "#f97316" },
+      { name: "bcrypt", iconKey: "FaDatabase", level: 78, color: "#8b5cf6" },
       { name: "Socket.IO", iconKey: "SiSocketdotio", level: 75, color: "#e2e8f0" },
     ],
   },
   {
     category: "Databases",
     items: [
+      { name: "PostgreSQL", iconKey: "SiPostgresql", level: 75, color: "#336791" },
+      { name: "Supabase", iconKey: "SiSupabase", level: 75, color: "#3ECF8E" },
       { name: "MongoDB", iconKey: "SiMongodb", level: 75, color: "#47A248" },
       { name: "MySQL", iconKey: "SiMysql", level: 72, color: "#4479A1" },
-      { name: "PostgreSQL", iconKey: "SiPostgresql", level: 70, color: "#336791" },
     ],
   },
   {
     category: "Developer Tools",
     items: [
       { name: "Git", iconKey: "FaGitAlt", level: 90, color: "#F05032" },
+      { name: "Docker", iconKey: "FaDocker", level: 72, color: "#2496ED" },
       { name: "ESLint", iconKey: "SiEslint", level: 85, color: "#4B32C3" },
       { name: "Prettier", iconKey: "SiPrettier", level: 85, color: "#F7B93E" },
       { name: "Jira", iconKey: "SiJira", level: 80, color: "#0052CC" },
@@ -59,6 +62,7 @@ export const skillsCategories: SkillCategory[] = [
       { name: "Cursor", iconKey: "FaRobot", level: 85, color: "#6366f1" },
       { name: "GitHub Copilot", iconKey: "FaRobot", level: 82, color: "#e2e8f0" },
       { name: "Gemini", iconKey: "FaRobot", level: 80, color: "#4285F4" },
+      { name: "Claude", iconKey: "FaRobot", level: 75, color: "#12ecf3" },
     ],
   },
 ];

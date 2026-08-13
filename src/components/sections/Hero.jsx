@@ -43,7 +43,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen snap-start overflow-hidden pt-24 flex items-center"
+      className="hero-scroll-exit relative min-h-screen snap-start overflow-hidden pt-24 flex items-center"
       aria-labelledby="hero-heading"
     >
       <AnimatedBackground />
@@ -87,7 +87,7 @@ export default function Hero() {
             transition={transition}
             className="mt-4 text-xl text-gray-400 sm:text-2xl md:mt-6"
           >
-            Building scalable, high-performance web applications
+            Building scalable, full-stack web applications
           </motion.p>
 
           {/* Description */}
@@ -96,7 +96,7 @@ export default function Hero() {
             transition={transition}
             className="mt-6 max-w-xl text-base leading-relaxed text-gray-500 md:mt-8 md:text-lg"
           >
-            Senior Frontend Engineer with 4+ years turning complex business needs into fast, maintainable interfaces. React, Next.js, Vue, TypeScript — focused on clean code and real-world impact.
+            Fullstack Developer with 4+ years turning complex business needs into fast, maintainable systems — frontend to backend. React, Next.js, Vue, Node.js, TypeScript — focused on clean code and real-world impact.
           </motion.p>
 
           {/* CTAs */}

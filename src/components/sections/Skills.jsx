@@ -10,9 +10,10 @@ import {
   FaGitAlt,
   FaDatabase,
   FaAngular,
-  FaRobot
+  FaRobot,
+  FaDocker
 } from "react-icons/fa";
-import { SiTypescript, SiNextdotjs, SiRedux, SiTailwindcss, SiMongodb, SiPostgresql, SiMysql, SiVuedotjs, SiSocketdotio, SiExpress, SiJira, SiPrettier, SiEslint } from "react-icons/si";
+import { SiTypescript, SiNextdotjs, SiRedux, SiTailwindcss, SiMongodb, SiPostgresql, SiMysql, SiSupabase, SiVuedotjs, SiSocketdotio, SiExpress, SiJira, SiPrettier, SiEslint } from "react-icons/si";
 import { skillsCategories } from "@/data/skills";
 
 const SKILL_ICONS = {
@@ -25,6 +26,7 @@ const SKILL_ICONS = {
   FaDatabase,
   FaAngular,
   FaRobot,
+  FaDocker,
   SiTypescript,
   SiNextdotjs,
   SiRedux,
@@ -32,6 +34,7 @@ const SKILL_ICONS = {
   SiMongodb,
   SiPostgresql,
   SiMysql,
+  SiSupabase,
   SiVuedotjs,
   SiSocketdotio,
   SiExpress,

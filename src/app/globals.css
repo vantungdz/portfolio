@@ -171,3 +171,53 @@ textarea:focus {
     animation: none;
   }
 }
+
+/* Scroll-driven progress bar: native CSS timeline tied to page scroll,
+   runs on the compositor thread instead of a scroll/rAF JS listener. */
+.scroll-progress-fill {
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+@supports (animation-timeline: scroll()) {
+  .scroll-progress-fill {
+    animation: scroll-progress-grow linear;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes scroll-progress-grow {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Hero exit parallax: as the Hero section scrolls out of view, it fades
+   and shrinks — driven by the section's own view() progress, not JS. */
+@supports (animation-timeline: view()) {
+  .hero-scroll-exit {
+    animation: hero-exit linear both;
+    animation-timeline: view();
+    animation-range: exit 0% exit 100%;
+  }
+}
+
+@keyframes hero-exit {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll-exit {
+    animation: none;
+  }
+}

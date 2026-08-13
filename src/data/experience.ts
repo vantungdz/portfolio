@@ -71,9 +71,10 @@ export const education: Education[] = [
 /** Resume section skill tags */
 export const resumeSkillTags: string[] = [
   "JavaScript", "TypeScript", "ReactJS", "NextJS", "Redux", "VueJS",
-  "Angular", "HTML/CSS", "Tailwind", "Formik + Yup", "Jest",
-  "MongoDB", "MySQL", "PostgreSQL",
-  "Git", "SVN", "Jira", "EsLint", "Prettier",
+  "Angular", "Node.js", "Express.js", "HTML/CSS", "Tailwind", "Formik + Yup", "Jest",
+  "MongoDB", "MySQL", "PostgreSQL", "Supabase",
+  "JWT", "bcrypt", "RBAC",
+  "Git", "SVN", "Jira", "Docker", "EsLint", "Prettier",
 ];
 
 /** Resume section counter values (for CountUp) */

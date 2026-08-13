@@ -6,17 +6,6 @@ export default function PerformanceMonitor() {
     // Only run in production
     if (process.env.NODE_ENV !== 'production') return;
 
-    // Monitor Core Web Vitals
-    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-      getCLS(console.log);
-      getFID(console.log);
-      getFCP(console.log);
-      getLCP(console.log);
-      getTTFB(console.log);
-    }).catch(() => {
-      // Web vitals not available, continue without it
-    });
-
     // Monitor page load performance
     if (typeof window !== 'undefined') {
       window.addEventListener('load', () => {
@@ -37,8 +26,6 @@ export default function PerformanceMonitor() {
             firstContentfulPaint: paint.find(entry => entry.name === 'first-contentful-paint')?.startTime,
           };
 
-          console.log('Performance Metrics:', metrics);
-          
           // Send to analytics if needed
           // analytics.track('performance_metrics', metrics);
         }, 0);

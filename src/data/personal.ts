@@ -2,9 +2,9 @@ const BASE_URL = "https://portfolio-virid-pi-75.vercel.app/";
 
 export const personalInfo = {
   name: "Tung Do",
-  jobTitle: "Senior Frontend Developer",
+  jobTitle: "Fullstack Developer",
   description:
-    "Senior Frontend Developer building scalable, high-performance web applications with React, Next.js, and TypeScript. Focused on clean code and real-world impact.",
+    "Fullstack Developer building scalable, high-performance web applications with React, Next.js, Vue.js, Node.js, and TypeScript. Focused on clean code and real-world impact.",
   url: BASE_URL,
   image: `${BASE_URL}/images/ava.png`,
   sameAs: [
@@ -24,9 +24,11 @@ export const personalInfo = {
     "React",
     "TypeScript",
     "Next.js",
+    "Vue.js",
+    "Node.js",
     "JavaScript",
     "Web Development",
-    "Frontend Development",
+    "Fullstack Development",
     "UI/UX Design",
   ],
 } as const;
