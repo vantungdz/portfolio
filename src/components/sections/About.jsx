@@ -5,10 +5,11 @@ import Image from "next/image";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const highlights = [
-  "Turn ambiguous business requirements into shipped, maintainable features",
-  "Comfortable owning a system end-to-end: requirements, architecture, implementation, and handoff",
+  "Own systems end-to-end: requirements, architecture, frontend, backend, and database design",
+  "Delivered production features for Japanese enterprise clients across banking, hospitality, and education systems",
+  "Independently built an internal KPI platform — Next.js frontend through PostgreSQL and business logic",
   "Use AI to move faster on repetitive work, but verify every suggestion before it ships",
-  "Pick up new stacks quickly — moved between React, Vue, and Next.js across projects without slowing delivery down",
+  "Pick up new stacks quickly — moved between React, Vue, Angular, and Next.js across projects without slowing delivery down",
 ];
 
 export default function About() {
@@ -44,7 +45,7 @@ export default function About() {
           >
             <Image
               src="/images/ava.png"
-              alt="Do Van Tung - Frontend Engineer"
+              alt="Do Van Tung - Fullstack Developer"
               fill
               className="object-cover object-top rounded-full select-none"
               sizes="(max-width: 640px) 200px, (max-width: 768px) 220px, (max-width: 1024px) 240px, 260px"
@@ -64,15 +65,15 @@ export default function About() {
           </h2>
 
           <p className="text-lg text-neutral-300 leading-relaxed">
-            I&apos;m a <span className="text-primary font-medium">Senior Frontend Engineer</span> with 4+ years turning business problems into reliable, fast web applications — from banking UIs and KPI dashboards to warehouse and accounting systems.
+            I&apos;m a <span className="text-primary font-medium">Fullstack Developer</span> with 5+ years turning business problems into reliable production systems — from banking, hotel, and school platforms for Japanese clients to an internal KPI platform I built end-to-end.
           </p>
 
           <p className="text-neutral-400 leading-relaxed">
-            I work mainly with React, Next.js, Vue, and TypeScript, and I care about solving real problems: clear requirements, sensible architecture, and code that stays maintainable as products grow.
+            I work across React, Next.js, Vue.js, Angular, and Node.js — from frontend interfaces down to backend APIs, RBAC, and database design — plus AI/LLM-oriented backend integrations like function calling, vLLM, and OpenClaw.
           </p>
 
           <p className="text-neutral-400 leading-relaxed">
-            I prioritize clean code, performance, and user experience. Whether it&apos;s a new feature or refactoring legacy code, I aim for impact that both users and engineering teams can feel.
+            I prioritize clean code, performance, and user experience — whether that&apos;s a customer-facing feature or the backend logic underneath it — aiming for impact that both users and engineering teams can feel.
           </p>
 
           <ul className="space-y-4 pt-2" aria-label="Highlights">

@@ -96,7 +96,7 @@ export default function Hero() {
             transition={transition}
             className="mt-6 max-w-xl text-base leading-relaxed text-gray-500 md:mt-8 md:text-lg"
           >
-            Fullstack Developer with 4+ years turning complex business needs into fast, maintainable systems — frontend to backend. React, Next.js, Vue, Node.js, TypeScript — focused on clean code and real-world impact.
+            Fullstack Developer with 5+ years turning complex business needs into fast, maintainable systems — frontend to backend. React, Next.js, Vue, Node.js, TypeScript — focused on clean code and real-world impact.
           </motion.p>
 
           {/* CTAs */}

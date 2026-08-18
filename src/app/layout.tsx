@@ -6,11 +6,13 @@ import PerformanceMonitor from "@/components/system/PerformanceMonitor";
 import { getPersonSchema } from "@/data/personal";
 
 export const metadata = {
-  title: "Tung Do - Frontend Developer | React, TypeScript, Next.js",
-  description: "Passionate Frontend Developer with 4+ years of experience building scalable web applications. Expert in React, TypeScript, and modern web technologies. Available for freelance and full-time opportunities.",
+  title: "Tung Do - Fullstack Developer | React, Next.js, Node.js",
+  description: "Passionate Fullstack Developer with 5+ years of experience building scalable web applications and enterprise systems. Expert in React, Next.js, Vue.js, Node.js, and TypeScript. Available for freelance and full-time opportunities.",
   keywords: [
+    "Fullstack Developer",
     "Frontend Developer",
     "React Developer",
+    "Node.js Developer",
     "TypeScript Developer",
     "Next.js Developer",
     "Web Developer",
@@ -33,8 +35,8 @@ export const metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: "Tung Do - Frontend Developer",
-    description: "Passionate Frontend Developer with 4+ years of experience building scalable web applications. Expert in React, TypeScript, and modern web technologies.",
+    title: "Tung Do - Fullstack Developer",
+    description: "Passionate Fullstack Developer with 5+ years of experience building scalable web applications and enterprise systems. Expert in React, Next.js, Vue.js, Node.js, and TypeScript.",
     url: 'https://portfolio-virid-pi-75.vercel.app/', // Replace with your actual domain
     siteName: "Tung Do Portfolio",
     images: [
@@ -42,7 +44,7 @@ export const metadata = {
         url: '/images/ava.png',
         width: 1200,
         height: 630,
-        alt: 'Tung Do - Frontend Developer',
+        alt: 'Tung Do - Fullstack Developer',
       },
     ],
     locale: 'en_US',
@@ -50,8 +52,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Tung Do - Senior Frontend Developer",
-    description: "Passionate Senior Frontend Developer with 4+ years of experience building scalable web applications.",
+    title: "Tung Do - Fullstack Developer",
+    description: "Passionate Fullstack Developer with 5+ years of experience building scalable web applications and enterprise systems.",
     images: ['/images/ava.png'],
   },
   robots: {

@@ -33,6 +33,11 @@ export default function ProjectCard({
   const relatedPosts = relatedPostSlugs?.length ? getPostsBySlugs(relatedPostSlugs) : [];
   const firstPost = relatedPosts[0];
 
+  const showNote = !hasLinks && !!codeNote;
+  const showViewDetails = !hasLinks && !codeNote;
+  const showCaseStudy = hasCaseStudy && !!slug;
+  const hasAnyAction = !!liveUrl || !!githubUrl || showViewDetails || showCaseStudy;
+
   return (
     <article
       onClick={handleCardClick}
@@ -117,64 +122,75 @@ export default function ProjectCard({
           </div>
         )}
 
-        {/* Actions */}
-        <div className="mt-5 flex flex-wrap gap-3 border-t border-white/10 pt-4">
-          {liveUrl && (
-            <Link
-              href={liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-medium text-black transition-colors hover:bg-gray-200"
-            >
-              <FaExternalLinkAlt className="h-3.5 w-3.5" />
-              Demo
-            </Link>
-          )}
-          {githubUrl && (
-            <Link
-              href={githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10 hover:border-white/30"
-            >
-              <FaGithub className="h-3.5 w-3.5" />
-              Code
-            </Link>
-          )}
-          {!hasLinks && codeNote && (
-            <span className="flex-1 self-center text-center text-xs italic text-gray-500">
-              {codeNote}
-            </span>
-          )}
-          {!hasLinks && !codeNote && (
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                trackEvent("project_click", { projectName: title });
-                onClick?.();
-              }}
-              className="flex-1 rounded-lg border border-white/20 bg-white/5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10"
-            >
-              View details
-            </button>
-          )}
-          {hasCaseStudy && slug && (
-            <Link
-              href={`/projects/${slug}`}
-              onClick={(e) => {
-                e.stopPropagation();
-                trackEvent("case_study_click", { projectName: title });
-              }}
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-primary/40 bg-primary/10 px-4 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary/20"
-            >
-              <FaBookOpen className="h-3.5 w-3.5" />
-              Case Study
-            </Link>
-          )}
-        </div>
+        {/* Spacer pushes notes/actions to the bottom so cards align across rows */}
+        <div className="flex-1" />
+
+        {/* Code note (own line, never affects button width) */}
+        {showNote && (
+          <p className="mt-4 text-center text-xs italic text-gray-500">
+            {codeNote}
+          </p>
+        )}
+
+        {/* Actions — fixed 2-col grid so a single button matches the width of a paired one */}
+        {hasAnyAction && (
+          <div
+            className={`grid grid-cols-2 gap-3 border-t border-white/10 pt-4 ${
+              showNote ? "mt-3" : "mt-5"
+            }`}
+          >
+            {liveUrl && (
+              <Link
+                href={liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-medium text-black transition-colors hover:bg-gray-200"
+              >
+                <FaExternalLinkAlt className="h-3.5 w-3.5" />
+                Demo
+              </Link>
+            )}
+            {githubUrl && (
+              <Link
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10 hover:border-white/30"
+              >
+                <FaGithub className="h-3.5 w-3.5" />
+                Code
+              </Link>
+            )}
+            {showViewDetails && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  trackEvent("project_click", { projectName: title });
+                  onClick?.();
+                }}
+                className="rounded-lg border border-white/20 bg-white/5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10"
+              >
+                View details
+              </button>
+            )}
+            {showCaseStudy && (
+              <Link
+                href={`/projects/${slug}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  trackEvent("case_study_click", { projectName: title });
+                }}
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-primary/40 bg-primary/10 px-4 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary/20"
+              >
+                <FaBookOpen className="h-3.5 w-3.5" />
+                Case Study
+              </Link>
+            )}
+          </div>
+        )}
       </div>
     </article>
   );
