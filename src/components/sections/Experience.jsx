@@ -1,7 +1,6 @@
 "use client";
 
 import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
-import { experiences, experienceStats } from "@/data/experience";
 
 function TimelineCard({ experience, isLast }) {
   return (
@@ -88,7 +87,7 @@ function TimelineCard({ experience, isLast }) {
   );
 }
 
-export default function Experience() {
+export default function Experience({ experiences, stats }) {
   return (
     <section
       id="experience"
@@ -132,7 +131,7 @@ export default function Experience() {
 
         {/* Stats */}
         <div className="mt-16 grid grid-cols-2 gap-4 sm:mt-20 md:grid-cols-4 md:gap-6">
-          {experienceStats.map((stat) => (
+          {stats.map((stat) => (
             <div
               key={stat.label}
               className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-5 text-center transition-colors hover:bg-white/[0.04] sm:px-6 sm:py-6"

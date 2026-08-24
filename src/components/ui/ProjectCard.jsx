@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaExternalLinkAlt, FaGithub, FaBookOpen } from "react-icons/fa";
 import { trackEvent } from "@/lib/analytics";
-import { getPostsBySlugs, getPostUrl, getPostInsight } from "@/data/blog";
+import { getPostsBySlugs, getPostUrl, getPostInsight } from "@/lib/content-helpers";
 
 export default function ProjectCard({
   title,
@@ -20,6 +20,8 @@ export default function ProjectCard({
   codeNote,
   hasCaseStudy,
   relatedPostSlugs,
+  blogPosts,
+  blogBaseUrl,
   onClick,
 }) {
   const handleCardClick = (e) => {
@@ -30,7 +32,7 @@ export default function ProjectCard({
 
   const isClient = ownership === "client";
   const hasLinks = liveUrl || githubUrl;
-  const relatedPosts = relatedPostSlugs?.length ? getPostsBySlugs(relatedPostSlugs) : [];
+  const relatedPosts = relatedPostSlugs?.length ? getPostsBySlugs(blogPosts, relatedPostSlugs) : [];
   const firstPost = relatedPosts[0];
 
   const showNote = !hasLinks && !!codeNote;
@@ -105,9 +107,9 @@ export default function ProjectCard({
             <p className="text-xs leading-snug text-gray-400 line-clamp-2">
               {getPostInsight(firstPost)}
             </p>
-            {getPostUrl(firstPost.slug) && (
+            {getPostUrl(firstPost.slug, blogBaseUrl) && (
               <a
-                href={getPostUrl(firstPost.slug)}
+                href={getPostUrl(firstPost.slug, blogBaseUrl)}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}

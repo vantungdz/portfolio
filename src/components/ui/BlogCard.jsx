@@ -3,8 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaCalendarAlt, FaClock, FaExternalLinkAlt, FaFolderOpen } from "react-icons/fa";
-import { getPostUrl } from "@/data/blog";
-import { getProjectBySlug } from "@/data/projects";
+import { getPostUrl, findProjectBySlug } from "@/lib/content-helpers";
 
 function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString("en-US", {
@@ -14,7 +13,7 @@ function formatDate(dateStr) {
   });
 }
 
-export default function BlogCard({ article, slug }) {
+export default function BlogCard({ article, slug, projects, blogBaseUrl }) {
   return (
     <article
       className="group relative flex h-full flex-col cursor-default rounded-xl border border-white/10 bg-white/[0.02] overflow-hidden transition-all duration-300 hover:border-white/20 hover:bg-white/[0.04] hover:shadow-xl hover:shadow-black/20"
@@ -81,7 +80,7 @@ export default function BlogCard({ article, slug }) {
 
         {/* Related project: link back to portfolio project */}
         {article.relatedProjectSlug && (() => {
-          const project = getProjectBySlug(article.relatedProjectSlug);
+          const project = findProjectBySlug(projects, article.relatedProjectSlug);
           if (!project) return null;
           return (
             <div className="mt-4 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2">
@@ -100,10 +99,10 @@ export default function BlogCard({ article, slug }) {
         })()}
 
         {/* CTA: link to external blog article (hidden until the blog is configured) */}
-        {slug && getPostUrl(slug) && (
+        {slug && getPostUrl(slug, blogBaseUrl) && (
           <div className="mt-5 border-t border-white/10 pt-4">
             <a
-              href={getPostUrl(slug)}
+              href={getPostUrl(slug, blogBaseUrl)}
               target="_blank"
               rel="noopener noreferrer"
               title="Read full article"

@@ -4,9 +4,8 @@ import { useState } from "react";
 import Modal from "@/components/ui/Modal";
 import ProjectCard from "@/components/ui/ProjectCard";
 import { FaFilter, FaGithub } from "react-icons/fa";
-import { projects, projectCategories } from "@/data/projects";
 
-export default function Projects() {
+export default function Projects({ projects, categories: projectCategories, blogPosts, blogBaseUrl }) {
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeCategory, setActiveCategory] = useState("All");
   const [sortBy, setSortBy] = useState("newest");
@@ -130,6 +129,8 @@ export default function Projects() {
               codeNote={project.codeNote}
               hasCaseStudy={!!project.caseStudy}
               relatedPostSlugs={project.relatedPostSlugs}
+              blogPosts={blogPosts}
+              blogBaseUrl={blogBaseUrl}
               onClick={() => setSelectedProject(project)}
             />
           </motion.div>
@@ -171,6 +172,8 @@ export default function Projects() {
         isOpen={!!selectedProject}
         onClose={() => setSelectedProject(null)}
         project={selectedProject}
+        blogPosts={blogPosts}
+        blogBaseUrl={blogBaseUrl}
       />
     </section>
   );

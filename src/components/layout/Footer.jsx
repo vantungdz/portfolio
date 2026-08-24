@@ -11,7 +11,6 @@ import {
   FaMapMarkerAlt,
   FaPhone,
 } from "react-icons/fa";
-import { socialLinksConfig, contactInfoConfig } from "@/data/contact";
 import { RESUME_PDF_URL } from "@/lib/resume";
 
 const navigationLinks = [
@@ -28,17 +27,6 @@ const resourceLinks = [
   { name: "CV", href: RESUME_PDF_URL, openInNewTab: true },
   { name: "Portfolio", href: "#home" },
   { name: "Blog Posts", href: "#blog" },
-];
-
-const socialLinks = [
-  { icon: FaGithub, href: socialLinksConfig.github, label: "GitHub" },
-  { icon: FaLinkedin, href: socialLinksConfig.linkedin, label: "LinkedIn" },
-  { icon: FaFacebook, href: socialLinksConfig.facebook, label: "Facebook" },
-  {
-    icon: FaEnvelope,
-    href: `mailto:${contactInfoConfig.email}`,
-    label: "Email",
-  },
 ];
 
 function ColumnHeading({ children }) {
@@ -77,8 +65,19 @@ function LinkList({ links, className = "" }) {
   );
 }
 
-export default function Footer() {
+export default function Footer({ socialLinks: socialLinksConfig, contactInfo: contactInfoConfig }) {
   const year = new Date().getFullYear();
+
+  const socialLinks = [
+    { icon: FaGithub, href: socialLinksConfig.github, label: "GitHub" },
+    { icon: FaLinkedin, href: socialLinksConfig.linkedin, label: "LinkedIn" },
+    { icon: FaFacebook, href: socialLinksConfig.facebook, label: "Facebook" },
+    {
+      icon: FaEnvelope,
+      href: `mailto:${contactInfoConfig.email}`,
+      label: "Email",
+    },
+  ];
 
   return (
     <footer

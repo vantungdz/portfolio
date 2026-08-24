@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBookOpen, FaExternalLinkAlt } from "react-icons/fa";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { getPostsBySlugs, getPostUrl, getPostInsight, BLOG_BASE_URL } from "@/data/blog";
+import { getPostsBySlugs, getPostUrl, getPostInsight } from "@/lib/content-helpers";
 
 const FOCUSABLE =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
@@ -17,7 +17,7 @@ function getFocusables(container) {
   );
 }
 
-export default function Modal({ isOpen, onClose, project }) {
+export default function Modal({ isOpen, onClose, project, blogPosts, blogBaseUrl }) {
   const dialogRef = useRef(null);
   const closeButtonRef = useRef(null);
   const reducedMotion = useReducedMotion();
@@ -121,7 +121,7 @@ export default function Modal({ isOpen, onClose, project }) {
 
           {(() => {
             const relatedPosts = project.relatedPostSlugs?.length
-              ? getPostsBySlugs(project.relatedPostSlugs).filter((post) => getPostUrl(post.slug))
+              ? getPostsBySlugs(blogPosts, project.relatedPostSlugs).filter((post) => getPostUrl(post.slug, blogBaseUrl))
               : [];
             const maxInsights = 3;
             const displayPosts = relatedPosts.slice(0, maxInsights);
@@ -142,7 +142,7 @@ export default function Modal({ isOpen, onClose, project }) {
                       {displayPosts.map((post) => (
                         <li key={post.slug}>
                           <a
-                            href={getPostUrl(post.slug)}
+                            href={getPostUrl(post.slug, blogBaseUrl)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="group block rounded-lg border border-white/10 bg-white/[0.02] p-3 transition-colors hover:border-primary/20 hover:bg-white/[0.04]"
@@ -162,9 +162,9 @@ export default function Modal({ isOpen, onClose, project }) {
                         </li>
                       ))}
                     </ul>
-                    {hasMore && BLOG_BASE_URL && (
+                    {hasMore && blogBaseUrl && (
                       <a
-                        href={BLOG_BASE_URL}
+                        href={blogBaseUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="mt-3 inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-primary transition-colors"

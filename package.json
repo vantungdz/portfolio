@@ -6,11 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "validate-blog-slugs": "npx tsx scripts/validateBlogSlugs.ts"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
+    "@supabase/supabase-js": "^2.112.3",
     "@vercel/analytics": "^2.0.1",
     "framer-motion": "^12.19.1",
     "gsap": "^3.13.0",

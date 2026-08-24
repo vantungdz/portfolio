@@ -1,11 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
 import { FaRobot, FaSitemap, FaCloud, FaTachometerAlt } from "react-icons/fa";
-import { currentlyLearning } from "@/data/learning";
 
 const ICONS = [FaRobot, FaSitemap, FaCloud, FaTachometerAlt];
 
-export default function CurrentlyLearning() {
+export default function CurrentlyLearning({ items }) {
   return (
     <section
       id="learning"
@@ -36,7 +35,7 @@ export default function CurrentlyLearning() {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2">
-          {currentlyLearning.map((item, index) => {
+          {items.map((item, index) => {
             const Icon = ICONS[index % ICONS.length];
             return (
               <motion.div

@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import ScrollBackground from "@/components/background/ScrollBackground";
 import PerformanceMonitor from "@/components/system/PerformanceMonitor";
-import { getPersonSchema } from "@/data/personal";
+import { getPersonalInfo, getPersonSchema } from "@/lib/queries";
 
 export const metadata = {
   title: "Tung Do - Fullstack Developer | React, Next.js, Node.js",
@@ -72,7 +72,9 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const personalInfo = await getPersonalInfo();
+
   return (
     <html lang="en">
       <head>
@@ -94,7 +96,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {/* Structured Data (Schema.org Person) */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(getPersonSchema()) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(getPersonSchema(personalInfo)) }}
         />
       </head>
       <body>

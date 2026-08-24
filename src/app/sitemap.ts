@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next'
-import { projects } from '@/data/projects'
+import { getProjects } from '@/lib/queries'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://portfolio-virid-pi-75.vercel.app/' // Replace with your actual domain
+  const projects = await getProjects()
 
   const projectCaseStudies: MetadataRoute.Sitemap = projects
     .filter((p) => p.slug && p.caseStudy)

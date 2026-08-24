@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import BlogCard from "@/components/ui/BlogCard";
-import { getLatestArticles, BLOG_BASE_URL } from "@/data/blog";
+import { getLatestArticles } from "@/lib/content-helpers";
 
 const LATEST_COUNT = 3;
 
-export default function Blog() {
-  const latestArticles = getLatestArticles(LATEST_COUNT);
+export default function Blog({ blogPosts, projects, blogBaseUrl }) {
+  const latestArticles = getLatestArticles(blogPosts, LATEST_COUNT);
 
   return (
     <section
@@ -39,7 +39,7 @@ export default function Blog() {
               transition={{ duration: 0.4, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <BlogCard article={article} slug={article.slug} />
+              <BlogCard article={article} slug={article.slug} projects={projects} blogBaseUrl={blogBaseUrl} />
             </motion.div>
           ))}
         </div>
@@ -66,7 +66,7 @@ export default function Blog() {
           className="mt-16 text-center md:mt-20"
         >
           <a
-            href={BLOG_BASE_URL}
+            href={blogBaseUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-medium text-white transition-all duration-300 hover:bg-white/10 hover:border-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black"

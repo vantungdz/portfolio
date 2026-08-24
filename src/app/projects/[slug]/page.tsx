@@ -3,10 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FaArrowLeft, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
-import { projects } from "@/data/projects";
-import { personalInfo } from "@/data/personal";
+import { getProjects, getPersonalInfo } from "@/lib/queries";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const projects = await getProjects();
   return projects
     .filter((p) => p.slug)
     .map((p) => ({ slug: p.slug as string }));
@@ -18,6 +18,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  const [projects, personalInfo] = await Promise.all([getProjects(), getPersonalInfo()]);
   const project = projects.find((p) => p.slug === slug);
   if (!project) return {};
 
@@ -43,6 +44,7 @@ export default async function ProjectCaseStudyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const projects = await getProjects();
   const project = projects.find((p) => p.slug === slug);
   if (!project) notFound();
 

@@ -3,7 +3,6 @@
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaArrowDown, FaDownload, FaExternalLinkAlt } from "react-icons/fa";
-import { socialLinksConfig } from "@/data/contact";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { scrollToSection } from "@/lib/layout";
 import { RESUME_PDF_URL, RESUME_PDF_FILENAME } from "@/lib/resume";
@@ -32,7 +31,7 @@ const fadeInUpReduced = {
   animate: { opacity: 1 },
 };
 
-export default function Hero() {
+export default function Hero({ socialLinks }) {
   const reducedMotion = useReducedMotion();
   const variants = reducedMotion ? fadeInUpReduced : fadeInUp;
   const transition = reducedMotion ? { duration: 0 } : { duration: 0.5 };
@@ -139,7 +138,7 @@ export default function Hero() {
             className="mt-12 flex items-center gap-6"
           >
             <a
-              href={socialLinksConfig.github}
+              href={socialLinks.github}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-500 transition-colors hover:text-white"
@@ -148,7 +147,7 @@ export default function Hero() {
               <FaGithub className="h-5 w-5" />
             </a>
             <a
-              href={socialLinksConfig.linkedin}
+              href={socialLinks.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-500 transition-colors hover:text-white"

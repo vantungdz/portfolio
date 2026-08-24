@@ -14,7 +14,6 @@ import {
   FaDocker
 } from "react-icons/fa";
 import { SiTypescript, SiNextdotjs, SiRedux, SiTailwindcss, SiMongodb, SiPostgresql, SiMysql, SiSupabase, SiVuedotjs, SiSocketdotio, SiExpress, SiJira, SiPrettier, SiEslint } from "react-icons/si";
-import { skillsCategories } from "@/data/skills";
 
 const SKILL_ICONS = {
   FaReact,
@@ -99,8 +98,8 @@ const SkillCard = ({ skill, index }) => {
   );
 };
 
-export default function Skills() {
-  const [activeCategory, setActiveCategory] = useState("Frontend");
+export default function Skills({ skillsCategories }) {
+  const [activeCategory, setActiveCategory] = useState(skillsCategories[0]?.category ?? "Frontend");
 
   return (
     <section

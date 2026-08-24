@@ -1,10 +1,11 @@
 "use client";
 import { motion } from "framer-motion";
 import CountUp from "react-countup";
-import { getResumeExperiences, education, resumeSkillTags, resumeCounters } from "@/data/experience";
+import { getResumeExperiences } from "@/lib/content-helpers";
 
-export default function Resume() {
-  const experiences = getResumeExperiences();
+export default function Resume({ experiences: rawExperiences, education, resumeMeta }) {
+  const experiences = getResumeExperiences(rawExperiences);
+  const { skillTags: resumeSkillTags, ...resumeCounters } = resumeMeta;
 
   return (
     <section id="resume" className="min-h-screen snap-start py-20 px-6 bg-black text-white pt-24">

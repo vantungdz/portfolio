@@ -1,11 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
 import { FaSearch, FaBug, FaFileAlt } from "react-icons/fa";
-import { aiWorkflowItems } from "@/data/aiWorkflow";
 
 const ICONS = [FaSearch, FaBug, FaFileAlt];
 
-export default function AIWorkflow() {
+export default function AIWorkflow({ items }) {
   return (
     <section
       id="ai-workflow"
@@ -36,7 +35,7 @@ export default function AIWorkflow() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {aiWorkflowItems.map((item, index) => {
+          {items.map((item, index) => {
             const Icon = ICONS[index % ICONS.length];
             return (
               <motion.div

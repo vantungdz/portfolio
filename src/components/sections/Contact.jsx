@@ -1,10 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import emailjs from '@emailjs/browser';
 import Signature from "@/components/sections/Signature";
 import { trackEvent } from "@/lib/analytics";
-import { socialLinksConfig, contactInfoConfig } from "@/data/contact";
+import { supabase } from "@/lib/supabase";
 import {
   FaGithub,
   FaLinkedin,
@@ -16,7 +15,7 @@ import {
   FaTimes
 } from "react-icons/fa";
 
-export default function Contact() {
+export default function Contact({ socialLinks: socialLinksConfig, contactInfo: contactInfoConfig }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,10 +25,6 @@ export default function Contact() {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
-
-  const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-  const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-  const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
   const validateForm = () => {
     const newErrors = {};
@@ -77,20 +72,14 @@ export default function Contact() {
       setLoading(true);
       setSubmitStatus(null);
 
-      const templateParams = {
-        from_name: formData.name.trim(),
-        from_email: formData.email.trim(),
+      const { error } = await supabase.from("contact_messages").insert({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
         subject: formData.subject.trim(),
         message: formData.message.trim(),
-        reply_to: formData.email.trim(),
-      };
+      });
 
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams,
-        EMAILJS_PUBLIC_KEY
-      );
+      if (error) throw error;
 
       setSubmitStatus("success");
       trackEvent("contact_submit", { email: formData.email });
