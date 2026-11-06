@@ -22,10 +22,9 @@ export default function About() {
       className="min-h-screen snap-start w-full bg-[#121212] flex items-center justify-center px-6 py-20 pt-24"
     >
       <motion.div
-        initial={reducedMotion ? false : { opacity: 0, y: 24 }}
-        whileInView={reducedMotion ? false : { opacity: 1, y: 0 }}
+        initial={false}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: reducedMotion ? 0 : 0.5 }}
-        viewport={{ once: true }}
         className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-[minmax(0,280px)_1fr] gap-10 sm:gap-14 md:gap-16 lg:gap-20 items-center md:items-start"
       >
         {/* Avatar: prominent, balanced, dark-theme aligned */}
